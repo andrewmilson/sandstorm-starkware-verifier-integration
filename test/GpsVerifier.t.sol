@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
 
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/layoutStarkNet/CpuConstraintPoly.sol";
+import "../src/verifier/CpuConstraintPoly.sol";
 import "../src/periodic_columns/PoseidonPoseidonFullRoundKey0Column.sol";
 import "../src/periodic_columns/PoseidonPoseidonFullRoundKey1Column.sol";
 import "../src/periodic_columns/PoseidonPoseidonFullRoundKey2Column.sol";
@@ -15,14 +15,14 @@ import "../src/periodic_columns/EcdsaPointsXColumn.sol";
 import "../src/periodic_columns/EcdsaPointsYColumn.sol";
 import "../src/periodic_columns/PedersenHashPointsXColumn.sol";
 import "../src/periodic_columns/PedersenHashPointsYColumn.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/CairoBootloaderProgram.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/layoutStarkNet/FriStatementVerifier.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/layoutStarkNet/CpuFrilessVerifier.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/MemoryPageFactRegistry.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/FriStatementContract.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/cpu/layoutStarkNet/CpuOods.sol";
-import "../src/starkex-contracts/evm-verifier/solidity/contracts/gps_starknet/GpsStatementVerifier.sol";
-import "../src/ProofData.sol";
+import "../src/gps/CairoBootloaderProgram.sol";
+import "../src/verifier/FriStatementVerifier.sol";
+import "../src/verifier/CpuFrilessVerifier.sol";
+import "../src/memory_page_fact_registry/MemoryPageFactRegistry.sol";
+import "../src/verifier/FriStatementContract.sol";
+import "../src/oods/CpuOods.sol";
+import "../src/gps/GpsStatementVerifier.sol";
+import "./ProofData.sol";
 
 contract StarkNetVerifierTest is Test {
     // == CPU layout6 verifier ==
