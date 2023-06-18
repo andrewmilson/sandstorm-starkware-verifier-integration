@@ -1,0 +1,24 @@
+[package]
+name = "proof-experimentation"
+version = "0.1.0"
+edition = "2021"
+
+# Example of customizing binaries in Cargo.toml.
+[[bin]]
+name = "proof-experimentation"
+path = "proof-experimentation/main.rs"
+test = false
+bench = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ministark-gpu = { version = "0.1", path = "../playground/ministark/gpu" }
+ministark = { path = "../playground/ministark" }
+serde = { version = "1.0", features = [ "derive" ] }
+serde_json = { version = "1.0", features = [ "arbitrary_precision" ] }
+sandstorm-binary = { path = "../sandstorm/binary" }
+sandstorm-layouts = { path = "../sandstorm/layouts" }
+ark-serialize = "0.4"
+num-bigint = { version = "0.4" }
+ark-ff = "0.4"

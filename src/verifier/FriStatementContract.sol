@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./FactRegistry.sol";
+import "../FactRegistry.sol";
 import "./FriLayer.sol";
 
 contract FriStatementContract is FriLayer, FactRegistry {

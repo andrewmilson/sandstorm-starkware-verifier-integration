@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./CpuPublicInputOffsetsBase.sol";
+import "../CpuPublicInputOffsetsBase.sol";
 
 contract CpuPublicInputOffsets is CpuPublicInputOffsetsBase {
     // The following constants are offsets of data expected in the public input.

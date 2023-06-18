@@ -18,9 +18,9 @@ import "../src/periodic_columns/PedersenHashPointsYColumn.sol";
 import "../src/gps/CairoBootloaderProgram.sol";
 import "../src/verifier/FriStatementVerifier.sol";
 import "../src/verifier/CpuFrilessVerifier.sol";
-import "../src/memory_page_fact_registry/MemoryPageFactRegistry.sol";
+import "../src/MemoryPageFactRegistry.sol";
 import "../src/verifier/FriStatementContract.sol";
-import "../src/oods/CpuOods.sol";
+import "../src/CpuOods.sol";
 import "../src/gps/GpsStatementVerifier.sol";
 import "./ProofData.sol";
 

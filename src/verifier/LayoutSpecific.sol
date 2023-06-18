@@ -18,10 +18,10 @@
 pragma solidity ^0.6.12;
 
 import "./IPeriodicColumn.sol";
-import "./MemoryMap.sol";
-import "./StarkParameters.sol";
+import "../MemoryMap.sol";
+import "../StarkParameters.sol";
 import "./CpuPublicInputOffsets.sol";
-import "./CairoVerifierContract.sol";
+import "../CairoVerifierContract.sol";
 
 abstract contract LayoutSpecific is
     MemoryMap,

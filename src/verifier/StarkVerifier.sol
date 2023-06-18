@@ -17,7 +17,8 @@
 pragma solidity ^0.6.12;
 
 import "./Fri.sol";
-import "./MemoryMap.sol";
+import "forge-std/console.sol";
+import "../MemoryMap.sol";
 import "./MemoryAccessUtils.sol";
 import "./IStarkVerifier.sol";
 import "./VerifierChannel.sol";
@@ -577,6 +578,7 @@ abstract contract StarkVerifier is
         uint256[] memory proof,
         uint256[] memory publicInput
     ) internal view override {
+        console.log("Doing verifyProof");
         uint256[] memory ctx = initVerifierParams(publicInput, proofParams);
         uint256 channelPtr = getChannelPtr(ctx);
 

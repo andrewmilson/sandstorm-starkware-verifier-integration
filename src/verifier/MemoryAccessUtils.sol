@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./MemoryMap.sol";
+import "../MemoryMap.sol";
 
 contract MemoryAccessUtils is MemoryMap {
     function getPtr(

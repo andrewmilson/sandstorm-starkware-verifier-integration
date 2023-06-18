@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./PageInfo.sol";
+import "../PageInfo.sol";
 
 abstract contract PublicMemoryOffsets is PageInfo {
     /*

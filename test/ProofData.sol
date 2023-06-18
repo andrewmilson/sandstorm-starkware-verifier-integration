@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0.
+pragma solidity ^0.6.12;
+
 contract ProofData {
     function getProofParams() public view returns (uint256[] memory) {
         return proofParams;

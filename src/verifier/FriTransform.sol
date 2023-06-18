@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./PrimeFieldElement0.sol";
+import "../PrimeFieldElement0.sol";
 
 /*
   The FRI transform for a coset of size 2 (x, -x) takes the inputs

@@ -16,12 +16,13 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "./CairoVerifierContract.sol";
-import "./MemoryPageFactRegistry.sol";
+import "../CairoVerifierContract.sol";
+import "../MemoryPageFactRegistry.sol";
 import "./PublicMemoryOffsets.sol";
 import "./CpuConstraintPoly.sol";
 import "./LayoutSpecific.sol";
 import "./StarkVerifier.sol";
+import "forge-std/console.sol";
 
 /*
   Verifies a Cairo statement: there exists a memory assignment and a valid corresponding program
@@ -352,6 +353,7 @@ contract CpuVerifier is
     */
     function verifyMemoryPageFacts(uint256[] memory ctx) private view {
         uint256 nPublicMemoryPages = ctx[MM_N_PUBLIC_MEM_PAGES];
+        console.log("nPublicMemoryPages: ", nPublicMemoryPages);
 
         for (uint256 page = 0; page < nPublicMemoryPages; page++) {
             // Fetch page values from the public input (hash, product and size).
@@ -402,6 +404,8 @@ contract CpuVerifier is
                     pageAddr
                 )
             );
+
+            console.logBytes32(factHash);
 
             require( // NOLINT: calls-loop.
                 memoryPageFactRegistry.isValid(factHash),

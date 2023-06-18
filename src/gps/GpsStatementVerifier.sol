@@ -2,10 +2,10 @@
 pragma solidity ^0.6.12;
 
 import "./CairoBootloaderProgram.sol";
-import "./CairoVerifierContract.sol";
-import "./MemoryPageFactRegistry.sol";
+import "../CairoVerifierContract.sol";
+import "../MemoryPageFactRegistry.sol";
 import "./Identity.sol";
-import "./PrimeFieldElement0.sol";
+import "../PrimeFieldElement0.sol";
 import "./GpsOutputParser.sol";
 
 contract GpsStatementVerifier is
