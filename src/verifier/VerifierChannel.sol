@@ -17,6 +17,7 @@
 pragma solidity ^0.6.12;
 
 import "./Prng.sol";
+import "forge-std/console.sol";
 
 /*
   Implements the communication channel from the verifier to the prover in the non-interactive case
@@ -63,7 +64,7 @@ contract VerifierChannel is Prng {
         uint256 channelPtr,
         uint256 nElements,
         uint256 targetPtr
-    ) internal pure {
+    ) public pure {
         require(nElements < 0x1000000, "Overflow protection failed.");
         assembly {
             // 31 * PRIME.

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
+import "forge-std/console.sol";
 import "./CairoBootloaderProgram.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
@@ -121,6 +122,9 @@ contract GpsStatementVerifier is
             // Each page has a page info and a cumulative product.
             // There is no 'page address' in the page info for page 0, but this 'free' slot is
             // used to store the number of pages.
+            console.log("n_pages:", nPages);
+            console.log("expected_len:", nPages * (PAGE_INFO_SIZE + 1));
+            console.log("actual_len:", publicMemoryPages.length);
             require(
                 publicMemoryPages.length == nPages * (PAGE_INFO_SIZE + 1),
                 "Invalid publicMemoryPages length."
@@ -136,6 +140,8 @@ contract GpsStatementVerifier is
                     cairoAuxInput,
                     selectedBuiltins
                 );
+
+            // require(false == true);
 
             // Make sure the first page is valid.
             // If the size or the hash are invalid, it may indicate that there is a mismatch
@@ -194,6 +200,7 @@ contract GpsStatementVerifier is
         private
         returns (uint256 publicMemoryLength, uint256 memoryHash, uint256 prod)
     {
+        // TODO: find out what task metadata is for
         uint256 nTasks = taskMetadata[0];
         // Ensure 'nTasks' is bounded as a sanity check (the bound is somewhat arbitrary).
         require(nTasks < 2 ** 30, "Invalid number of tasks.");
@@ -210,6 +217,7 @@ contract GpsStatementVerifier is
             1 +
             2 *
             nTasks);
+        console.log("public memory length:", publicMemoryLength);
         uint256[] memory publicMemory = new uint256[](
             MEMORY_PAIR_SIZE * publicMemoryLength
         );

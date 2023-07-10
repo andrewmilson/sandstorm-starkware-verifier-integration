@@ -217,6 +217,10 @@ abstract contract StarkVerifier is
         uint256[] memory publicInput
     ) internal pure virtual returns (bytes32);
 
+    function getPublicInputHash2(
+        uint256[] memory publicInput
+    ) public view virtual returns (bytes32);
+
     function oodsConsistencyCheck(uint256[] memory ctx) internal view virtual;
 
     function getNColumnsInTrace() internal pure virtual returns (uint256);
@@ -582,11 +586,18 @@ abstract contract StarkVerifier is
         uint256[] memory ctx = initVerifierParams(publicInput, proofParams);
         uint256 channelPtr = getChannelPtr(ctx);
 
-        initChannel(
-            channelPtr,
-            getProofPtr(proof),
-            getPublicInputHash(publicInput)
-        );
+        bytes32 pubInputHash = getPublicInputHash2(publicInput);
+
+        // uint256 nPages = publicInput[24];
+        // // uint256 publicInputSizeForHash = getOffsetPageProd(0, nPages);
+        // console.log("num pages", nPages);
+        // console.log("pub mem offset");
+        // console.log(getOffsetPageProd(0, nPages));
+
+        console.log("pubInputHash");
+        console.logBytes32(pubInputHash);
+
+        initChannel(channelPtr, getProofPtr(proof), pubInputHash);
         // Read trace commitment.
         ctx[MM_TRACE_COMMITMENT] = uint256(readHash(channelPtr, true));
 

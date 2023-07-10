@@ -245,6 +245,31 @@ contract CpuVerifier is
         }
     }
 
+    function getPublicInputHash2(
+        uint256[] memory publicInput
+    ) public view override returns (bytes32 publicInputHash) {
+        // The initial seed consists of the first part of publicInput. Specifically, it does not
+        // include the page products (which are only known later in the process, as they depend on
+        // the values of z and alpha).
+        uint256 nPages = publicInput[OFFSET_N_PUBLIC_MEMORY_PAGES];
+        uint256 publicInputSizeForHash = 0x20 * getOffsetPageProd(0, nPages);
+
+        // uint256 nPages = publicInput[24];
+        // // uint256 publicInputSizeForHash = getOffsetPageProd(0, nPages);
+        console.log("num pages", nPages);
+        console.log("pub mem offset");
+        console.log(getOffsetPageProd(0, nPages));
+
+        console.log("pub input first", publicInput[0]);
+
+        assembly {
+            publicInputHash := keccak256(
+                add(publicInput, 0x20),
+                publicInputSizeForHash
+            )
+        }
+    }
+
     /*
       Computes the value of the public memory quotient:
         numerator / (denominator * padding)

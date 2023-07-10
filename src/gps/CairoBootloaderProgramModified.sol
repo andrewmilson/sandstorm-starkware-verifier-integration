@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-contract CairoBootloaderProgramSize {
+contract CairoBootloaderProgramModifiedSize {
     uint256 internal constant PROGRAM_SIZE = 566;
 }
 
-contract CairoBootloaderProgram is CairoBootloaderProgramSize {
+contract CairoBootloaderProgramModified is CairoBootloaderProgramModifiedSize {
     function getCompiledProgram()
         external
         pure

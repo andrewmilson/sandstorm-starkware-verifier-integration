@@ -2,6 +2,7 @@
 pragma solidity ^0.6.12;
 
 import "./FactRegistry.sol";
+import "forge-std/console.sol";
 
 contract MemoryPageFactRegistryConstants {
     // A page based on a list of pairs (address, value).
@@ -53,6 +54,10 @@ contract MemoryPageFactRegistry is
         );
         require(z < prime, "Invalid value of z.");
         require(alpha < prime, "Invalid value of alpha.");
+        console.log("printing memory pairs");
+        for (uint i = 0; i < memoryPairs.length; i++) {
+            console.log(memoryPairs[i]);
+        }
         (factHash, memoryHash, prod) = computeFactHash(
             memoryPairs,
             z,
