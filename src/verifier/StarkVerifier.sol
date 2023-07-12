@@ -600,13 +600,24 @@ abstract contract StarkVerifier is
         initChannel(channelPtr, getProofPtr(proof), pubInputHash);
         // Read trace commitment.
         ctx[MM_TRACE_COMMITMENT] = uint256(readHash(channelPtr, true));
+        console.log("trace commitment", ctx[MM_TRACE_COMMITMENT]);
 
         if (hasInteraction()) {
+            console.log(
+                "yo interaction before ",
+                ctx[getMmInteractionElements()]
+            );
+
             // Send interaction elements.
             VerifierChannel.sendFieldElements(
                 channelPtr,
                 getNInteractionElements(),
                 getPtr(ctx, getMmInteractionElements())
+            );
+
+            console.log(
+                "yo interaction after ",
+                ctx[getMmInteractionElements()]
             );
 
             // Read second trace commitment.
@@ -621,12 +632,17 @@ abstract contract StarkVerifier is
         );
         ctx[MM_OODS_COMMITMENT] = uint256(readHash(channelPtr, true));
 
+        // 1404206723339884257925569064645133332869953592734028041867750617941777260653
+        console.log("composition alpha", ctx[MM_COMPOSITION_ALPHA]);
+
         // Send Out of Domain Sampling point.
         VerifierChannel.sendFieldElements(
             channelPtr,
             1,
             getPtr(ctx, MM_OODS_POINT)
         );
+
+        console.log("OODS point:", ctx[MM_OODS_POINT]);
 
         // Read the answers to the Out of Domain Sampling.
         uint256 lmmOodsValues = getMmOodsValues();

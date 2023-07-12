@@ -55,9 +55,9 @@ contract MemoryPageFactRegistry is
         require(z < prime, "Invalid value of z.");
         require(alpha < prime, "Invalid value of alpha.");
         console.log("printing memory pairs");
-        for (uint i = 0; i < memoryPairs.length; i++) {
-            console.log(memoryPairs[i]);
-        }
+        // for (uint i = 0; i < memoryPairs.length; i++) {
+        //     console.log(memoryPairs[i]);
+        // }
         (factHash, memoryHash, prod) = computeFactHash(
             memoryPairs,
             z,

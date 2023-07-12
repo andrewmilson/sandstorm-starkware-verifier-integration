@@ -16,6 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
+import "forge-std/console.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
 import "./PublicMemoryOffsets.sol";
@@ -262,6 +263,12 @@ contract CpuVerifier is
 
         console.log("pub input first", publicInput[0]);
 
+        for (uint i = 0; i < getOffsetPageProd(0, nPages); i++) {
+            console.log(publicInput[i]);
+            console.log("yo");
+        }
+        console.log("pub input first", publicInput[0]);
+
         assembly {
             publicInputHash := keccak256(
                 add(publicInput, 0x20),
@@ -413,6 +420,15 @@ contract CpuVerifier is
                 }
             }
 
+            console.log(
+                "interaction element: z=",
+                ctx[MM_INTERACTION_ELEMENTS]
+            );
+            console.log(
+                "interaction element: alpha=",
+                ctx[MM_INTERACTION_ELEMENTS + 1]
+            );
+
             // Verify that a corresponding fact is registered attesting to the consistency of the page
             // information with z and alpha.
             bytes32 factHash = keccak256(
@@ -457,6 +473,7 @@ contract CpuVerifier is
         ctx[MM_RC16__PERM__INTERACTION_ELM] = ctx[MM_INTERACTION_ELEMENTS + 2];
         {
             uint256 public_memory_prod = computePublicMemoryQuotient(ctx);
+            console.log("public memory prod ood: ", public_memory_prod);
             ctx[
                 MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD
             ] = public_memory_prod;
@@ -486,6 +503,15 @@ contract CpuVerifier is
             }
             compositionFromTraceValue := mload(p)
         }
+
+        console.log(
+            "1st cmoposition trace val",
+            ctx[MM_COMPOSITION_OODS_VALUES]
+        );
+        console.log(
+            "2nd cmoposition trace val",
+            ctx[MM_COMPOSITION_OODS_VALUES + 1]
+        );
 
         uint256 claimedComposition = fadd(
             ctx[MM_COMPOSITION_OODS_VALUES],

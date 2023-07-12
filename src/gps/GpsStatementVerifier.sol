@@ -371,5 +371,7 @@ contract GpsStatementVerifier is
         bytes32 factHash;
         (factHash, memoryHash, prod) = memoryPageFactRegistry
             .registerRegularMemoryPage(publicMemory, z, alpha, K_MODULUS);
+        console.log("FACT HASSSSSHHSSHSHSH");
+        console.logBytes32(factHash);
     }
 }

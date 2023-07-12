@@ -5,6 +5,7 @@ use ministark_gpu::fields::p3618502788666131213697322783095070105623107215331596
 use ministark::Proof;
 use num_bigint::BigUint;
 use ruint::{aliases::U256, uint};
+use sandstorm_claims::sharp::utils::to_montgomery;
 use sandstorm_binary::{CompiledProgram, AirPublicInput};
 use sandstorm_claims::sharp;
 use sha3::Keccak256;
@@ -37,6 +38,11 @@ fn main() -> std::io::Result<()> {
 fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Proof<Fp>) -> String {
     let mut res = String::new();
 
+    println!(
+        "YOO public memory product: {}",
+        metadata.public_memory_quotient
+    );
+
     let public_inputs = claim.get_public_inputs();
     let sharp_public_input = CairoAuxInput(&public_inputs);
 
@@ -56,6 +62,23 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Proof
     let fmt_cairo_aux_inputs = fmt_array_items(&cairo_aux_elements);
 
     let proof_params = fmt_array_items(&get_proof_params(&proof));
+
+    let mut proof_elements = Vec::new();
+    proof_elements.extend_from_slice(&[
+        U256::try_from_be_slice(&proof.base_trace_commitment).unwrap(),
+        U256::try_from_be_slice(&proof.extension_trace_commitment.unwrap()).unwrap(),
+        U256::try_from_be_slice(&proof.composition_trace_commitment).unwrap(),
+    ]);
+    for eval in proof.execution_trace_ood_evals {
+        // proof_elements.push(U256::from(BigUint::from(eval)));
+        proof_elements.push(U256::from(to_montgomery(eval)));
+    }
+    for eval in proof.composition_trace_ood_evals {
+        println!("ood eval: {}", eval);
+        proof_elements.push(U256::from(to_montgomery(eval)));
+    }
+
+    let proof_elements = fmt_array_items(&proof_elements);
 
     res += &format!(
         r"// SPDX-License-Identifier: Apache-2.0.
@@ -82,7 +105,7 @@ contract AutoGenProofData {{
 
     uint256[] public proofParams = {proof_params};
 
-    uint256[] public proof = [0];
+    uint256[] public proof = {proof_elements};
 
     uint256[] public taskMetadata = [0];
 
