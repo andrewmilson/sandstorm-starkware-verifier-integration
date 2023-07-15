@@ -185,6 +185,10 @@ abstract contract StarkVerifier is
             mstore(friStepSizesPtr, friStepSizes)
         }
         ctx[MM_FRI_LAST_LAYER_DEG_BOUND] = 2 ** logFriLastLayerDegBound;
+        console.log(
+            "Fri last layer degree bound:",
+            ctx[MM_FRI_LAST_LAYER_DEG_BOUND]
+        );
         ctx[MM_TRACE_LENGTH] = 2 ** logTraceLength;
 
         ctx[MM_BLOW_UP_FACTOR] = 2 ** logBlowupFactor;
@@ -659,9 +663,12 @@ abstract contract StarkVerifier is
             1,
             getPtr(ctx, MM_OODS_ALPHA)
         );
+        console.log("oods alpha: ", ctx[MM_OODS_ALPHA]);
         ctx[MM_FRI_COMMITMENTS] = uint256(
             VerifierChannel.readHash(channelPtr, true)
         );
+
+        console.log("first commitment: ", ctx[MM_FRI_COMMITMENTS]);
 
         uint256 nFriSteps = getFriStepSizes(ctx).length;
         uint256 fri_evalPointPtr = getPtr(ctx, MM_FRI_EVAL_POINTS);
@@ -674,7 +681,10 @@ abstract contract StarkVerifier is
             ctx[MM_FRI_COMMITMENTS + i] = uint256(
                 VerifierChannel.readHash(channelPtr, true)
             );
+            console.log("yo fri hash is:", ctx[MM_FRI_COMMITMENTS + i]);
         }
+
+        console.log("finished");
 
         // Send last random FRI evaluation point.
         VerifierChannel.sendFieldElements(

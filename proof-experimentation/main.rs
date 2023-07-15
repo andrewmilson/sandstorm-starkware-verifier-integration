@@ -77,6 +77,16 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Proof
         println!("ood eval: {}", eval);
         proof_elements.push(U256::from(to_montgomery(eval)));
     }
+    for layer in &proof.fri_proof.layers {
+        let commitment = U256::try_from_be_slice(&layer.commitment).unwrap();
+        println!("layer commitment is {}", commitment);
+        proof_elements.push(commitment);
+    }
+    let fri_remainder = proof.fri_proof.remainder;
+    println!("Fri remainder len: {}", fri_remainder.len());
+    for eval in fri_remainder {
+        proof_elements.push(U256::from(to_montgomery(eval)));
+    }
 
     let proof_elements = fmt_array_items(&proof_elements);
 
