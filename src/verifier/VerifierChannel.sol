@@ -232,11 +232,12 @@ contract VerifierChannel is Prng {
     function verifyProofOfWork(
         uint256 channelPtr,
         uint256 proofOfWorkBits
-    ) internal pure {
+    ) internal view {
         if (proofOfWorkBits == 0) {
             return;
         }
 
+        uint256 prefixDigest;
         uint256 proofOfWorkDigest;
         assembly {
             // [0:0x29) := 0123456789abcded || digest     || workBits.
@@ -249,6 +250,7 @@ contract VerifierChannel is Prng {
             mstore(0x8, digest)
             mstore8(0x28, proofOfWorkBits)
             mstore(0, keccak256(0, 0x29))
+            prefixDigest := mload(0)
 
             let proofPtr := mload(channelPtr)
             mstore(0x20, mload(proofPtr))
@@ -263,6 +265,9 @@ contract VerifierChannel is Prng {
 
             mstore(channelPtr, add(proofPtr, 0x8))
         }
+
+        console.log("prefix digest", prefixDigest);
+        console.log("proof of work digest", proofOfWorkDigest);
 
         uint256 proofOfWorkThreshold = uint256(1) << (256 - proofOfWorkBits);
         require(

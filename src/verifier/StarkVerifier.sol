@@ -536,11 +536,13 @@ abstract contract StarkVerifier is
       -- The coefficients are not actually read and copied elsewhere, but rather only a pointer to
          their location in the channel is stored.
     */
-    function readLastFriLayer(uint256[] memory ctx) internal pure {
+    function readLastFriLayer(uint256[] memory ctx) internal view {
         uint256 lmmChannel = MM_CHANNEL;
         uint256 friLastLayerDegBound = ctx[MM_FRI_LAST_LAYER_DEG_BOUND];
         uint256 lastLayerPtr;
         uint256 badInput = 0;
+
+        uint256 newDigest;
 
         assembly {
             let
@@ -570,11 +572,22 @@ abstract contract StarkVerifier is
 
             // prng.digest := keccak256((digest+1)||lastLayerCoefs).
             mstore(digestPtr, keccak256(newDigestPtr, add(length, 0x20)))
+            newDigest := mload(digestPtr)
             // prng.counter := 0.
             mstore(add(channelPtr, 0x40), 0)
 
             // Note: proof pointer is not incremented until this point.
             mstore(channelPtr, lastLayerEnd)
+        }
+
+        console.log("post remainder digest:", newDigest);
+
+        for (uint i = 0; i < friLastLayerDegBound; i++) {
+            uint256 val;
+            assembly {
+                val := mload(add(lastLayerPtr, mul(i, 0x20)))
+            }
+            console.log("val is:", val);
         }
 
         require(badInput == 0, "Invalid field element.");
@@ -693,11 +706,17 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_FRI_EVAL_POINTS + nFriSteps - 1)
         );
 
+        console.log(
+            "Remainder alpha:",
+            ctx[MM_FRI_EVAL_POINTS + nFriSteps - 1]
+        );
+
         // Read FRI last layer commitment.
         readLastFriLayer(ctx);
 
         // Generate queries.
         // emit LogGas("Read FRI commitments", gasleft());
+        console.log("proof of work bits: {}", ctx[MM_PROOF_OF_WORK_BITS]);
         VerifierChannel.verifyProofOfWork(
             channelPtr,
             ctx[MM_PROOF_OF_WORK_BITS]
@@ -709,6 +728,12 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_FRI_QUEUE),
             FRI_QUEUE_SLOT_SIZE_IN_BYTES
         );
+        console.log("fri query:", ctx[MM_FRI_QUEUE]);
+        console.log("fri query:", ctx[MM_FRI_QUEUE + 1]);
+        console.log("fri query:", ctx[MM_FRI_QUEUE + 2]);
+        console.log("fri query:", ctx[MM_FRI_QUEUE + 3]);
+        console.log("fri query:", ctx[MM_FRI_QUEUE + 4]);
+        console.log("fri query:", ctx[MM_FRI_QUEUE + 5]);
         computeFirstFriLayer(ctx);
 
         friVerifyLayers(ctx);

@@ -9,9 +9,9 @@ use sandstorm_claims::sharp::utils::to_montgomery;
 use sandstorm_binary::{CompiledProgram, AirPublicInput};
 use sandstorm_claims::sharp;
 use sha3::Keccak256;
-use ministark::Verifiable;
 use sandstorm_claims::sharp::input::CairoAuxInput;
 use sandstorm_claims::sharp::verifier::SharpMetadata;
+use ministark::stark::Stark;
 use sandstorm_layouts::starknet::{AirConfig, ExecutionTrace};
 use std::io::Write;
 
@@ -22,20 +22,26 @@ const PROOF_BYTES: &[u8] = include_bytes!("../bootloader-proof.bin");
 const PROGRAM_BYTES: &[u8] = include_bytes!("../bootloader_compiled.json");
 
 type SharpClaim = sharp::CairoClaim<AirConfig, ExecutionTrace, Keccak256>;
+type SharpProof = Proof<
+    <SharpClaim as Stark>::Fp,
+    <SharpClaim as Stark>::Fp,
+    <SharpClaim as Stark>::Digest,
+    <SharpClaim as Stark>::MerkleTree,
+>;
 
 fn main() -> std::io::Result<()> {
     let air_public_input: AirPublicInput<Fp> =
         serde_json::from_reader(AIR_PUBLIC_INPUT_BYTES).unwrap();
     let program: CompiledProgram<Fp> = serde_json::from_reader(PROGRAM_BYTES).unwrap();
     let claim = SharpClaim::new(program, air_public_input);
-    let proof: Proof<Fp> = Proof::deserialize_compressed(PROOF_BYTES).unwrap();
-    let metadata = claim.verify_with_artifacts(proof.clone()).unwrap();
+    let proof: SharpProof = Proof::deserialize_compressed(PROOF_BYTES).unwrap();
+    let metadata = claim.verify_sharp(proof.clone()).unwrap();
 
     let mut output = File::create("./test/AutoGenProofData.sol")?;
     write!(output, "{}", gen_proof_data_class(claim, metadata, proof))
 }
 
-fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Proof<Fp>) -> String {
+fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: SharpProof) -> String {
     let mut res = String::new();
 
     println!(
@@ -82,11 +88,14 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Proof
         println!("layer commitment is {}", commitment);
         proof_elements.push(commitment);
     }
-    let fri_remainder = proof.fri_proof.remainder;
-    println!("Fri remainder len: {}", fri_remainder.len());
-    for eval in fri_remainder {
+    let fri_remainder_coeffs = proof.fri_proof.remainder_coeffs;
+    println!("Fri remainder coeffs len: {}", fri_remainder_coeffs.len());
+    for eval in fri_remainder_coeffs {
+        println!("remainder eval: {}", eval);
         proof_elements.push(U256::from(to_montgomery(eval)));
     }
+    let shifted_nonce = U256::from(proof.pow_nonce) << (256 - 64);
+    proof_elements.push(shifted_nonce);
 
     let proof_elements = fmt_array_items(&proof_elements);
 
@@ -143,7 +152,7 @@ fn fmt_array_items(items: &[impl Display]) -> String {
     res
 }
 
-fn get_proof_params(proof: &Proof<Fp>) -> Vec<U256> {
+fn get_proof_params(proof: &SharpProof) -> Vec<U256> {
     let options = proof.options;
     const N_QUERIES_OFFSET: usize = 0;
     const LOG_BLOWUP_FACTOR_OFFSET: usize = 1;
