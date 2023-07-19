@@ -16,12 +16,18 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
+import "forge-std/console.sol";
 import "./IMerkleVerifier.sol";
 
 contract MerkleVerifier is IMerkleVerifier {
-    // Commitments are masked to 160bit using the following mask to save gas costs.
+    // // Commitments are masked to 160bit using the following mask to save gas costs.
+    // uint256 internal constant COMMITMENT_MASK = (
+    //     0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000
+    // );
+
+    // TODO: change back for SHARP compatibility
     uint256 internal constant COMMITMENT_MASK = (
-        0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000
+        0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
     );
 
     // The size of a commitment. We use 32 bytes (rather than 20 bytes) per commitment as it
@@ -51,6 +57,13 @@ contract MerkleVerifier is IMerkleVerifier {
         uint256 n
     ) internal view virtual override returns (bytes32 hash) {
         require(n <= MAX_N_MERKLE_VERIFIER_QUERIES, "TOO_MANY_MERKLE_QUERIES");
+
+        // channel[0] == merkle view == proofPtr
+        // what is a merkle view?
+        //
+
+        console.log("merkle root is");
+        console.logBytes32(root);
 
         assembly {
             // queuePtr + i * MERKLE_SLOT_SIZE_IN_BYTES gives the i'th index in the queue.

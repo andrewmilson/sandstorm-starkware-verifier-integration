@@ -125,12 +125,47 @@ contract StarkNetVerifierTest is Test {
         );
     }
 
+    function testAddMerkleStatement() public {
+        AutoGenProofData proofData = new AutoGenProofData();
+        MerkleStatementContract myMerkleContract = new MerkleStatementContract();
+        myMerkleContract.verifyMerkle(
+            proofData.getBaseTraceMerkleView(),
+            proofData.getBaseTraceMerkleInitials(),
+            proofData.baseTraceMerkleHeight(),
+            proofData.baseTraceMerkleRoot()
+        );
+    }
+
     function testVerify() public {
         // ProofData proofData = new ProofData();
         AutoGenProofData proofData = new AutoGenProofData();
         uint256 cairoVerifierId = proofData.cairoVerifierId();
         console.logUint(proofData.cairoVerifierId());
         console.log(address(bootloaderProgram));
+
+        // register merkle statements
+        // 1. base trace
+        merkleStatementContract.verifyMerkle(
+            proofData.getBaseTraceMerkleView(),
+            proofData.getBaseTraceMerkleInitials(),
+            proofData.baseTraceMerkleHeight(),
+            proofData.baseTraceMerkleRoot()
+        );
+        // 2. extension trace
+        merkleStatementContract.verifyMerkle(
+            proofData.getExtensionTraceMerkleView(),
+            proofData.getExtensionTraceMerkleInitials(),
+            proofData.extensionTraceMerkleHeight(),
+            proofData.extensionTraceMerkleRoot()
+        );
+        // 2. composition trace
+        merkleStatementContract.verifyMerkle(
+            proofData.getCompositionTraceMerkleView(),
+            proofData.getCompositionTraceMerkleInitials(),
+            proofData.compositionTraceMerkleHeight(),
+            proofData.compositionTraceMerkleRoot()
+        );
+
         gpsStatementVerifier.verifyProofAndRegister(
             proofData.getProofParams(),
             proofData.getProof(),

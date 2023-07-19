@@ -425,10 +425,17 @@ abstract contract StarkVerifier is
         uint256 merkleQueuePtr = getPtr(ctx, MM_MERKLE_QUEUE);
         uint256 rowSize = 0x20 * nColumns;
         uint256 proofDataSkipBytes = 0x20 * (nTotalColumns - nColumns);
+        bytes32 firstHash;
+        uint256 firstItem;
+        uint256 secondItem;
 
         assembly {
             let proofPtr := mload(channelPtr)
             let merklePtr := merkleQueuePtr
+
+            firstItem := mload(proofPtr)
+            secondItem := mload(add(proofPtr, 0x20))
+            firstHash := keccak256(proofPtr, rowSize)
 
             for {
 
@@ -465,6 +472,18 @@ abstract contract StarkVerifier is
             mstore(channelPtr, proofPtr)
         }
 
+        console.log("first hash:");
+        console.logBytes32(firstHash);
+
+        console.log("first item", firstItem);
+        console.log("second item", secondItem);
+
+        console.log("about to verify merkle");
+
+        // for (uint i = 0; i < 5; i++) {
+        //     console.log("Merkle queue", i, ctx[MM_MERKLE_QUEUE + i]);
+        // }
+
         verifyMerkle(channelPtr, merkleQueuePtr, merkleRoot, nUniqueQueries);
     }
 
@@ -479,7 +498,9 @@ abstract contract StarkVerifier is
       the term (f(x) - c)/(x-z).
     */
     function computeFirstFriLayer(uint256[] memory ctx) internal view {
+        console.log("inside computeFirstFriLayer");
         adjustQueryIndicesAndPrepareEvalPoints(ctx);
+        console.log("finished adjusting indices");
         readQueryResponsesAndDecommit(
             ctx,
             getNColumnsInTrace(),
@@ -487,6 +508,7 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_TRACE_QUERY_RESPONSES),
             bytes32(ctx[MM_TRACE_COMMITMENT])
         );
+        console.log("Managed to verify first query response");
         if (hasInteraction()) {
             readQueryResponsesAndDecommit(
                 ctx,
@@ -495,6 +517,7 @@ abstract contract StarkVerifier is
                 getPtr(ctx, MM_TRACE_QUERY_RESPONSES + getNColumnsInTrace0()),
                 bytes32(ctx[MM_TRACE_COMMITMENT + 1])
             );
+            console.log("Managed to verify second query response");
         }
 
         readQueryResponsesAndDecommit(
@@ -504,6 +527,7 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_COMPOSITION_QUERY_RESPONSES),
             bytes32(ctx[MM_OODS_COMMITMENT])
         );
+        console.log("Managed to verify thirs query response");
 
         address oodsAddress = oodsContractAddress;
         uint256 friQueue = getPtr(ctx, MM_FRI_QUEUE);
