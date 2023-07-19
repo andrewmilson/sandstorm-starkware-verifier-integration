@@ -19,6 +19,7 @@ pragma solidity ^0.6.12;
 
 import "./MemoryMap.sol";
 import "./StarkParameters.sol";
+import "forge-std/console.sol";
 
 contract CpuOods is MemoryMap, StarkParameters {
     // For each query point we want to invert (2 + N_ROWS_IN_MASK) items:
@@ -64,13 +65,20 @@ contract CpuOods is MemoryMap, StarkParameters {
         );
         oodsPrepareInverses(ctx, batchInverseArray);
 
+        console.log("inside OODS YOYOYYOYOYOYO!");
+
         uint256 kMontgomeryRInv = PrimeFieldElement0.K_MONTGOMERY_R_INV;
+
+        uint256 oodsFirst;
+        uint256 oodsAlpha;
+        uint256 firstRes;
 
         assembly {
             let
                 PRIME
             := 0x800000000000011000000000000000000000000000000000000000000000001
             let context := ctx
+            let friQueueFirstPtr := add(context, add(0xdc0, 0x20))
             let friQueue := /*friQueue*/ add(context, 0xdc0)
             let friQueueEnd := add(friQueue, mul(n_queries, 0x60))
             let traceQueryResponses := /*traceQueryQesponses*/ add(
@@ -99,6 +107,7 @@ contract CpuOods is MemoryMap, StarkParameters {
                 // Trace constraints.
                 let oods_alpha_pow := 1
                 let oods_alpha := /*oods_alpha*/ mload(add(context, 0x5600))
+                oodsAlpha := oods_alpha
 
                 // Mask items for column #0.
                 {
@@ -6984,6 +6993,11 @@ contract CpuOods is MemoryMap, StarkParameters {
                     oods_alpha_pow := mulmod(oods_alpha_pow, oods_alpha, PRIME)
                 }
 
+                // yo
+                if eq(friQueue, add(context, 0xdc0)) {
+                    firstRes := mulmod(res, 1, PRIME)
+                }
+
                 // Advance compositionQueryResponses by amount read (0x20 * constraintDegree).
                 compositionQueryResponses := add(
                     compositionQueryResponses,
@@ -7003,6 +7017,10 @@ contract CpuOods is MemoryMap, StarkParameters {
                 // Advance denominatorsPtr by chunk size (0x20 * (2+N_ROWS_IN_MASK)).
                 denominatorsPtr := add(denominatorsPtr, 0x1820)
             }
+            oodsFirst := mload(friQueueFirstPtr)
+        }
+        assembly {
+            let context := ctx
             return(/*friQueue*/ add(context, 0xdc0), 0x1200)
         }
     }

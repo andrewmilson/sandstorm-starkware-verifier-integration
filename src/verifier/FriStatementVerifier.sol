@@ -21,6 +21,7 @@ import "./MemoryAccessUtils.sol";
 import "./FriStatementContract.sol";
 import "./HornerEvaluator.sol";
 import "./VerifierChannel.sol";
+import "forge-std/console.sol";
 
 /*
   This contract verifies all the FRI layer, one by one, using the FriStatementContract.
@@ -93,6 +94,7 @@ abstract contract FriStatementVerifier is
       have been registered in the FriStatementContract.
     */
     function friVerifyLayers(uint256[] memory ctx) internal view virtual {
+        console.log("doing a friVerifyLayers");
         uint256 channelPtr = getChannelPtr(ctx);
         uint256 nQueries = ctx[MM_N_UNIQUE_QUERIES];
 
@@ -115,10 +117,15 @@ abstract contract FriStatementVerifier is
             inputLayerHash := keccak256(friQueue, mul(nQueries, 0x60))
         }
 
+        console.log("friQueue[0]:", ctx[MM_FRI_QUEUE + 0]);
+        console.log("friQueue[1]:", ctx[MM_FRI_QUEUE + 1]);
+        console.log("friQueue[2]:", ctx[MM_FRI_QUEUE + 2]);
+
         uint256[] memory friStepSizes = getFriStepSizes(ctx);
         uint256 nFriInnerLayers = friStepSizes.length - 1;
         uint256 friStep = 1;
         uint256 sumOfStepSizes = friStepSizes[1];
+        console.log("sum of fri step siszes:", sumOfStepSizes);
         uint256[5] memory dataToHash;
         while (friStep < nFriInnerLayers) {
             uint256 outputLayerHash = uint256(readBytes(channelPtr, true));

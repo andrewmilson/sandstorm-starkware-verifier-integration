@@ -18,6 +18,7 @@ pragma solidity ^0.6.12;
 
 import "./MerkleVerifier.sol";
 import "./FriTransform.sol";
+import "forge-std/console.sol";
 
 /*
   The main component of FRI is the FRI step which takes

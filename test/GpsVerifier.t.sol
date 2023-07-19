@@ -136,6 +136,25 @@ contract StarkNetVerifierTest is Test {
         );
     }
 
+    // function friStatement() public {
+    //     AutoGenProofData proofData = new AutoGenProofData();
+    //     FriStatementContract myFriContract = new FriStatementContract();
+    //     myFriContract.verifyMerkle(
+    //         proofData.getBaseTraceMerkleView(),
+    //         proofData.getBaseTraceMerkleInitials(),
+    //         proofData.baseTraceMerkleHeight(),
+    //         proofData.baseTraceMerkleRoot()
+    //     );
+    //     // AutoGenProofData proofData = new AutoGenProofData();
+    //     // MerkleStatementContract myMerkleContract = new MerkleStatementContract();
+    //     // myMerkleContract.verifyMerkle(
+    //     //     proofData.getBaseTraceMerkleView(),
+    //     //     proofData.getBaseTraceMerkleInitials(),
+    //     //     proofData.baseTraceMerkleHeight(),
+    //     //     proofData.baseTraceMerkleRoot()
+    //     // );
+    // }
+
     function testVerify() public {
         // ProofData proofData = new ProofData();
         AutoGenProofData proofData = new AutoGenProofData();

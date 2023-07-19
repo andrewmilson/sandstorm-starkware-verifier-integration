@@ -760,6 +760,7 @@ abstract contract StarkVerifier is
         console.log("fri query:", ctx[MM_FRI_QUEUE + 5]);
         computeFirstFriLayer(ctx);
 
+        console.log("about to verify fri layers");
         friVerifyLayers(ctx);
     }
 }
