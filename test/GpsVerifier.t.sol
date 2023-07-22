@@ -181,7 +181,7 @@ contract StarkNetVerifierTest is Test {
 
         // register fri layer statements
         FriDataLayer[] memory friDataLayers = proofData.getFriDataLayers();
-        for (uint i = 0; i < 3; i++) {
+        for (uint i = 0; i < friDataLayers.length; i++) {
             console.log("verifying fri layer", i);
             FriDataLayer friDataLayer = friDataLayers[i];
             friStatementContract.verifyFRI(

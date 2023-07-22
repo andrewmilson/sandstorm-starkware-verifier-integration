@@ -275,12 +275,14 @@ contract FriLayer is MerkleVerifier, FriTransform {
                 friCosetSize
             );
 
-            console.log("coset offset is:", cosetOffset);
+            // console.log("coset offset is:", cosetOffset);
 
             // Compute the index of the coset evaluations in the Merkle queue.
             index /= friCosetSize;
 
             // Add (index, keccak256(evaluationsOnCoset)) to the Merkle queue.
+            // uint256 merkleIndex;
+            uint256 merkleHash;
             assembly {
                 mstore(merkleQueuePtr, index)
                 mstore(
@@ -293,8 +295,12 @@ contract FriLayer is MerkleVerifier, FriTransform {
                         )
                     )
                 )
+                // merkleIndex := mload(merkleQueuePtr)
+                merkleHash := mload(add(merkleQueuePtr, 0x20))
             }
             merkleQueuePtr += MERKLE_SLOT_SIZE_IN_BYTES;
+            // console.log("merkleIndex[]", merkleIndex);
+            console.log("merkleHash[]", merkleHash);
 
             (uint256 friValue, uint256 FriInversedPoint) = transformCoset(
                 friCtx + FRI_CTX_TO_FRI_HALF_INV_GROUP_OFFSET,

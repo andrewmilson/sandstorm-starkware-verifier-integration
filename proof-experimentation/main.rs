@@ -191,37 +191,61 @@ fn gen_fri_layer_statement<D: Digest + Send + Sync + 'static, const N: usize>(
 
     let mut fri_proof = Vec::new();
 
-    let mut merkle_positions = Vec::new();
+    // let mut merkle_positions = Vec::new();
     let cosets = layer.flattenend_rows.chunks(N);
     // assert_eq!(positions.len(), cosets.len());
-    let mut position_queue = VecDeque::from_iter(zip(zip(positions, cosets), &layer.proofs));
-    while let Some(((position, coset), proof)) = position_queue.pop_front() {
-        let merkle_position = position / N;
-        merkle_positions.push((merkle_position, proof.clone()));
-        let coset_idx = merkle_position * N;
+    println!("pos len: {}", positions.len());
+    println!("folded pos len: {}", fold_positions(&positions, N).len());
+    println!("cosets len: {}", cosets.len());
+    println!("proofs len: {}", layer.proofs.len());
+    // let mut position_queue = VecDeque::from_iter(zip(zip(positions, cosets), &layer.proofs));
+    // while let Some(((position, coset), proof)) = position_queue.pop_front() {
+    //     // let merkle_position = position / N;
+    //     // merkle_positions.push((merkle_position, proof.clone()));
+    //     // let coset_idx = merkle_position * N;
+    //     let coset_idx = (position / N) * N;
+    //     'inner: for (i, v) in coset.iter().enumerate() {
+    //         if let Some(&((next_position, _), _)) = position_queue.front() {
+    //             // don't bother adding to proof since value can be obtained from fri queue
+    //             if coset_idx + i == *next_position {
+    //                 // println!("made it here, {}", merkle_position + domain_size / N);
+    //                 // position_queue.pop_front();
+    //                 continue 'inner;
+    //             }
+    //         }
+    //         if i == position % N {
+    //             // println!("also made it here!!!");
+    //             continue;
+    //         }
+    //         fri_proof.push(U256::from(to_montgomery(*v)))
+    //     }
+    // }
+
+    let posSet = BTreeSet::from_iter(positions);
+    for (pos, coset) in zip(fold_positions(positions, N), cosets) {
         for (i, v) in coset.iter().enumerate() {
-            if let Some(&((next_position, _), _)) = position_queue.front() {
-                // don't bother adding to proof since value can be obtained from fri queue
-                if coset_idx + i == *next_position {
-                    position_queue.pop_front();
-                    continue;
-                }
+            if !posSet.contains(&(pos * N + i)) {
+                fri_proof.push(U256::from(to_montgomery(*v)))
             }
-            if i == position % N {
-                continue;
-            }
-            fri_proof.push(U256::from(to_montgomery(*v)))
         }
     }
 
-    for (index, proof) in &merkle_positions {
-        let leaf = match &proof {
-            MerkleTreeVariantProof::Hashed(p) => U256::try_from_be_slice(p.leaf()).unwrap(),
-            _ => unreachable!(),
-        };
+    let merkle_positions = zip(fold_positions(positions, N), layer.proofs.clone());
+
+    for (index, proof) in merkle_positions.clone() {
+        if layer_idx == 3 {
+            // println!("merkleIndex[] {}", index + domain_size / N);
+
+            let leaf = match &proof {
+                MerkleTreeVariantProof::Hashed(p) => U256::try_from_be_slice(p.leaf()).unwrap(),
+                _ => unreachable!(),
+            };
+
+            println!("merkleHash[] {}", leaf);
+        }
     }
 
-    let (indices, proofs): (Vec<_>, Vec<_>) = merkle_positions.into_iter().unzip();
+    let (indices, proofs): (Vec<_>, Vec<_>) = merkle_positions.unzip();
     let fri_merkle_proofs = partition_proofs(&proofs);
     let fri_merkle_vals =
         get_merkle_statement_values(&layer.commitment, &fri_merkle_proofs, &indices);
@@ -432,6 +456,9 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     println!("first queue hash {}", fri_statements[1].input_hash);
 
     remainder_bytes.extend(fri_statements[1].input_hash.to_be_bytes::<32>());
+    remainder_bytes.extend(fri_statements[2].input_hash.to_be_bytes::<32>());
+    remainder_bytes.extend(fri_statements[3].input_hash.to_be_bytes::<32>());
+    remainder_bytes.extend(fri_statements[4].input_hash.to_be_bytes::<32>());
 
     let fri_statements = print_fri_statements(&fri_statements);
     // assert_eq!(first_fri_statements, fri_statements);
@@ -674,6 +701,7 @@ fn gen_fri_statements<const N: usize>(
         let folded_positions = fold_positions(&positions, N);
         let (chunks, _) = layer.flattenend_rows.as_chunks::<N>();
         let evals = get_query_values(chunks, &positions, &folded_positions);
+        println!("=====DOING STATEMENT: {i}");
         let fri_layer_statement = gen_fri_layer_statement::<Keccak256, N>(
             &positions,
             &evals,
