@@ -69,9 +69,9 @@ contract CpuOods is MemoryMap, StarkParameters {
 
         uint256 kMontgomeryRInv = PrimeFieldElement0.K_MONTGOMERY_R_INV;
 
-        uint256 oodsFirst;
         uint256 oodsAlpha;
         uint256 firstRes;
+        uint256 firstEvalInv;
 
         assembly {
             let
@@ -7014,11 +7014,16 @@ contract CpuOods is MemoryMap, StarkParameters {
                     /*friInvPoint*/ mload(add(denominatorsPtr, 0x1800))
                 )
 
+                // yo
+                if eq(friQueue, add(context, 0xdc0)) {
+                    firstEvalInv := mload(add(friQueue, 0x40))
+                }
+
                 // Advance denominatorsPtr by chunk size (0x20 * (2+N_ROWS_IN_MASK)).
                 denominatorsPtr := add(denominatorsPtr, 0x1820)
             }
-            oodsFirst := mload(friQueueFirstPtr)
         }
+        console.log("First HHH eval inv:", firstEvalInv);
         assembly {
             let context := ctx
             return(/*friQueue*/ add(context, 0xdc0), 0x1200)

@@ -23,6 +23,7 @@ sandstorm-claims = { path = "../sandstorm/claims" }
 ark-serialize = "0.4"
 num-bigint = { version = "0.4" }
 ark-ff = "0.4"
+ark-poly = "0.4"
 sha2 = "0.10"
 ruint = { version = "1.7", features = [ "serde", "num-bigint" ] }
 sha3 = "0.10"

@@ -120,6 +120,7 @@ abstract contract FriStatementVerifier is
         console.log("friQueue[0]:", ctx[MM_FRI_QUEUE + 0]);
         console.log("friQueue[1]:", ctx[MM_FRI_QUEUE + 1]);
         console.log("friQueue[2]:", ctx[MM_FRI_QUEUE + 2]);
+        console.log("keckakk(friQueue)", inputLayerHash);
 
         uint256[] memory friStepSizes = getFriStepSizes(ctx);
         uint256 nFriInnerLayers = friStepSizes.length - 1;
@@ -129,11 +130,21 @@ abstract contract FriStatementVerifier is
         uint256[5] memory dataToHash;
         while (friStep < nFriInnerLayers) {
             uint256 outputLayerHash = uint256(readBytes(channelPtr, true));
+            // console.log("output layer hash", outputLayerHash);
             dataToHash[0] = ctx[MM_FRI_EVAL_POINTS + friStep];
+            // console.log("friEvalsPoint[i]:", ctx[MM_FRI_EVAL_POINTS + friStep]);
             dataToHash[1] = friStepSizes[friStep];
+            // console.log("friStepSizes[i]:", dataToHash[1]);
             dataToHash[2] = inputLayerHash;
             dataToHash[3] = outputLayerHash;
             dataToHash[4] = ctx[MM_FRI_COMMITMENTS + friStep - 1];
+            // console.log("friCommitment[i]:", dataToHash[4]);
+
+            console.log("(((evalPoint: ", dataToHash[0]);
+            console.log("(((friStepSize: ", dataToHash[1]);
+            console.log("(((inputHash: ", dataToHash[2]);
+            console.log("(((outputHash: ", dataToHash[3]);
+            console.log("(((root: ", dataToHash[4]);
 
             // Verify statement is registered.
             require( // NOLINT: calls-loop.

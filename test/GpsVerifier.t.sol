@@ -125,34 +125,28 @@ contract StarkNetVerifierTest is Test {
         );
     }
 
-    function testAddMerkleStatement() public {
-        AutoGenProofData proofData = new AutoGenProofData();
-        MerkleStatementContract myMerkleContract = new MerkleStatementContract();
-        myMerkleContract.verifyMerkle(
-            proofData.getBaseTraceMerkleView(),
-            proofData.getBaseTraceMerkleInitials(),
-            proofData.baseTraceMerkleHeight(),
-            proofData.baseTraceMerkleRoot()
-        );
-    }
-
-    // function friStatement() public {
+    // function testAddMerkleStatement() public {
     //     AutoGenProofData proofData = new AutoGenProofData();
-    //     FriStatementContract myFriContract = new FriStatementContract();
-    //     myFriContract.verifyMerkle(
+    //     MerkleStatementContract myMerkleContract = new MerkleStatementContract();
+    //     myMerkleContract.verifyMerkle(
     //         proofData.getBaseTraceMerkleView(),
     //         proofData.getBaseTraceMerkleInitials(),
     //         proofData.baseTraceMerkleHeight(),
     //         proofData.baseTraceMerkleRoot()
     //     );
-    //     // AutoGenProofData proofData = new AutoGenProofData();
-    //     // MerkleStatementContract myMerkleContract = new MerkleStatementContract();
-    //     // myMerkleContract.verifyMerkle(
-    //     //     proofData.getBaseTraceMerkleView(),
-    //     //     proofData.getBaseTraceMerkleInitials(),
-    //     //     proofData.baseTraceMerkleHeight(),
-    //     //     proofData.baseTraceMerkleRoot()
-    //     // );
+    // }
+
+    // function testFriStatement() public {
+    //     AutoGenProofData proofData = new AutoGenProofData();
+    //     FriDataLayer firstStatement = proofData.getFriDataLayers()[0];
+    //     FriStatementContract myFriContract = new FriStatementContract();
+    //     myFriContract.verifyFRI(
+    //         firstStatement.getProof(),
+    //         firstStatement.getQueue(),
+    //         firstStatement.evalPoint(),
+    //         firstStatement.stepSize(),
+    //         firstStatement.root()
+    //     );
     // }
 
     function testVerify() public {
@@ -184,6 +178,20 @@ contract StarkNetVerifierTest is Test {
             proofData.compositionTraceMerkleHeight(),
             proofData.compositionTraceMerkleRoot()
         );
+
+        // register fri layer statements
+        FriDataLayer[] memory friDataLayers = proofData.getFriDataLayers();
+        for (uint i = 0; i < 3; i++) {
+            console.log("verifying fri layer", i);
+            FriDataLayer friDataLayer = friDataLayers[i];
+            friStatementContract.verifyFRI(
+                friDataLayer.getProof(),
+                friDataLayer.getQueue(),
+                friDataLayer.evalPoint(),
+                friDataLayer.stepSize(),
+                friDataLayer.root()
+            );
+        }
 
         gpsStatementVerifier.verifyProofAndRegister(
             proofData.getProofParams(),

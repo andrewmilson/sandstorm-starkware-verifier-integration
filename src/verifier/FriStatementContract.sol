@@ -18,6 +18,7 @@ pragma solidity ^0.6.12;
 
 import "../FactRegistry.sol";
 import "./FriLayer.sol";
+import "forge-std/console.sol";
 
 contract FriStatementContract is FriLayer, FactRegistry {
     /*
@@ -77,7 +78,14 @@ contract FriStatementContract is FriLayer, FactRegistry {
                 add(dataToHash, 0x40),
                 keccak256(friQueuePtr, mul(0x60, nQueries))
             )
+
+            // for testing
+            // friQueuePtr := mload(add(dataToHash, 0x40))
         }
+
+        // // 89242941205408176723340213932503768558669806349213902864930852777868496999448
+        // console.log("statement input hash: ", friQueuePtr);
+        // require(1 == 0);
 
         initFriGroups(friCtx);
 
@@ -91,6 +99,28 @@ contract FriStatementContract is FriLayer, FactRegistry {
             2 ** friStepSize /* friCosetSize = 2**friStepSize */
         );
 
+        uint256 firstMQItem;
+        uint256 secondMQItem;
+        uint256 thirdMQItem;
+        uint256 fourthMQItem;
+        assembly {
+            // firstMQItem := mload(merkleQueuePtr)
+            // secondMQItem := mload(add(merkleQueuePtr, 0x20))
+            // thirdMQItem := mload(add(merkleQueuePtr, 0x40))
+            // fourthMQItem := mload(add(merkleQueuePtr, 0x60))
+
+            firstMQItem := mload(friQueuePtr)
+            secondMQItem := mload(add(friQueuePtr, 0x20))
+            thirdMQItem := mload(add(friQueuePtr, 0x40))
+            fourthMQItem := mload(add(friQueuePtr, 0x60))
+        }
+
+        console.log("first item:", firstMQItem);
+        console.log("second item:", secondMQItem);
+        console.log("third item:", thirdMQItem);
+        console.log("fourth item:", fourthMQItem);
+        console.log("expected root:", expectedRoot);
+
         verifyMerkle(
             channelPtr,
             merkleQueuePtr,
@@ -99,14 +129,28 @@ contract FriStatementContract is FriLayer, FactRegistry {
         );
 
         bytes32 factHash;
+
+        uint256 evalPoint;
+        uint256 friStepSize;
+        uint256 inputHash;
+        uint256 outputHash;
+        uint256 root;
         assembly {
+            outputHash := keccak256(friQueuePtr, mul(0x60, nQueries))
             // Hash FRI outputs and add to dataToHash.
-            mstore(
-                add(dataToHash, 0x60),
-                keccak256(friQueuePtr, mul(0x60, nQueries))
-            )
+            mstore(add(dataToHash, 0x60), outputHash)
+            evalPoint := mload(add(dataToHash, 0x0))
+            friStepSize := mload(add(dataToHash, 0x20))
+            inputHash := mload(add(dataToHash, 0x40))
+            outputHash := mload(add(dataToHash, 0x60))
+            root := mload(add(dataToHash, 0x80))
             factHash := keccak256(dataToHash, 0xa0)
         }
+        console.log("(((evalPoint: ", evalPoint);
+        console.log("(((friStepSize: ", friStepSize);
+        console.log("(((inputHash: ", inputHash);
+        console.log("(((outputHash: ", outputHash);
+        console.log("(((root: ", root);
 
         registerFact(factHash);
     }

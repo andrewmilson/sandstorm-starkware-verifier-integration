@@ -38,6 +38,7 @@ contract FriLayer is MerkleVerifier, FriTransform {
 
     uint256 internal constant MAX_COSET_SIZE = 2 ** FRI_MAX_STEP_SIZE;
     // Generator of the group of size MAX_COSET_SIZE: GENERATOR_VAL**((K_MODULUS - 1)/MAX_COSET_SIZE).
+    // (2^4)th root of unity
     uint256 internal constant FRI_GROUP_GEN =
         0x5ec467b88826aba4537602d514425f3b0bdf467bbf302458337c45f6021e539;
 
@@ -252,7 +253,7 @@ contract FriLayer is MerkleVerifier, FriTransform {
         uint256 friCtx,
         uint256 friEvalPoint,
         uint256 friCosetSize
-    ) internal pure returns (uint256 nLiveQueries) {
+    ) internal view returns (uint256 nLiveQueries) {
         uint256 evaluationsOnCosetPtr = friCtx +
             FRI_CTX_TO_COSET_EVALUATIONS_OFFSET;
 
@@ -273,6 +274,8 @@ contract FriLayer is MerkleVerifier, FriTransform {
                 inputPtr,
                 friCosetSize
             );
+
+            console.log("coset offset is:", cosetOffset);
 
             // Compute the index of the coset evaluations in the Merkle queue.
             index /= friCosetSize;
