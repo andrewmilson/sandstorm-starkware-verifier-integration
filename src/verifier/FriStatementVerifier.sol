@@ -128,6 +128,7 @@ abstract contract FriStatementVerifier is
         uint256 sumOfStepSizes = friStepSizes[1];
         console.log("sum of fri step siszes:", sumOfStepSizes);
         uint256[5] memory dataToHash;
+        console.log("num fri inner layers", nFriInnerLayers);
         while (friStep < nFriInnerLayers) {
             uint256 outputLayerHash = uint256(readBytes(channelPtr, true));
             // console.log("output layer hash", outputLayerHash);
@@ -139,12 +140,6 @@ abstract contract FriStatementVerifier is
             dataToHash[3] = outputLayerHash;
             dataToHash[4] = ctx[MM_FRI_COMMITMENTS + friStep - 1];
             // console.log("friCommitment[i]:", dataToHash[4]);
-
-            console.log("(((evalPoint: ", dataToHash[0]);
-            console.log("(((friStepSize: ", dataToHash[1]);
-            console.log("(((inputHash: ", dataToHash[2]);
-            console.log("(((outputHash: ", dataToHash[3]);
-            console.log("(((root: ", dataToHash[4]);
 
             // Verify statement is registered.
             require( // NOLINT: calls-loop.
@@ -160,6 +155,8 @@ abstract contract FriStatementVerifier is
             sumOfStepSizes += friStepSizes[friStep];
         }
 
+        console.log("the final hurdle");
+
         dataToHash[0] = ctx[MM_FRI_EVAL_POINTS + friStep];
         dataToHash[1] = friStepSizes[friStep];
         dataToHash[2] = inputLayerHash;
@@ -167,6 +164,12 @@ abstract contract FriStatementVerifier is
             computeLastLayerHash(ctx, nQueries, sumOfStepSizes)
         );
         dataToHash[4] = ctx[MM_FRI_COMMITMENTS + friStep - 1];
+
+        console.log("(((evalPoint: ", dataToHash[0]);
+        console.log("(((friStepSize: ", dataToHash[1]);
+        console.log("(((inputHash: ", dataToHash[2]);
+        console.log("(((outputHash: ", dataToHash[3]);
+        console.log("(((root: ", dataToHash[4]);
 
         require(
             friStatementContract.isValid(

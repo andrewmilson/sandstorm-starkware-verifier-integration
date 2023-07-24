@@ -20,15 +20,15 @@ import "forge-std/console.sol";
 import "./IMerkleVerifier.sol";
 
 contract MerkleVerifier is IMerkleVerifier {
-    // // Commitments are masked to 160bit using the following mask to save gas costs.
-    // uint256 internal constant COMMITMENT_MASK = (
-    //     0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000
-    // );
-
-    // TODO: change back for SHARP compatibility
+    // Commitments are masked to 160bit using the following mask to save gas costs.
     uint256 internal constant COMMITMENT_MASK = (
-        0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000
     );
+
+    // // TODO: change back for SHARP compatibility
+    // uint256 internal constant COMMITMENT_MASK = (
+    //     0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    // );
 
     // The size of a commitment. We use 32 bytes (rather than 20 bytes) per commitment as it
     // simplifies the code.

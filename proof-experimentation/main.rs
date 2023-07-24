@@ -23,7 +23,7 @@ use ministark::air::AirConfig as _;
 use ministark_gpu::utils::bit_reverse_index;
 use num_bigint::BigUint;
 use ruint::{aliases::U256, uint};
-use sandstorm_claims::sharp::merkle::{MerkleTreeVariantProof, MerkleTreeVariant};
+use sandstorm_claims::sharp::merkle::{MerkleTreeVariantProof, MerkleTreeVariant, HASH_MASK, mask_bytes};
 use sandstorm_claims::sharp::utils::to_montgomery;
 use sandstorm_claims::sharp::utils::from_montgomery;
 use sandstorm_binary::{CompiledProgram, AirPublicInput};
@@ -426,6 +426,11 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
         _ => unreachable!(),
     };
 
+    println!(
+        "last statement root: {}",
+        fri_statements.last().unwrap().root
+    );
+
     // let first_fri_layer_statement = gen_fri_layer_statement::<Keccak256>(
     //     &metadata.query_positions,
     //     &metadata.deep_evaluations,
@@ -459,6 +464,7 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     remainder_bytes.extend(fri_statements[2].input_hash.to_be_bytes::<32>());
     remainder_bytes.extend(fri_statements[3].input_hash.to_be_bytes::<32>());
     remainder_bytes.extend(fri_statements[4].input_hash.to_be_bytes::<32>());
+    remainder_bytes.extend(fri_statements[5].input_hash.to_be_bytes::<32>());
 
     let fri_statements = print_fri_statements(&fri_statements);
     // assert_eq!(first_fri_statements, fri_statements);
@@ -695,7 +701,7 @@ fn gen_fri_statements<const N: usize>(
     let mut res = Vec::new();
     let num_layers = proof.fri_proof.layers.len();
     println!("num layers: {num_layers}");
-    for i in 0..num_layers.saturating_sub(1) {
+    for i in 0..num_layers {
         let layer = &proof.fri_proof.layers[i];
         let alpha = fri_alphas[i];
         let folded_positions = fold_positions(&positions, N);

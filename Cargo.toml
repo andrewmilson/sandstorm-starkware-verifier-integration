@@ -13,13 +13,13 @@ bench = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ministark-gpu = { version = "0.1", path = "../playground/ministark/gpu" }
-ministark = { path = "../playground/ministark" }
+ministark-gpu = { version = "0.1", path = "../ministark-mirror/gpu" }
+ministark = { path = "../ministark-mirror" }
 serde = { version = "1.0", features = [ "derive" ] }
 serde_json = { version = "1.0", features = [ "arbitrary_precision" ] }
-sandstorm-binary = { path = "../sandstorm/binary" }
-sandstorm-layouts = { path = "../sandstorm/layouts" }
-sandstorm-claims = { path = "../sandstorm/claims" }
+sandstorm-binary = { path = "../sandstorm-mirror/binary" }
+sandstorm-layouts = { path = "../sandstorm-mirror/layouts" }
+sandstorm-claims = { path = "../sandstorm-mirror/claims" }
 ark-serialize = "0.4"
 num-bigint = { version = "0.4" }
 ark-ff = "0.4"
