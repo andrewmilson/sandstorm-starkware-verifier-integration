@@ -460,11 +460,14 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     println!("3rd item {}", fri_statements[0].fri_queue[2]);
     println!("first queue hash {}", fri_statements[1].input_hash);
 
-    remainder_bytes.extend(fri_statements[1].input_hash.to_be_bytes::<32>());
-    remainder_bytes.extend(fri_statements[2].input_hash.to_be_bytes::<32>());
-    remainder_bytes.extend(fri_statements[3].input_hash.to_be_bytes::<32>());
-    remainder_bytes.extend(fri_statements[4].input_hash.to_be_bytes::<32>());
-    remainder_bytes.extend(fri_statements[5].input_hash.to_be_bytes::<32>());
+    for statement in &fri_statements[1..] {
+        remainder_bytes.extend(statement.input_hash.to_be_bytes::<32>());
+    }
+    // remainder_bytes.extend(fri_statements[1].input_hash.to_be_bytes::<32>());
+    // remainder_bytes.extend(fri_statements[2].input_hash.to_be_bytes::<32>());
+    // remainder_bytes.extend(fri_statements[3].input_hash.to_be_bytes::<32>());
+    // remainder_bytes.extend(fri_statements[4].input_hash.to_be_bytes::<32>());
+    // remainder_bytes.extend(fri_statements[5].input_hash.to_be_bytes::<32>());
 
     let fri_statements = print_fri_statements(&fri_statements);
     // assert_eq!(first_fri_statements, fri_statements);

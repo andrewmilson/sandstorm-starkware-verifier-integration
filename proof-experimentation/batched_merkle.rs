@@ -1,27 +1,12 @@
-use ark_ff::BigInteger;
-use ark_ff::PrimeField;
-use ark_serialize::CanonicalDeserialize;
-use ark_serialize::CanonicalSerialize;
-use ark_serialize::Valid;
-use ministark::merkle::Error;
-use ministark::merkle::MatrixMerkleTree;
 use ministark::merkle::MerkleProof;
-use ministark::merkle::MerkleTree;
 use ministark::merkle::MerkleTreeConfig;
-use ministark::merkle::MerkleTreeImpl;
 use ministark::utils::SerdeOutput;
-use ministark::Matrix;
-use ministark_gpu::fields::p3618502788666131213697322783095070105623107215331596699973092056135872020481::ark::Fp;
-use ruint::aliases::U256;
 use sandstorm_claims::sharp::merkle::HashedLeafConfig;
 use sandstorm_claims::sharp::merkle::MerkleTreeVariantProof;
 use sandstorm_claims::sharp::merkle::UnhashedLeafConfig;
 use sha2::Digest;
-use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::iter::zip;
-use std::marker::PhantomData;
-use std::rc::Rc;
 
 /// Batched merkle proof as per SHARP verifier
 pub struct BatchedMerkleProof<C: MerkleTreeConfig> {

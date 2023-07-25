@@ -31,24 +31,10 @@ abstract contract LayoutSpecific is
 {
     IPeriodicColumn pedersenPointsX;
     IPeriodicColumn pedersenPointsY;
-    IPeriodicColumn ecdsaGeneratorPointsX;
-    IPeriodicColumn ecdsaGeneratorPointsY;
-    IPeriodicColumn poseidonPoseidonFullRoundKey0;
-    IPeriodicColumn poseidonPoseidonFullRoundKey1;
-    IPeriodicColumn poseidonPoseidonFullRoundKey2;
-    IPeriodicColumn poseidonPoseidonPartialRoundKey0;
-    IPeriodicColumn poseidonPoseidonPartialRoundKey1;
 
     function initPeriodicColumns(address[] memory auxPolynomials) internal {
         pedersenPointsX = IPeriodicColumn(auxPolynomials[1]);
         pedersenPointsY = IPeriodicColumn(auxPolynomials[2]);
-        ecdsaGeneratorPointsX = IPeriodicColumn(auxPolynomials[3]);
-        ecdsaGeneratorPointsY = IPeriodicColumn(auxPolynomials[4]);
-        poseidonPoseidonFullRoundKey0 = IPeriodicColumn(auxPolynomials[5]);
-        poseidonPoseidonFullRoundKey1 = IPeriodicColumn(auxPolynomials[6]);
-        poseidonPoseidonFullRoundKey2 = IPeriodicColumn(auxPolynomials[7]);
-        poseidonPoseidonPartialRoundKey0 = IPeriodicColumn(auxPolynomials[8]);
-        poseidonPoseidonPartialRoundKey1 = IPeriodicColumn(auxPolynomials[9]);
     }
 
     function getLayoutInfo()
@@ -62,10 +48,7 @@ abstract contract LayoutSpecific is
             (1 << OUTPUT_BUILTIN_BIT) |
             (1 << PEDERSEN_BUILTIN_BIT) |
             (1 << RANGE_CHECK_BUILTIN_BIT) |
-            (1 << ECDSA_BUILTIN_BIT) |
-            (1 << BITWISE_BUILTIN_BIT) |
-            (1 << EC_OP_BUILTIN_BIT) |
-            (1 << POSEIDON_BUILTIN_BIT);
+            (1 << BITWISE_BUILTIN_BIT);
     }
 
     function safeDiv(
@@ -149,28 +132,6 @@ abstract contract LayoutSpecific is
         );
         ctx[MM_RC16__PERM__PUBLIC_MEMORY_PROD] = 1;
 
-        // "ecdsa" memory segment.
-        ctx[MM_INITIAL_ECDSA_ADDR] = publicInput[OFFSET_ECDSA_BEGIN_ADDR];
-        validateBuiltinPointers(
-            ctx[MM_INITIAL_ECDSA_ADDR],
-            publicInput[OFFSET_ECDSA_STOP_PTR],
-            ECDSA_BUILTIN_RATIO,
-            2,
-            nSteps,
-            "ecdsa"
-        );
-
-        ctx[MM_ECDSA__SIG_CONFIG_ALPHA] = 1;
-        ctx[
-            MM_ECDSA__SIG_CONFIG_BETA
-        ] = 0x6f21413efbe40de150e596d72f7a8c5609ad26c15c915c1f4cdfcb99cee9e89;
-        ctx[
-            MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X
-        ] = 0x49ee3eba8c1600700ee1b87eb599f16716b0b1022947733551fde4050ca6804;
-        ctx[
-            MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y
-        ] = 0x3ca0cfe4b3bc6ddf346d49d06ea0ed34e621062c0e056c1d0405d266e10268a;
-
         // "bitwise" memory segment.
         ctx[MM_INITIAL_BITWISE_ADDR] = publicInput[OFFSET_BITWISE_BEGIN_ADDR];
         validateBuiltinPointers(
@@ -184,30 +145,6 @@ abstract contract LayoutSpecific is
 
         ctx[MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD] = 1;
         ctx[MM_DILUTED_CHECK__FIRST_ELM] = 0;
-
-        // "ec_op" memory segment.
-        ctx[MM_INITIAL_EC_OP_ADDR] = publicInput[OFFSET_EC_OP_BEGIN_ADDR];
-        validateBuiltinPointers(
-            ctx[MM_INITIAL_EC_OP_ADDR],
-            publicInput[OFFSET_EC_OP_STOP_ADDR],
-            EC_OP_BUILTIN_RATIO,
-            7,
-            nSteps,
-            "ec_op"
-        );
-
-        ctx[MM_EC_OP__CURVE_CONFIG_ALPHA] = 1;
-
-        // "poseidon" memory segment.
-        ctx[MM_INITIAL_POSEIDON_ADDR] = publicInput[OFFSET_POSEIDON_BEGIN_ADDR];
-        validateBuiltinPointers(
-            ctx[MM_INITIAL_POSEIDON_ADDR],
-            publicInput[OFFSET_POSEIDON_STOP_PTR],
-            POSEIDON__RATIO,
-            6,
-            nSteps,
-            "poseidon"
-        );
     }
 
     function prepareForOodsCheck(uint256[] memory ctx) internal view {
@@ -228,21 +165,6 @@ abstract contract LayoutSpecific is
             zPointPowPedersen
         );
 
-        // The number of copies in the ECDSA signature periodic columns is
-        // nSteps / ECDSA_BUILTIN_RATIO / ECDSA_BUILTIN_REPETITIONS.
-        uint256 nEcdsaSignatureCopies = safeDiv(
-            2 ** ctx[MM_LOG_N_STEPS],
-            ECDSA_BUILTIN_RATIO * ECDSA_BUILTIN_REPETITIONS
-        );
-        uint256 zPointPowEcdsa = fpow(oodsPoint, nEcdsaSignatureCopies);
-
-        ctx[
-            MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X
-        ] = ecdsaGeneratorPointsX.compute(zPointPowEcdsa);
-        ctx[
-            MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y
-        ] = ecdsaGeneratorPointsY.compute(zPointPowEcdsa);
-
         ctx[MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM] = ctx[
             MM_INTERACTION_ELEMENTS + 3
         ];
@@ -254,30 +176,6 @@ abstract contract LayoutSpecific is
         ctx[MM_DILUTED_CHECK__FINAL_CUM_VAL] = computeDilutedCumulativeValue(
             ctx
         );
-
-        // The number of copies in the Poseidon hash periodic columns is
-        // nSteps / POSEIDON__RATIO.
-        uint256 nPoseidonHashCopies = safeDiv(
-            2 ** ctx[MM_LOG_N_STEPS],
-            POSEIDON__RATIO
-        );
-        uint256 zPointPowPoseidon = fpow(oodsPoint, nPoseidonHashCopies);
-
-        ctx[
-            MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY0
-        ] = poseidonPoseidonFullRoundKey0.compute(zPointPowPoseidon);
-        ctx[
-            MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY1
-        ] = poseidonPoseidonFullRoundKey1.compute(zPointPowPoseidon);
-        ctx[
-            MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY2
-        ] = poseidonPoseidonFullRoundKey2.compute(zPointPowPoseidon);
-        ctx[
-            MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__PARTIAL_ROUND_KEY0
-        ] = poseidonPoseidonPartialRoundKey0.compute(zPointPowPoseidon);
-        ctx[
-            MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__PARTIAL_ROUND_KEY1
-        ] = poseidonPoseidonPartialRoundKey1.compute(zPointPowPoseidon);
     }
 
     /*

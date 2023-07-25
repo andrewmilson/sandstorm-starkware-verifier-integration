@@ -140,6 +140,11 @@ abstract contract FriStatementVerifier is
             dataToHash[3] = outputLayerHash;
             dataToHash[4] = ctx[MM_FRI_COMMITMENTS + friStep - 1];
             // console.log("friCommitment[i]:", dataToHash[4]);
+            console.log("(((evalPoint: ", dataToHash[0]);
+            console.log("(((friStepSize: ", dataToHash[1]);
+            console.log("(((inputHash: ", dataToHash[2]);
+            console.log("(((outputHash: ", dataToHash[3]);
+            console.log("(((root: ", dataToHash[4]);
 
             // Verify statement is registered.
             require( // NOLINT: calls-loop.
