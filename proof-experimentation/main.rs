@@ -12,6 +12,7 @@ use ark_poly::{Radix2EvaluationDomain, EvaluationDomain};
 use ark_serialize::CanonicalDeserialize;
 use ministark::fri::get_query_values;
 use ministark::fri::fold_positions;
+use ministark::hash::ElementHashFn;
 use batched_merkle::{BatchedMerkleProof, MerkleProofsVariant};
 use ministark::fri::{FriProof, LayerProof};
 use ministark::merkle::{MerkleTreeConfig, HashedLeafConfig, MerkleTree, MatrixMerkleTree};
@@ -37,6 +38,9 @@ use sandstorm_claims::sharp::verifier::SharpMetadata;
 use ministark::stark::Stark;
 use sandstorm_layouts::starknet::{AirConfig, ExecutionTrace};
 use std::io::Write;
+use sandstorm_claims::sharp::StarknetSolidityProof;
+use sandstorm_claims::sharp::StarknetSolidityClaim;
+use sandstorm_claims::sharp::SolidityVerifierMaskedHashFn;
 
 use crate::batched_merkle::partition_proofs;
 
@@ -46,20 +50,15 @@ const AIR_PUBLIC_INPUT_BYTES: &[u8] = include_bytes!("../air-public-input.json")
 const PROOF_BYTES: &[u8] = include_bytes!("../bootloader-proof.bin");
 const PROGRAM_BYTES: &[u8] = include_bytes!("../bootloader_compiled.json");
 
-type SharpClaim = sharp::CairoClaim<AirConfig, ExecutionTrace, Keccak256>;
-type SharpProof = Proof<
-    <SharpClaim as Stark>::Fp,
-    <SharpClaim as Stark>::Fp,
-    <SharpClaim as Stark>::Digest,
-    <SharpClaim as Stark>::MerkleTree,
->;
+type SharpClaim = StarknetSolidityClaim;
+type SharpProof = StarknetSolidityProof;
 
-fn fri_io_hash<D: Digest + Send + Sync + 'static, const N: usize>(
+fn fri_io_hash<const N: usize>(
     domain_size: usize,
     indices: &[usize],
-    layer: &LayerProof<Fp, D, MerkleTreeVariant<D>>,
+    layer: &LayerProof<Fp, SerdeOutput<Keccak256>, MerkleTreeVariant<SolidityVerifierMaskedHashFn>>,
     layer_idx: usize,
-) -> Output<D> {
+) -> SerdeOutput<Keccak256> {
     // let domain_offset = Fp::GENERATOR * domain_generator.pow([bit_rev_position as u64]);
     // let domain = Radix2EvaluationDomain::<Fp>::new_coset(domain_size, Fp::GENERATOR.pow([N as u64])).unwrap();
     // let domain = Radix2EvaluationDomain::<Fp>::new_coset(
@@ -70,7 +69,7 @@ fn fri_io_hash<D: Digest + Send + Sync + 'static, const N: usize>(
     let domain = Radix2EvaluationDomain::<Fp>::new(domain_size).unwrap();
     let (chunks, _) = layer.flattenend_rows.as_chunks::<N>();
     let evals = get_query_values(chunks, indices, &fold_positions(indices, N));
-    let mut hasher = D::new();
+    let mut hasher = Keccak256::new();
     for (index, eval) in zip(indices, evals) {
         hasher.update(U256::from(index + domain_size).to_be_bytes::<32>());
         hasher.update(U256::from(to_montgomery(eval)).to_be_bytes::<32>());
@@ -84,7 +83,7 @@ fn fri_io_hash<D: Digest + Send + Sync + 'static, const N: usize>(
             .to_be_bytes::<32>(),
         );
     }
-    hasher.finalize()
+    SerdeOutput::new(hasher.finalize())
 }
 
 fn main() -> std::io::Result<()> {
@@ -152,10 +151,10 @@ struct FriLayerStatement {
     input_hash: U256,
 }
 
-fn gen_fri_layer_statement<D: Digest + Send + Sync + 'static, const N: usize>(
+fn gen_fri_layer_statement<const N: usize>(
     positions: &[usize],
     evaluations: &[Fp],
-    layer: &LayerProof<Fp, D, MerkleTreeVariant<D>>,
+    layer: &LayerProof<Fp, SerdeOutput<Keccak256>, MerkleTreeVariant<SolidityVerifierMaskedHashFn>>,
     layer_idx: usize,
     domain_size: usize,
     alpha: Fp,
@@ -237,7 +236,7 @@ fn gen_fri_layer_statement<D: Digest + Send + Sync + 'static, const N: usize>(
             // println!("merkleIndex[] {}", index + domain_size / N);
 
             let leaf = match &proof {
-                MerkleTreeVariantProof::Hashed(p) => U256::try_from_be_slice(p.leaf()).unwrap(),
+                MerkleTreeVariantProof::Hashed(p) => U256::try_from_be_slice(&*p.leaf()).unwrap(),
                 _ => unreachable!(),
             };
 
@@ -258,10 +257,9 @@ fn gen_fri_layer_statement<D: Digest + Send + Sync + 'static, const N: usize>(
     let root = U256::try_from_be_slice(&layer.commitment[0..32]).unwrap();
     println!("fri root is: {}", root);
 
-    let input_hash = U256::try_from_be_slice(
-        &fri_io_hash::<D, N>(domain_size, positions, layer, layer_idx)[0..32],
-    )
-    .unwrap();
+    let input_hash =
+        U256::try_from_be_slice(&fri_io_hash::<N>(domain_size, positions, layer, layer_idx)[0..32])
+            .unwrap();
 
     FriLayerStatement {
         fri_queue,
@@ -289,7 +287,7 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     let public_memory_alpha: BigUint = metadata.public_memory_alpha.into();
 
     let cairo_aux_elements = [
-        sharp_public_input.public_input_elements::<Keccak256>(),
+        sharp_public_input.public_input_elements(),
         vec![
             U256::from(public_memory_product),
             U256::from(public_memory_z),
@@ -623,12 +621,12 @@ struct BatchMerkleProofValues {
     height: usize,
 }
 
-fn get_merkle_statement_values<D: Digest + Send + Sync + 'static>(
-    root: &Output<D>,
-    proofs: &MerkleProofsVariant<D>,
+fn get_merkle_statement_values(
+    root: &SerdeOutput<Keccak256>,
+    proofs: &MerkleProofsVariant<SolidityVerifierMaskedHashFn>,
     indices: &[usize],
 ) -> BatchMerkleProofValues {
-    let nodes: Vec<SerdeOutput<D>>;
+    let nodes: Vec<SerdeOutput<Keccak256>>;
     let height: usize;
     let mut leaf_siblings = Vec::new();
     let mut initial_leaves = Vec::new();
@@ -708,14 +706,8 @@ fn gen_fri_statements<const N: usize>(
         let (chunks, _) = layer.flattenend_rows.as_chunks::<N>();
         let evals = get_query_values(chunks, &positions, &folded_positions);
         println!("=====DOING STATEMENT: {i}");
-        let fri_layer_statement = gen_fri_layer_statement::<Keccak256, N>(
-            &positions,
-            &evals,
-            layer,
-            i,
-            domain_size,
-            alpha,
-        );
+        let fri_layer_statement =
+            gen_fri_layer_statement::<N>(&positions, &evals, layer, i, domain_size, alpha);
         res.push(fri_layer_statement);
         positions = folded_positions;
         domain_size /= N;

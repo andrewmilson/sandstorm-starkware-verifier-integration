@@ -9,6 +9,7 @@ use ministark::merkle::MerkleProof;
 use ministark::merkle::MerkleTree;
 use ministark::merkle::MerkleTreeConfig;
 use ministark::merkle::MerkleTreeImpl;
+use ministark::hash::ElementHashFn;
 use ministark::utils::SerdeOutput;
 use ministark::Matrix;
 use ministark_gpu::fields::p3618502788666131213697322783095070105623107215331596699973092056135872020481::ark::Fp;
@@ -25,7 +26,7 @@ use std::rc::Rc;
 
 /// Batched merkle proof as per SHARP verifier
 pub struct BatchedMerkleProof<C: MerkleTreeConfig> {
-    pub nodes: Vec<SerdeOutput<C::Digest>>,
+    pub nodes: Vec<C::Digest>,
     pub initial_leaves: Vec<C::Leaf>,
     pub sibling_leaves: Vec<C::Leaf>,
     pub height: usize,
@@ -203,14 +204,14 @@ fn are_siblings(i0: usize, i1: usize) -> bool {
     i0 ^ 1 == i1
 }
 
-pub enum MerkleProofsVariant<D: Digest + Send + Sync + 'static> {
-    Hashed(Vec<MerkleProof<HashedLeafConfig<D>>>),
-    Unhashed(Vec<MerkleProof<UnhashedLeafConfig<D>>>),
+pub enum MerkleProofsVariant<H: ElementHashFn<Fp>> {
+    Hashed(Vec<MerkleProof<HashedLeafConfig<H>>>),
+    Unhashed(Vec<MerkleProof<UnhashedLeafConfig<H>>>),
 }
 
-pub fn partition_proofs<D: Digest + Send + Sync + 'static>(
-    proofs: &[MerkleTreeVariantProof<D>],
-) -> MerkleProofsVariant<D> {
+pub fn partition_proofs<H: ElementHashFn<Fp>>(
+    proofs: &[MerkleTreeVariantProof<H>],
+) -> MerkleProofsVariant<H> {
     let mut hash_proofs = Vec::new();
     let mut unhash_proofs = Vec::new();
     for proof in proofs.to_vec() {
@@ -232,7 +233,10 @@ pub fn partition_proofs<D: Digest + Send + Sync + 'static>(
 
 mod tests {
     use super::BatchedMerkleProof;
+    use ministark::hash::HashFn;
     use ministark::merkle::MerkleTreeConfig;
+    use ministark::utils::SerdeOutput;
+    use sandstorm_claims::sharp::hash::Keccak256HashFn;
     use sha2::digest::Output;
     use sha2::Digest;
     use sha3::Keccak256;
@@ -252,11 +256,12 @@ mod tests {
     struct ByteMerkleTreeConfig;
 
     impl MerkleTreeConfig for ByteMerkleTreeConfig {
-        type Digest = Keccak256;
+        type Digest = SerdeOutput<Keccak256>;
+        type HashFn = Keccak256HashFn;
         type Leaf = u8;
 
-        fn hash_leaves(l0: &u8, l1: &u8) -> Output<Keccak256> {
-            Keccak256::digest([*l0, *l1])
+        fn hash_leaves(l0: &u8, l1: &u8) -> SerdeOutput<Keccak256> {
+            Keccak256HashFn::hash([*l0, *l1])
         }
     }
 }

@@ -30,7 +30,7 @@ contract StarkNetVerifierTest is Test {
     // == CPU layout6 verifier ==
     // https://etherscan.io/address/0xe9664d230490d5a515ef7ef30033d8075a8d0e24#code
     // uint256 numSecurityBits = 96;
-    uint256 numSecurityBits = 30;
+    uint256 numSecurityBits = 18;
     // uint256 minProofOfWorkBits = 30;
     uint256 minProofOfWorkBits = 8;
     CpuConstraintPoly public cpuConstraintPoly;
