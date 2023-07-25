@@ -13,13 +13,13 @@ cairo-run --program_input ./bootloader_inputs.json --program bootloader_compiled
           --air_public_input ./air-public-input.json \
           --trace_file ./trace.bin \
           --memory_file ./memory.bin \
-          --layout starknet \
+          --layout recursive \
           --min_steps 128 \
           --proof_mode --print_info
 
 
-../sandstorm/target/release/sandstorm --program bootloader_compiled.json --layout starknet \
+(cd ../sandstorm-mirror && cargo +nightly build -r -F parallel,asm) && ../sandstorm-mirror/target/release/sandstorm --program bootloader_compiled.json \
     --air-public-input air-public-input.json \
     prove --air-private-input air-private-input.json \
-          --output bootloader-proof.bin
+          --output bootloader-proof.bin && cargo run
 ```
