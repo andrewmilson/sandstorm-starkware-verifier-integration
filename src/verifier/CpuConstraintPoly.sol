@@ -2017,1359 +2017,1359 @@ contract CpuConstraintPoly {
                     )
                 }
 
-                //{
-                //    // Constraint expression for cpu/decode/flag_pc_update_regular_bit: cpu__decode__flag_pc_update_regular_0 * cpu__decode__flag_pc_update_regular_0 - cpu__decode__flag_pc_update_regular_0.
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
-                //                0x1680
-                //            ),
-                //            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
-                //                0x1680
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
-                //                0x1680
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 5.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/decode/fp_update_regular_bit: cpu__decode__fp_update_regular_0 * cpu__decode__fp_update_regular_0 - cpu__decode__fp_update_regular_0.
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
-                //                0x16e0
-                //            ),
-                //            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
-                //                0x16e0
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
-                //                0x16e0
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 6.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/operands/mem_dst_addr: column3_row8 + half_offset_size - (cpu__decode__opcode_rc__bit_0 * column6_row9 + (1 - cpu__decode__opcode_rc__bit_0) * column6_row1 + column5_row0).
-                //    let val := addmod(
-                //        addmod(
-                //            /*column3_row8*/ mload(0xb60),
-                //            /*half_offset_size*/ mload(0x80),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
-                //                            0x1520
-                //                        ),
-                //                        /*column6_row9*/ mload(0x1280),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        addmod(
-                //                            1,
-                //                            sub(
-                //                                PRIME,
-                //                                /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
-                //                                    0x1520
-                //                                )
-                //                            ),
-                //                            PRIME
-                //                        ),
-                //                        /*column6_row1*/ mload(0x11c0),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*column5_row0*/ mload(0xee0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 7.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/operands/mem0_addr: column3_row4 + half_offset_size - (cpu__decode__opcode_rc__bit_1 * column6_row9 + (1 - cpu__decode__opcode_rc__bit_1) * column6_row1 + column5_row8).
-                //    let val := addmod(
-                //        addmod(
-                //            /*column3_row4*/ mload(0xb20),
-                //            /*half_offset_size*/ mload(0x80),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
-                //                            0x1700
-                //                        ),
-                //                        /*column6_row9*/ mload(0x1280),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        addmod(
-                //                            1,
-                //                            sub(
-                //                                PRIME,
-                //                                /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
-                //                                    0x1700
-                //                                )
-                //                            ),
-                //                            PRIME
-                //                        ),
-                //                        /*column6_row1*/ mload(0x11c0),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*column5_row8*/ mload(0xfe0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 8.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/operands/mem1_addr: column3_row12 + half_offset_size - (cpu__decode__opcode_rc__bit_2 * column3_row0 + cpu__decode__opcode_rc__bit_4 * column6_row1 + cpu__decode__opcode_rc__bit_3 * column6_row9 + cpu__decode__flag_op1_base_op0_0 * column3_row5 + column5_row4).
-                //    let val := addmod(
-                //        addmod(
-                //            /*column3_row12*/ mload(0xbe0),
-                //            /*half_offset_size*/ mload(0x80),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    addmod(
-                //                        addmod(
-                //                            mulmod(
-                //                                /*intermediate_value/cpu/decode/opcode_rc/bit_2*/ mload(
-                //                                    0x1540
-                //                                ),
-                //                                /*column3_row0*/ mload(0xaa0),
-                //                                PRIME
-                //                            ),
-                //                            mulmod(
-                //                                /*intermediate_value/cpu/decode/opcode_rc/bit_4*/ mload(
-                //                                    0x1560
-                //                                ),
-                //                                /*column6_row1*/ mload(0x11c0),
-                //                                PRIME
-                //                            ),
-                //                            PRIME
-                //                        ),
-                //                        mulmod(
-                //                            /*intermediate_value/cpu/decode/opcode_rc/bit_3*/ mload(
-                //                                0x1580
-                //                            ),
-                //                            /*column6_row9*/ mload(0x1280),
-                //                            PRIME
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/flag_op1_base_op0_0*/ mload(
-                //                            0x15a0
-                //                        ),
-                //                        /*column3_row5*/ mload(0xb40),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*column5_row4*/ mload(0xf60),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 9.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/operands/ops_mul: column6_row5 - column3_row5 * column3_row13.
-                //    let val := addmod(
-                //        /*column6_row5*/ mload(0x1240),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*column3_row5*/ mload(0xb40),
-                //                /*column3_row13*/ mload(0xc00),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 10.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/operands/res: (1 - cpu__decode__opcode_rc__bit_9) * column6_row13 - (cpu__decode__opcode_rc__bit_5 * (column3_row5 + column3_row13) + cpu__decode__opcode_rc__bit_6 * column6_row5 + cpu__decode__flag_res_op1_0 * column3_row13).
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                1,
-                //                sub(
-                //                    PRIME,
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
-                //                        0x1600
-                //                    )
-                //                ),
-                //                PRIME
-                //            ),
-                //            /*column6_row13*/ mload(0x12c0),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_5*/ mload(
-                //                            0x15c0
-                //                        ),
-                //                        addmod(
-                //                            /*column3_row5*/ mload(0xb40),
-                //                            /*column3_row13*/ mload(0xc00),
-                //                            PRIME
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_6*/ mload(
-                //                            0x15e0
-                //                        ),
-                //                        /*column6_row5*/ mload(0x1240),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                mulmod(
-                //                    /*intermediate_value/cpu/decode/flag_res_op1_0*/ mload(
-                //                        0x1620
-                //                    ),
-                //                    /*column3_row13*/ mload(0xc00),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 11.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_pc/tmp0: column6_row3 - cpu__decode__opcode_rc__bit_9 * column3_row9.
-                //    let val := addmod(
-                //        /*column6_row3*/ mload(0x1200),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
-                //                    0x1600
-                //                ),
-                //                /*column3_row9*/ mload(0xb80),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 12.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_pc/tmp1: column6_row11 - column6_row3 * column6_row13.
-                //    let val := addmod(
-                //        /*column6_row11*/ mload(0x12a0),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*column6_row3*/ mload(0x1200),
-                //                /*column6_row13*/ mload(0x12c0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 13.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_pc/pc_cond_negative: (1 - cpu__decode__opcode_rc__bit_9) * column3_row16 + column6_row3 * (column3_row16 - (column3_row0 + column3_row13)) - (cpu__decode__flag_pc_update_regular_0 * npc_reg_0 + cpu__decode__opcode_rc__bit_7 * column6_row13 + cpu__decode__opcode_rc__bit_8 * (column3_row0 + column6_row13)).
-                //    let val := addmod(
-                //        addmod(
-                //            mulmod(
-                //                addmod(
-                //                    1,
-                //                    sub(
-                //                        PRIME,
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
-                //                            0x1600
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*column3_row16*/ mload(0xc20),
-                //                PRIME
-                //            ),
-                //            mulmod(
-                //                /*column6_row3*/ mload(0x1200),
-                //                addmod(
-                //                    /*column3_row16*/ mload(0xc20),
-                //                    sub(
-                //                        PRIME,
-                //                        addmod(
-                //                            /*column3_row0*/ mload(0xaa0),
-                //                            /*column3_row13*/ mload(0xc00),
-                //                            PRIME
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
-                //                            0x1680
-                //                        ),
-                //                        /*intermediate_value/npc_reg_0*/ mload(
-                //                            0x1720
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_7*/ mload(
-                //                            0x1640
-                //                        ),
-                //                        /*column6_row13*/ mload(0x12c0),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                mulmod(
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_8*/ mload(
-                //                        0x1660
-                //                    ),
-                //                    addmod(
-                //                        /*column3_row0*/ mload(0xaa0),
-                //                        /*column6_row13*/ mload(0x12c0),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 14.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_pc/pc_cond_positive: (column6_row11 - cpu__decode__opcode_rc__bit_9) * (column3_row16 - npc_reg_0).
-                //    let val := mulmod(
-                //        addmod(
-                //            /*column6_row11*/ mload(0x12a0),
-                //            sub(
-                //                PRIME,
-                //                /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
-                //                    0x1600
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        addmod(
-                //            /*column3_row16*/ mload(0xc20),
-                //            sub(
-                //                PRIME,
-                //                /*intermediate_value/npc_reg_0*/ mload(0x1720)
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 15.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_ap/ap_update: column6_row17 - (column6_row1 + cpu__decode__opcode_rc__bit_10 * column6_row13 + cpu__decode__opcode_rc__bit_11 + cpu__decode__opcode_rc__bit_12 * 2).
-                //    let val := addmod(
-                //        /*column6_row17*/ mload(0x12e0),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    addmod(
-                //                        /*column6_row1*/ mload(0x11c0),
-                //                        mulmod(
-                //                            /*intermediate_value/cpu/decode/opcode_rc/bit_10*/ mload(
-                //                                0x1740
-                //                            ),
-                //                            /*column6_row13*/ mload(0x12c0),
-                //                            PRIME
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_11*/ mload(
-                //                        0x1760
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                mulmod(
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //                        0x16a0
-                //                    ),
-                //                    2,
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 16.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/update_registers/update_fp/fp_update: column6_row25 - (cpu__decode__fp_update_regular_0 * column6_row9 + cpu__decode__opcode_rc__bit_13 * column3_row9 + cpu__decode__opcode_rc__bit_12 * (column6_row1 + 2)).
-                //    let val := addmod(
-                //        /*column6_row25*/ mload(0x1300),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
-                //                            0x16e0
-                //                        ),
-                //                        /*column6_row9*/ mload(0x1280),
-                //                        PRIME
-                //                    ),
-                //                    mulmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
-                //                            0x16c0
-                //                        ),
-                //                        /*column3_row9*/ mload(0xb80),
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                mulmod(
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //                        0x16a0
-                //                    ),
-                //                    addmod(
-                //                        /*column6_row1*/ mload(0x11c0),
-                //                        2,
-                //                        PRIME
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= domains[14].
-                //    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 17.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/call/push_fp: cpu__decode__opcode_rc__bit_12 * (column3_row9 - column6_row9).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //            0x16a0
-                //        ),
-                //        addmod(
-                //            /*column3_row9*/ mload(0xb80),
-                //            sub(PRIME, /*column6_row9*/ mload(0x1280)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 18.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/call/push_pc: cpu__decode__opcode_rc__bit_12 * (column3_row5 - (column3_row0 + cpu__decode__opcode_rc__bit_2 + 1)).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //            0x16a0
-                //        ),
-                //        addmod(
-                //            /*column3_row5*/ mload(0xb40),
-                //            sub(
-                //                PRIME,
-                //                addmod(
-                //                    addmod(
-                //                        /*column3_row0*/ mload(0xaa0),
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_2*/ mload(
-                //                            0x1540
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    1,
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 19.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/call/off0: cpu__decode__opcode_rc__bit_12 * (column5_row0 - half_offset_size).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //            0x16a0
-                //        ),
-                //        addmod(
-                //            /*column5_row0*/ mload(0xee0),
-                //            sub(PRIME, /*half_offset_size*/ mload(0x80)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 20.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/call/off1: cpu__decode__opcode_rc__bit_12 * (column5_row8 - (half_offset_size + 1)).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //            0x16a0
-                //        ),
-                //        addmod(
-                //            /*column5_row8*/ mload(0xfe0),
-                //            sub(
-                //                PRIME,
-                //                addmod(
-                //                    /*half_offset_size*/ mload(0x80),
-                //                    1,
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 21.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/call/flags: cpu__decode__opcode_rc__bit_12 * (cpu__decode__opcode_rc__bit_12 + cpu__decode__opcode_rc__bit_12 + 1 + 1 - (cpu__decode__opcode_rc__bit_0 + cpu__decode__opcode_rc__bit_1 + 4)).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //            0x16a0
-                //        ),
-                //        addmod(
-                //            addmod(
-                //                addmod(
-                //                    addmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //                            0x16a0
-                //                        ),
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
-                //                            0x16a0
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    1,
-                //                    PRIME
-                //                ),
-                //                1,
-                //                PRIME
-                //            ),
-                //            sub(
-                //                PRIME,
-                //                addmod(
-                //                    addmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
-                //                            0x1520
-                //                        ),
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
-                //                            0x1700
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    4,
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 22.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/ret/off0: cpu__decode__opcode_rc__bit_13 * (column5_row0 + 2 - half_offset_size).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
-                //            0x16c0
-                //        ),
-                //        addmod(
-                //            addmod(/*column5_row0*/ mload(0xee0), 2, PRIME),
-                //            sub(PRIME, /*half_offset_size*/ mload(0x80)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 23.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/ret/off2: cpu__decode__opcode_rc__bit_13 * (column5_row4 + 1 - half_offset_size).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
-                //            0x16c0
-                //        ),
-                //        addmod(
-                //            addmod(/*column5_row4*/ mload(0xf60), 1, PRIME),
-                //            sub(PRIME, /*half_offset_size*/ mload(0x80)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 24.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/ret/flags: cpu__decode__opcode_rc__bit_13 * (cpu__decode__opcode_rc__bit_7 + cpu__decode__opcode_rc__bit_0 + cpu__decode__opcode_rc__bit_3 + cpu__decode__flag_res_op1_0 - 4).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
-                //            0x16c0
-                //        ),
-                //        addmod(
-                //            addmod(
-                //                addmod(
-                //                    addmod(
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_7*/ mload(
-                //                            0x1640
-                //                        ),
-                //                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
-                //                            0x1520
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    /*intermediate_value/cpu/decode/opcode_rc/bit_3*/ mload(
-                //                        0x1580
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*intermediate_value/cpu/decode/flag_res_op1_0*/ mload(
-                //                    0x1620
-                //                ),
-                //                PRIME
-                //            ),
-                //            sub(PRIME, 4),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 25.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for cpu/opcodes/assert_eq/assert_eq: cpu__decode__opcode_rc__bit_14 * (column3_row9 - column6_row13).
-                //    let val := mulmod(
-                //        /*intermediate_value/cpu/decode/opcode_rc/bit_14*/ mload(
-                //            0x1780
-                //        ),
-                //        addmod(
-                //            /*column3_row9*/ mload(0xb80),
-                //            sub(PRIME, /*column6_row13*/ mload(0x12c0)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 26.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for initial_ap: column6_row1 - initial_ap.
-                //    let val := addmod(
-                //        /*column6_row1*/ mload(0x11c0),
-                //        sub(PRIME, /*initial_ap*/ mload(0xa0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 27.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for initial_fp: column6_row9 - initial_ap.
-                //    let val := addmod(
-                //        /*column6_row9*/ mload(0x1280),
-                //        sub(PRIME, /*initial_ap*/ mload(0xa0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 28.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for initial_pc: column3_row0 - initial_pc.
-                //    let val := addmod(
-                //        /*column3_row0*/ mload(0xaa0),
-                //        sub(PRIME, /*initial_pc*/ mload(0xc0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 29.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for final_ap: column6_row1 - final_ap.
-                //    let val := addmod(
-                //        /*column6_row1*/ mload(0x11c0),
-                //        sub(PRIME, /*final_ap*/ mload(0xe0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= denominator_invs[3].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[3]*/ mload(0x20a0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 30.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for final_fp: column6_row9 - initial_ap.
-                //    let val := addmod(
-                //        /*column6_row9*/ mload(0x1280),
-                //        sub(PRIME, /*initial_ap*/ mload(0xa0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= denominator_invs[3].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[3]*/ mload(0x20a0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 31.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for final_pc: column3_row0 - final_pc.
-                //    let val := addmod(
-                //        /*column3_row0*/ mload(0xaa0),
-                //        sub(PRIME, /*final_pc*/ mload(0x100)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
-                //    // val *= denominator_invs[3].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[3]*/ mload(0x20a0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 32.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                {
+                    // Constraint expression for cpu/decode/flag_pc_update_regular_bit: cpu__decode__flag_pc_update_regular_0 * cpu__decode__flag_pc_update_regular_0 - cpu__decode__flag_pc_update_regular_0.
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
+                                0x1680
+                            ),
+                            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
+                                0x1680
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
+                                0x1680
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 5.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/decode/fp_update_regular_bit: cpu__decode__fp_update_regular_0 * cpu__decode__fp_update_regular_0 - cpu__decode__fp_update_regular_0.
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
+                                0x16e0
+                            ),
+                            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
+                                0x16e0
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
+                                0x16e0
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 6.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/operands/mem_dst_addr: column3_row8 + half_offset_size - (cpu__decode__opcode_rc__bit_0 * column6_row9 + (1 - cpu__decode__opcode_rc__bit_0) * column6_row1 + column5_row0).
+                    let val := addmod(
+                        addmod(
+                            /*column3_row8*/ mload(0xb60),
+                            /*half_offset_size*/ mload(0x80),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
+                                            0x1520
+                                        ),
+                                        /*column6_row9*/ mload(0x1280),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        addmod(
+                                            1,
+                                            sub(
+                                                PRIME,
+                                                /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
+                                                    0x1520
+                                                )
+                                            ),
+                                            PRIME
+                                        ),
+                                        /*column6_row1*/ mload(0x11c0),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                /*column5_row0*/ mload(0xee0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 7.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/operands/mem0_addr: column3_row4 + half_offset_size - (cpu__decode__opcode_rc__bit_1 * column6_row9 + (1 - cpu__decode__opcode_rc__bit_1) * column6_row1 + column5_row8).
+                    let val := addmod(
+                        addmod(
+                            /*column3_row4*/ mload(0xb20),
+                            /*half_offset_size*/ mload(0x80),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
+                                            0x1700
+                                        ),
+                                        /*column6_row9*/ mload(0x1280),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        addmod(
+                                            1,
+                                            sub(
+                                                PRIME,
+                                                /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
+                                                    0x1700
+                                                )
+                                            ),
+                                            PRIME
+                                        ),
+                                        /*column6_row1*/ mload(0x11c0),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                /*column5_row8*/ mload(0xfe0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 8.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/operands/mem1_addr: column3_row12 + half_offset_size - (cpu__decode__opcode_rc__bit_2 * column3_row0 + cpu__decode__opcode_rc__bit_4 * column6_row1 + cpu__decode__opcode_rc__bit_3 * column6_row9 + cpu__decode__flag_op1_base_op0_0 * column3_row5 + column5_row4).
+                    let val := addmod(
+                        addmod(
+                            /*column3_row12*/ mload(0xbe0),
+                            /*half_offset_size*/ mload(0x80),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    addmod(
+                                        addmod(
+                                            mulmod(
+                                                /*intermediate_value/cpu/decode/opcode_rc/bit_2*/ mload(
+                                                    0x1540
+                                                ),
+                                                /*column3_row0*/ mload(0xaa0),
+                                                PRIME
+                                            ),
+                                            mulmod(
+                                                /*intermediate_value/cpu/decode/opcode_rc/bit_4*/ mload(
+                                                    0x1560
+                                                ),
+                                                /*column6_row1*/ mload(0x11c0),
+                                                PRIME
+                                            ),
+                                            PRIME
+                                        ),
+                                        mulmod(
+                                            /*intermediate_value/cpu/decode/opcode_rc/bit_3*/ mload(
+                                                0x1580
+                                            ),
+                                            /*column6_row9*/ mload(0x1280),
+                                            PRIME
+                                        ),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/flag_op1_base_op0_0*/ mload(
+                                            0x15a0
+                                        ),
+                                        /*column3_row5*/ mload(0xb40),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                /*column5_row4*/ mload(0xf60),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 9.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/operands/ops_mul: column6_row5 - column3_row5 * column3_row13.
+                    let val := addmod(
+                        /*column6_row5*/ mload(0x1240),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*column3_row5*/ mload(0xb40),
+                                /*column3_row13*/ mload(0xc00),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 10.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/operands/res: (1 - cpu__decode__opcode_rc__bit_9) * column6_row13 - (cpu__decode__opcode_rc__bit_5 * (column3_row5 + column3_row13) + cpu__decode__opcode_rc__bit_6 * column6_row5 + cpu__decode__flag_res_op1_0 * column3_row13).
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                1,
+                                sub(
+                                    PRIME,
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
+                                        0x1600
+                                    )
+                                ),
+                                PRIME
+                            ),
+                            /*column6_row13*/ mload(0x12c0),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_5*/ mload(
+                                            0x15c0
+                                        ),
+                                        addmod(
+                                            /*column3_row5*/ mload(0xb40),
+                                            /*column3_row13*/ mload(0xc00),
+                                            PRIME
+                                        ),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_6*/ mload(
+                                            0x15e0
+                                        ),
+                                        /*column6_row5*/ mload(0x1240),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                mulmod(
+                                    /*intermediate_value/cpu/decode/flag_res_op1_0*/ mload(
+                                        0x1620
+                                    ),
+                                    /*column3_row13*/ mload(0xc00),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 11.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_pc/tmp0: column6_row3 - cpu__decode__opcode_rc__bit_9 * column3_row9.
+                    let val := addmod(
+                        /*column6_row3*/ mload(0x1200),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
+                                    0x1600
+                                ),
+                                /*column3_row9*/ mload(0xb80),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 12.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_pc/tmp1: column6_row11 - column6_row3 * column6_row13.
+                    let val := addmod(
+                        /*column6_row11*/ mload(0x12a0),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*column6_row3*/ mload(0x1200),
+                                /*column6_row13*/ mload(0x12c0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 13.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_pc/pc_cond_negative: (1 - cpu__decode__opcode_rc__bit_9) * column3_row16 + column6_row3 * (column3_row16 - (column3_row0 + column3_row13)) - (cpu__decode__flag_pc_update_regular_0 * npc_reg_0 + cpu__decode__opcode_rc__bit_7 * column6_row13 + cpu__decode__opcode_rc__bit_8 * (column3_row0 + column6_row13)).
+                    let val := addmod(
+                        addmod(
+                            mulmod(
+                                addmod(
+                                    1,
+                                    sub(
+                                        PRIME,
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
+                                            0x1600
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                /*column3_row16*/ mload(0xc20),
+                                PRIME
+                            ),
+                            mulmod(
+                                /*column6_row3*/ mload(0x1200),
+                                addmod(
+                                    /*column3_row16*/ mload(0xc20),
+                                    sub(
+                                        PRIME,
+                                        addmod(
+                                            /*column3_row0*/ mload(0xaa0),
+                                            /*column3_row13*/ mload(0xc00),
+                                            PRIME
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/flag_pc_update_regular_0*/ mload(
+                                            0x1680
+                                        ),
+                                        /*intermediate_value/npc_reg_0*/ mload(
+                                            0x1720
+                                        ),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_7*/ mload(
+                                            0x1640
+                                        ),
+                                        /*column6_row13*/ mload(0x12c0),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                mulmod(
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_8*/ mload(
+                                        0x1660
+                                    ),
+                                    addmod(
+                                        /*column3_row0*/ mload(0xaa0),
+                                        /*column6_row13*/ mload(0x12c0),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 14.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_pc/pc_cond_positive: (column6_row11 - cpu__decode__opcode_rc__bit_9) * (column3_row16 - npc_reg_0).
+                    let val := mulmod(
+                        addmod(
+                            /*column6_row11*/ mload(0x12a0),
+                            sub(
+                                PRIME,
+                                /*intermediate_value/cpu/decode/opcode_rc/bit_9*/ mload(
+                                    0x1600
+                                )
+                            ),
+                            PRIME
+                        ),
+                        addmod(
+                            /*column3_row16*/ mload(0xc20),
+                            sub(
+                                PRIME,
+                                /*intermediate_value/npc_reg_0*/ mload(0x1720)
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 15.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_ap/ap_update: column6_row17 - (column6_row1 + cpu__decode__opcode_rc__bit_10 * column6_row13 + cpu__decode__opcode_rc__bit_11 + cpu__decode__opcode_rc__bit_12 * 2).
+                    let val := addmod(
+                        /*column6_row17*/ mload(0x12e0),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    addmod(
+                                        /*column6_row1*/ mload(0x11c0),
+                                        mulmod(
+                                            /*intermediate_value/cpu/decode/opcode_rc/bit_10*/ mload(
+                                                0x1740
+                                            ),
+                                            /*column6_row13*/ mload(0x12c0),
+                                            PRIME
+                                        ),
+                                        PRIME
+                                    ),
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_11*/ mload(
+                                        0x1760
+                                    ),
+                                    PRIME
+                                ),
+                                mulmod(
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                                        0x16a0
+                                    ),
+                                    2,
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 16.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/update_registers/update_fp/fp_update: column6_row25 - (cpu__decode__fp_update_regular_0 * column6_row9 + cpu__decode__opcode_rc__bit_13 * column3_row9 + cpu__decode__opcode_rc__bit_12 * (column6_row1 + 2)).
+                    let val := addmod(
+                        /*column6_row25*/ mload(0x1300),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/fp_update_regular_0*/ mload(
+                                            0x16e0
+                                        ),
+                                        /*column6_row9*/ mload(0x1280),
+                                        PRIME
+                                    ),
+                                    mulmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
+                                            0x16c0
+                                        ),
+                                        /*column3_row9*/ mload(0xb80),
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                mulmod(
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                                        0x16a0
+                                    ),
+                                    addmod(
+                                        /*column6_row1*/ mload(0x11c0),
+                                        2,
+                                        PRIME
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= domains[14].
+                    val := mulmod(val, /*domains[14]*/ mload(0x1f60), PRIME)
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 17.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/call/push_fp: cpu__decode__opcode_rc__bit_12 * (column3_row9 - column6_row9).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                            0x16a0
+                        ),
+                        addmod(
+                            /*column3_row9*/ mload(0xb80),
+                            sub(PRIME, /*column6_row9*/ mload(0x1280)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 18.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/call/push_pc: cpu__decode__opcode_rc__bit_12 * (column3_row5 - (column3_row0 + cpu__decode__opcode_rc__bit_2 + 1)).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                            0x16a0
+                        ),
+                        addmod(
+                            /*column3_row5*/ mload(0xb40),
+                            sub(
+                                PRIME,
+                                addmod(
+                                    addmod(
+                                        /*column3_row0*/ mload(0xaa0),
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_2*/ mload(
+                                            0x1540
+                                        ),
+                                        PRIME
+                                    ),
+                                    1,
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 19.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/call/off0: cpu__decode__opcode_rc__bit_12 * (column5_row0 - half_offset_size).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                            0x16a0
+                        ),
+                        addmod(
+                            /*column5_row0*/ mload(0xee0),
+                            sub(PRIME, /*half_offset_size*/ mload(0x80)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 20.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/call/off1: cpu__decode__opcode_rc__bit_12 * (column5_row8 - (half_offset_size + 1)).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                            0x16a0
+                        ),
+                        addmod(
+                            /*column5_row8*/ mload(0xfe0),
+                            sub(
+                                PRIME,
+                                addmod(
+                                    /*half_offset_size*/ mload(0x80),
+                                    1,
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 21.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/call/flags: cpu__decode__opcode_rc__bit_12 * (cpu__decode__opcode_rc__bit_12 + cpu__decode__opcode_rc__bit_12 + 1 + 1 - (cpu__decode__opcode_rc__bit_0 + cpu__decode__opcode_rc__bit_1 + 4)).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                            0x16a0
+                        ),
+                        addmod(
+                            addmod(
+                                addmod(
+                                    addmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                                            0x16a0
+                                        ),
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_12*/ mload(
+                                            0x16a0
+                                        ),
+                                        PRIME
+                                    ),
+                                    1,
+                                    PRIME
+                                ),
+                                1,
+                                PRIME
+                            ),
+                            sub(
+                                PRIME,
+                                addmod(
+                                    addmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
+                                            0x1520
+                                        ),
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_1*/ mload(
+                                            0x1700
+                                        ),
+                                        PRIME
+                                    ),
+                                    4,
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 22.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/ret/off0: cpu__decode__opcode_rc__bit_13 * (column5_row0 + 2 - half_offset_size).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
+                            0x16c0
+                        ),
+                        addmod(
+                            addmod(/*column5_row0*/ mload(0xee0), 2, PRIME),
+                            sub(PRIME, /*half_offset_size*/ mload(0x80)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 23.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/ret/off2: cpu__decode__opcode_rc__bit_13 * (column5_row4 + 1 - half_offset_size).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
+                            0x16c0
+                        ),
+                        addmod(
+                            addmod(/*column5_row4*/ mload(0xf60), 1, PRIME),
+                            sub(PRIME, /*half_offset_size*/ mload(0x80)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 24.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/ret/flags: cpu__decode__opcode_rc__bit_13 * (cpu__decode__opcode_rc__bit_7 + cpu__decode__opcode_rc__bit_0 + cpu__decode__opcode_rc__bit_3 + cpu__decode__flag_res_op1_0 - 4).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_13*/ mload(
+                            0x16c0
+                        ),
+                        addmod(
+                            addmod(
+                                addmod(
+                                    addmod(
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_7*/ mload(
+                                            0x1640
+                                        ),
+                                        /*intermediate_value/cpu/decode/opcode_rc/bit_0*/ mload(
+                                            0x1520
+                                        ),
+                                        PRIME
+                                    ),
+                                    /*intermediate_value/cpu/decode/opcode_rc/bit_3*/ mload(
+                                        0x1580
+                                    ),
+                                    PRIME
+                                ),
+                                /*intermediate_value/cpu/decode/flag_res_op1_0*/ mload(
+                                    0x1620
+                                ),
+                                PRIME
+                            ),
+                            sub(PRIME, 4),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 25.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for cpu/opcodes/assert_eq/assert_eq: cpu__decode__opcode_rc__bit_14 * (column3_row9 - column6_row13).
+                    let val := mulmod(
+                        /*intermediate_value/cpu/decode/opcode_rc/bit_14*/ mload(
+                            0x1780
+                        ),
+                        addmod(
+                            /*column3_row9*/ mload(0xb80),
+                            sub(PRIME, /*column6_row13*/ mload(0x12c0)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 26.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for initial_ap: column6_row1 - initial_ap.
+                    let val := addmod(
+                        /*column6_row1*/ mload(0x11c0),
+                        sub(PRIME, /*initial_ap*/ mload(0xa0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 27.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for initial_fp: column6_row9 - initial_ap.
+                    let val := addmod(
+                        /*column6_row9*/ mload(0x1280),
+                        sub(PRIME, /*initial_ap*/ mload(0xa0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 28.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for initial_pc: column3_row0 - initial_pc.
+                    let val := addmod(
+                        /*column3_row0*/ mload(0xaa0),
+                        sub(PRIME, /*initial_pc*/ mload(0xc0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 29.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for final_ap: column6_row1 - final_ap.
+                    let val := addmod(
+                        /*column6_row1*/ mload(0x11c0),
+                        sub(PRIME, /*final_ap*/ mload(0xe0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= denominator_invs[3].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[3]*/ mload(0x20a0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 30.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for final_fp: column6_row9 - initial_ap.
+                    let val := addmod(
+                        /*column6_row9*/ mload(0x1280),
+                        sub(PRIME, /*initial_ap*/ mload(0xa0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= denominator_invs[3].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[3]*/ mload(0x20a0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 31.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for final_pc: column3_row0 - final_pc.
+                    let val := addmod(
+                        /*column3_row0*/ mload(0xaa0),
+                        sub(PRIME, /*final_pc*/ mload(0x100)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(16 * (trace_length / 16 - 1)).
+                    // val *= denominator_invs[3].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[3]*/ mload(0x20a0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 32.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
                 {
                     // Constraint expression for memory/multi_column_perm/perm/init0: (memory/multi_column_perm/perm/interaction_elm - (column4_row0 + memory/multi_column_perm/hash_interaction_elm0 * column4_row1)) * column9_inter1_row0 + column3_row0 + memory/multi_column_perm/hash_interaction_elm0 * column3_row1 - memory/multi_column_perm/perm/interaction_elm.
@@ -3446,294 +3446,294 @@ contract CpuConstraintPoly {
                     )
                 }
 
-                //{
-                //    // Constraint expression for memory/multi_column_perm/perm/step0: (memory/multi_column_perm/perm/interaction_elm - (column4_row2 + memory/multi_column_perm/hash_interaction_elm0 * column4_row3)) * column9_inter1_row2 - (memory/multi_column_perm/perm/interaction_elm - (column3_row2 + memory/multi_column_perm/hash_interaction_elm0 * column3_row3)) * column9_inter1_row0.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*memory/multi_column_perm/perm/interaction_elm*/ mload(
-                //                    0x120
-                //                ),
-                //                sub(
-                //                    PRIME,
-                //                    addmod(
-                //                        /*column4_row2*/ mload(0xea0),
-                //                        mulmod(
-                //                            /*memory/multi_column_perm/hash_interaction_elm0*/ mload(
-                //                                0x140
-                //                            ),
-                //                            /*column4_row3*/ mload(0xec0),
-                //                            PRIME
-                //                        ),
-                //                        PRIME
-                //                    )
-                //                ),
-                //                PRIME
-                //            ),
-                //            /*column9_inter1_row2*/ mload(0x14e0),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                addmod(
-                //                    /*memory/multi_column_perm/perm/interaction_elm*/ mload(
-                //                        0x120
-                //                    ),
-                //                    sub(
-                //                        PRIME,
-                //                        addmod(
-                //                            /*column3_row2*/ mload(0xae0),
-                //                            mulmod(
-                //                                /*memory/multi_column_perm/hash_interaction_elm0*/ mload(
-                //                                    0x140
-                //                                ),
-                //                                /*column3_row3*/ mload(0xb00),
-                //                                PRIME
-                //                            ),
-                //                            PRIME
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                /*column9_inter1_row0*/ mload(0x14a0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for memory/multi_column_perm/perm/step0: (memory/multi_column_perm/perm/interaction_elm - (column4_row2 + memory/multi_column_perm/hash_interaction_elm0 * column4_row3)) * column9_inter1_row2 - (memory/multi_column_perm/perm/interaction_elm - (column3_row2 + memory/multi_column_perm/hash_interaction_elm0 * column3_row3)) * column9_inter1_row0.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*memory/multi_column_perm/perm/interaction_elm*/ mload(
+                                    0x120
+                                ),
+                                sub(
+                                    PRIME,
+                                    addmod(
+                                        /*column4_row2*/ mload(0xea0),
+                                        mulmod(
+                                            /*memory/multi_column_perm/hash_interaction_elm0*/ mload(
+                                                0x140
+                                            ),
+                                            /*column4_row3*/ mload(0xec0),
+                                            PRIME
+                                        ),
+                                        PRIME
+                                    )
+                                ),
+                                PRIME
+                            ),
+                            /*column9_inter1_row2*/ mload(0x14e0),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                addmod(
+                                    /*memory/multi_column_perm/perm/interaction_elm*/ mload(
+                                        0x120
+                                    ),
+                                    sub(
+                                        PRIME,
+                                        addmod(
+                                            /*column3_row2*/ mload(0xae0),
+                                            mulmod(
+                                                /*memory/multi_column_perm/hash_interaction_elm0*/ mload(
+                                                    0x140
+                                                ),
+                                                /*column3_row3*/ mload(0xb00),
+                                                PRIME
+                                            ),
+                                            PRIME
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                /*column9_inter1_row0*/ mload(0x14a0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
-                //    // val *= domains[16].
-                //    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
-                //    // Denominator: point^(trace_length / 2) - 1.
-                //    // val *= denominator_invs[5].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[5]*/ mload(0x20e0),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
+                    // val *= domains[16].
+                    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
+                    // Denominator: point^(trace_length / 2) - 1.
+                    // val *= denominator_invs[5].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[5]*/ mload(0x20e0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 34.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 34.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for memory/multi_column_perm/perm/last: column9_inter1_row0 - memory/multi_column_perm/perm/public_memory_prod.
-                //    let val := addmod(
-                //        /*column9_inter1_row0*/ mload(0x14a0),
-                //        sub(
-                //            PRIME,
-                //            /*memory/multi_column_perm/perm/public_memory_prod*/ mload(
-                //                0x160
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for memory/multi_column_perm/perm/last: column9_inter1_row0 - memory/multi_column_perm/perm/public_memory_prod.
+                    let val := addmod(
+                        /*column9_inter1_row0*/ mload(0x14a0),
+                        sub(
+                            PRIME,
+                            /*memory/multi_column_perm/perm/public_memory_prod*/ mload(
+                                0x160
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(2 * (trace_length / 2 - 1)).
-                //    // val *= denominator_invs[6].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[6]*/ mload(0x2100),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(2 * (trace_length / 2 - 1)).
+                    // val *= denominator_invs[6].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[6]*/ mload(0x2100),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 35.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 35.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for memory/diff_is_bit: memory__address_diff_0 * memory__address_diff_0 - memory__address_diff_0.
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/memory/address_diff_0*/ mload(
-                //                0x17a0
-                //            ),
-                //            /*intermediate_value/memory/address_diff_0*/ mload(
-                //                0x17a0
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            /*intermediate_value/memory/address_diff_0*/ mload(
-                //                0x17a0
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for memory/diff_is_bit: memory__address_diff_0 * memory__address_diff_0 - memory__address_diff_0.
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/memory/address_diff_0*/ mload(
+                                0x17a0
+                            ),
+                            /*intermediate_value/memory/address_diff_0*/ mload(
+                                0x17a0
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            /*intermediate_value/memory/address_diff_0*/ mload(
+                                0x17a0
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
-                //    // val *= domains[16].
-                //    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
-                //    // Denominator: point^(trace_length / 2) - 1.
-                //    // val *= denominator_invs[5].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[5]*/ mload(0x20e0),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
+                    // val *= domains[16].
+                    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
+                    // Denominator: point^(trace_length / 2) - 1.
+                    // val *= denominator_invs[5].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[5]*/ mload(0x20e0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 36.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 36.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for memory/is_func: (memory__address_diff_0 - 1) * (column4_row1 - column4_row3).
-                //    let val := mulmod(
-                //        addmod(
-                //            /*intermediate_value/memory/address_diff_0*/ mload(
-                //                0x17a0
-                //            ),
-                //            sub(PRIME, 1),
-                //            PRIME
-                //        ),
-                //        addmod(
-                //            /*column4_row1*/ mload(0xe80),
-                //            sub(PRIME, /*column4_row3*/ mload(0xec0)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for memory/is_func: (memory__address_diff_0 - 1) * (column4_row1 - column4_row3).
+                    let val := mulmod(
+                        addmod(
+                            /*intermediate_value/memory/address_diff_0*/ mload(
+                                0x17a0
+                            ),
+                            sub(PRIME, 1),
+                            PRIME
+                        ),
+                        addmod(
+                            /*column4_row1*/ mload(0xe80),
+                            sub(PRIME, /*column4_row3*/ mload(0xec0)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
-                //    // val *= domains[16].
-                //    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
-                //    // Denominator: point^(trace_length / 2) - 1.
-                //    // val *= denominator_invs[5].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[5]*/ mload(0x20e0),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(2 * (trace_length / 2 - 1)).
+                    // val *= domains[16].
+                    val := mulmod(val, /*domains[16]*/ mload(0x1fa0), PRIME)
+                    // Denominator: point^(trace_length / 2) - 1.
+                    // val *= denominator_invs[5].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[5]*/ mload(0x20e0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 37.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 37.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for memory/initial_addr: column4_row0 - 1.
-                //    let val := addmod(
-                //        /*column4_row0*/ mload(0xe60),
-                //        sub(PRIME, 1),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for memory/initial_addr: column4_row0 - 1.
+                    let val := addmod(
+                        /*column4_row0*/ mload(0xe60),
+                        sub(PRIME, 1),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 38.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 38.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for public_memory_addr_zero: column3_row2.
-                //    let val := /*column3_row2*/ mload(0xae0)
+                {
+                    // Constraint expression for public_memory_addr_zero: column3_row2.
+                    let val := /*column3_row2*/ mload(0xae0)
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 39.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 39.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for public_memory_value_zero: column3_row3.
-                //    let val := /*column3_row3*/ mload(0xb00)
+                {
+                    // Constraint expression for public_memory_value_zero: column3_row3.
+                    let val := /*column3_row3*/ mload(0xb00)
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 16) - 1.
-                //    // val *= denominator_invs[2].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[2]*/ mload(0x2080),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 16) - 1.
+                    // val *= denominator_invs[2].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[2]*/ mload(0x2080),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 40.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 40.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
                 {
                     // Constraint expression for rc16/perm/init0: (rc16/perm/interaction_elm - column5_row2) * column9_inter1_row1 + column5_row0 - rc16/perm/interaction_elm.
@@ -3778,191 +3778,191 @@ contract CpuConstraintPoly {
                     )
                 }
 
-                //{
-                //    // Constraint expression for rc16/perm/step0: (rc16/perm/interaction_elm - column5_row6) * column9_inter1_row5 - (rc16/perm/interaction_elm - column5_row4) * column9_inter1_row1.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*rc16/perm/interaction_elm*/ mload(0x180),
-                //                sub(PRIME, /*column5_row6*/ mload(0xfa0)),
-                //                PRIME
-                //            ),
-                //            /*column9_inter1_row5*/ mload(0x1500),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                addmod(
-                //                    /*rc16/perm/interaction_elm*/ mload(0x180),
-                //                    sub(PRIME, /*column5_row4*/ mload(0xf60)),
-                //                    PRIME
-                //                ),
-                //                /*column9_inter1_row1*/ mload(0x14c0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for rc16/perm/step0: (rc16/perm/interaction_elm - column5_row6) * column9_inter1_row5 - (rc16/perm/interaction_elm - column5_row4) * column9_inter1_row1.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*rc16/perm/interaction_elm*/ mload(0x180),
+                                sub(PRIME, /*column5_row6*/ mload(0xfa0)),
+                                PRIME
+                            ),
+                            /*column9_inter1_row5*/ mload(0x1500),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                addmod(
+                                    /*rc16/perm/interaction_elm*/ mload(0x180),
+                                    sub(PRIME, /*column5_row4*/ mload(0xf60)),
+                                    PRIME
+                                ),
+                                /*column9_inter1_row1*/ mload(0x14c0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(4 * (trace_length / 4 - 1)).
-                //    // val *= domains[17].
-                //    val := mulmod(val, /*domains[17]*/ mload(0x1fc0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(4 * (trace_length / 4 - 1)).
+                    // val *= domains[17].
+                    val := mulmod(val, /*domains[17]*/ mload(0x1fc0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 42.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 42.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for rc16/perm/last: column9_inter1_row1 - rc16/perm/public_memory_prod.
-                //    let val := addmod(
-                //        /*column9_inter1_row1*/ mload(0x14c0),
-                //        sub(
-                //            PRIME,
-                //            /*rc16/perm/public_memory_prod*/ mload(0x1a0)
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for rc16/perm/last: column9_inter1_row1 - rc16/perm/public_memory_prod.
+                    let val := addmod(
+                        /*column9_inter1_row1*/ mload(0x14c0),
+                        sub(
+                            PRIME,
+                            /*rc16/perm/public_memory_prod*/ mload(0x1a0)
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(4 * (trace_length / 4 - 1)).
-                //    // val *= denominator_invs[8].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[8]*/ mload(0x2140),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(4 * (trace_length / 4 - 1)).
+                    // val *= denominator_invs[8].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[8]*/ mload(0x2140),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 43.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 43.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for rc16/diff_is_bit: rc16__diff_0 * rc16__diff_0 - rc16__diff_0.
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/rc16/diff_0*/ mload(0x17c0),
-                //            /*intermediate_value/rc16/diff_0*/ mload(0x17c0),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            /*intermediate_value/rc16/diff_0*/ mload(0x17c0)
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for rc16/diff_is_bit: rc16__diff_0 * rc16__diff_0 - rc16__diff_0.
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/rc16/diff_0*/ mload(0x17c0),
+                            /*intermediate_value/rc16/diff_0*/ mload(0x17c0),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            /*intermediate_value/rc16/diff_0*/ mload(0x17c0)
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(4 * (trace_length / 4 - 1)).
-                //    // val *= domains[17].
-                //    val := mulmod(val, /*domains[17]*/ mload(0x1fc0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(4 * (trace_length / 4 - 1)).
+                    // val *= domains[17].
+                    val := mulmod(val, /*domains[17]*/ mload(0x1fc0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 44.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 44.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for rc16/minimum: column5_row2 - rc_min.
-                //    let val := addmod(
-                //        /*column5_row2*/ mload(0xf20),
-                //        sub(PRIME, /*rc_min*/ mload(0x1c0)),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for rc16/minimum: column5_row2 - rc_min.
+                    let val := addmod(
+                        /*column5_row2*/ mload(0xf20),
+                        sub(PRIME, /*rc_min*/ mload(0x1c0)),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 45.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 45.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for rc16/maximum: column5_row2 - rc_max.
-                //    let val := addmod(
-                //        /*column5_row2*/ mload(0xf20),
-                //        sub(PRIME, /*rc_max*/ mload(0x1e0)),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for rc16/maximum: column5_row2 - rc_max.
+                    let val := addmod(
+                        /*column5_row2*/ mload(0xf20),
+                        sub(PRIME, /*rc_max*/ mload(0x1e0)),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(4 * (trace_length / 4 - 1)).
-                //    // val *= denominator_invs[8].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[8]*/ mload(0x2140),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(4 * (trace_length / 4 - 1)).
+                    // val *= denominator_invs[8].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[8]*/ mload(0x2140),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 46.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 46.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
                 {
                     // Constraint expression for diluted_check/permutation/init0: (diluted_check/permutation/interaction_elm - column2_row0) * column8_inter1_row0 + column1_row0 - diluted_check/permutation/interaction_elm.
@@ -4014,158 +4014,158 @@ contract CpuConstraintPoly {
                     )
                 }
 
-                //{
-                //    // Constraint expression for diluted_check/permutation/step0: (diluted_check/permutation/interaction_elm - column2_row1) * column8_inter1_row1 - (diluted_check/permutation/interaction_elm - column1_row1) * column8_inter1_row0.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*diluted_check/permutation/interaction_elm*/ mload(
-                //                    0x200
-                //                ),
-                //                sub(PRIME, /*column2_row1*/ mload(0xa80)),
-                //                PRIME
-                //            ),
-                //            /*column8_inter1_row1*/ mload(0x1480),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                addmod(
-                //                    /*diluted_check/permutation/interaction_elm*/ mload(
-                //                        0x200
-                //                    ),
-                //                    sub(PRIME, /*column1_row1*/ mload(0x6a0)),
-                //                    PRIME
-                //                ),
-                //                /*column8_inter1_row0*/ mload(0x1460),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for diluted_check/permutation/step0: (diluted_check/permutation/interaction_elm - column2_row1) * column8_inter1_row1 - (diluted_check/permutation/interaction_elm - column1_row1) * column8_inter1_row0.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*diluted_check/permutation/interaction_elm*/ mload(
+                                    0x200
+                                ),
+                                sub(PRIME, /*column2_row1*/ mload(0xa80)),
+                                PRIME
+                            ),
+                            /*column8_inter1_row1*/ mload(0x1480),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                addmod(
+                                    /*diluted_check/permutation/interaction_elm*/ mload(
+                                        0x200
+                                    ),
+                                    sub(PRIME, /*column1_row1*/ mload(0x6a0)),
+                                    PRIME
+                                ),
+                                /*column8_inter1_row0*/ mload(0x1460),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: point - trace_generator^(trace_length - 1).
-                //    // val *= domains[18].
-                //    val := mulmod(val, /*domains[18]*/ mload(0x1fe0), PRIME)
-                //    // Denominator: point^trace_length - 1.
-                //    // val *= denominator_invs[0].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[0]*/ mload(0x2040),
-                //        PRIME
-                //    )
+                    // Numerator: point - trace_generator^(trace_length - 1).
+                    // val *= domains[18].
+                    val := mulmod(val, /*domains[18]*/ mload(0x1fe0), PRIME)
+                    // Denominator: point^trace_length - 1.
+                    // val *= denominator_invs[0].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[0]*/ mload(0x2040),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 48.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 48.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for diluted_check/permutation/last: column8_inter1_row0 - diluted_check/permutation/public_memory_prod.
-                //    let val := addmod(
-                //        /*column8_inter1_row0*/ mload(0x1460),
-                //        sub(
-                //            PRIME,
-                //            /*diluted_check/permutation/public_memory_prod*/ mload(
-                //                0x220
-                //            )
-                //        ),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for diluted_check/permutation/last: column8_inter1_row0 - diluted_check/permutation/public_memory_prod.
+                    let val := addmod(
+                        /*column8_inter1_row0*/ mload(0x1460),
+                        sub(
+                            PRIME,
+                            /*diluted_check/permutation/public_memory_prod*/ mload(
+                                0x220
+                            )
+                        ),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(trace_length - 1).
-                //    // val *= denominator_invs[9].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[9]*/ mload(0x2160),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(trace_length - 1).
+                    // val *= denominator_invs[9].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[9]*/ mload(0x2160),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 49.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 49.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for diluted_check/init: column7_inter1_row0 - 1.
-                //    let val := addmod(
-                //        /*column7_inter1_row0*/ mload(0x1420),
-                //        sub(PRIME, 1),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for diluted_check/init: column7_inter1_row0 - 1.
+                    let val := addmod(
+                        /*column7_inter1_row0*/ mload(0x1420),
+                        sub(PRIME, 1),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 50.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 50.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
-                //{
-                //    // Constraint expression for diluted_check/first_element: column2_row0 - diluted_check/first_elm.
-                //    let val := addmod(
-                //        /*column2_row0*/ mload(0xa60),
-                //        sub(PRIME, /*diluted_check/first_elm*/ mload(0x240)),
-                //        PRIME
-                //    )
+                {
+                    // Constraint expression for diluted_check/first_element: column2_row0 - diluted_check/first_elm.
+                    let val := addmod(
+                        /*column2_row0*/ mload(0xa60),
+                        sub(PRIME, /*diluted_check/first_elm*/ mload(0x240)),
+                        PRIME
+                    )
 
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
 
-                //    // res += val * alpha ** 51.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                    // res += val * alpha ** 51.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
                 {
                     // Constraint expression for diluted_check/step: column7_inter1_row1 - (column7_inter1_row0 * (1 + diluted_check/interaction_z * (column2_row1 - column2_row0)) + diluted_check/interaction_alpha * (column2_row1 - column2_row0) * (column2_row1 - column2_row0)).
@@ -4253,1534 +4253,1534 @@ contract CpuConstraintPoly {
                     )
                 }
 
-                //{
-                //    // Constraint expression for diluted_check/last: column7_inter1_row0 - diluted_check/final_cum_val.
-                //    let val := addmod(
-                //        /*column7_inter1_row0*/ mload(0x1420),
-                //        sub(
-                //            PRIME,
-                //            /*diluted_check/final_cum_val*/ mload(0x2a0)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - trace_generator^(trace_length - 1).
-                //    // val *= denominator_invs[9].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[9]*/ mload(0x2160),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 53.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/last_one_is_zero: column6_row7 * (column6_row0 - (column6_row4 + column6_row4)).
-                //    let val := mulmod(
-                //        /*column6_row7*/ mload(0x1260),
-                //        addmod(
-                //            /*column6_row0*/ mload(0x11a0),
-                //            sub(
-                //                PRIME,
-                //                addmod(
-                //                    /*column6_row4*/ mload(0x1220),
-                //                    /*column6_row4*/ mload(0x1220),
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 54.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones0: column6_row7 * (column6_row4 - 3138550867693340381917894711603833208051177722232017256448 * column6_row768).
-                //    let val := mulmod(
-                //        /*column6_row7*/ mload(0x1260),
-                //        addmod(
-                //            /*column6_row4*/ mload(0x1220),
-                //            sub(
-                //                PRIME,
-                //                mulmod(
-                //                    3138550867693340381917894711603833208051177722232017256448,
-                //                    /*column6_row768*/ mload(0x1320),
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 55.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/cumulative_bit192: column6_row7 - column6_row1022 * (column6_row768 - (column6_row772 + column6_row772)).
-                //    let val := addmod(
-                //        /*column6_row7*/ mload(0x1260),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*column6_row1022*/ mload(0x13e0),
-                //                addmod(
-                //                    /*column6_row768*/ mload(0x1320),
-                //                    sub(
-                //                        PRIME,
-                //                        addmod(
-                //                            /*column6_row772*/ mload(0x1340),
-                //                            /*column6_row772*/ mload(0x1340),
-                //                            PRIME
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 56.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones192: column6_row1022 * (column6_row772 - 8 * column6_row784).
-                //    let val := mulmod(
-                //        /*column6_row1022*/ mload(0x13e0),
-                //        addmod(
-                //            /*column6_row772*/ mload(0x1340),
-                //            sub(
-                //                PRIME,
-                //                mulmod(
-                //                    8,
-                //                    /*column6_row784*/ mload(0x1360),
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 57.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/cumulative_bit196: column6_row1022 - (column6_row1004 - (column6_row1008 + column6_row1008)) * (column6_row784 - (column6_row788 + column6_row788)).
-                //    let val := addmod(
-                //        /*column6_row1022*/ mload(0x13e0),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                addmod(
-                //                    /*column6_row1004*/ mload(0x13a0),
-                //                    sub(
-                //                        PRIME,
-                //                        addmod(
-                //                            /*column6_row1008*/ mload(0x13c0),
-                //                            /*column6_row1008*/ mload(0x13c0),
-                //                            PRIME
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                addmod(
-                //                    /*column6_row784*/ mload(0x1360),
-                //                    sub(
-                //                        PRIME,
-                //                        addmod(
-                //                            /*column6_row788*/ mload(0x1380),
-                //                            /*column6_row788*/ mload(0x1380),
-                //                            PRIME
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 58.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones196: (column6_row1004 - (column6_row1008 + column6_row1008)) * (column6_row788 - 18014398509481984 * column6_row1004).
-                //    let val := mulmod(
-                //        addmod(
-                //            /*column6_row1004*/ mload(0x13a0),
-                //            sub(
-                //                PRIME,
-                //                addmod(
-                //                    /*column6_row1008*/ mload(0x13c0),
-                //                    /*column6_row1008*/ mload(0x13c0),
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        addmod(
-                //            /*column6_row788*/ mload(0x1380),
-                //            sub(
-                //                PRIME,
-                //                mulmod(
-                //                    18014398509481984,
-                //                    /*column6_row1004*/ mload(0x13a0),
-                //                    PRIME
-                //                )
-                //            ),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 59.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/booleanity_test: pedersen__hash0__ec_subset_sum__bit_0 * (pedersen__hash0__ec_subset_sum__bit_0 - 1).
-                //    let val := mulmod(
-                //        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
-                //            0x17e0
-                //        ),
-                //        addmod(
-                //            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
-                //                0x17e0
-                //            ),
-                //            sub(PRIME, 1),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 60.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_extraction_end: column6_row0.
-                //    let val := /*column6_row0*/ mload(0x11a0)
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - trace_generator^(63 * trace_length / 64).
-                //    // val *= denominator_invs[12].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[12]*/ mload(0x21c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 61.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/zeros_tail: column6_row0.
-                //    let val := /*column6_row0*/ mload(0x11a0)
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= denominator_invs[11].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[11]*/ mload(0x21a0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 62.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/slope: pedersen__hash0__ec_subset_sum__bit_0 * (column5_row3 - pedersen__points__y) - column6_row2 * (column5_row1 - pedersen__points__x).
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
-                //                0x17e0
-                //            ),
-                //            addmod(
-                //                /*column5_row3*/ mload(0xf40),
-                //                sub(
-                //                    PRIME,
-                //                    /*periodic_column/pedersen/points/y*/ mload(
-                //                        0x20
-                //                    )
-                //                ),
-                //                PRIME
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*column6_row2*/ mload(0x11e0),
-                //                addmod(
-                //                    /*column5_row1*/ mload(0xf00),
-                //                    sub(
-                //                        PRIME,
-                //                        /*periodic_column/pedersen/points/x*/ mload(
-                //                            0x0
-                //                        )
-                //                    ),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 63.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/x: column6_row2 * column6_row2 - pedersen__hash0__ec_subset_sum__bit_0 * (column5_row1 + pedersen__points__x + column5_row5).
-                //    let val := addmod(
-                //        mulmod(
-                //            /*column6_row2*/ mload(0x11e0),
-                //            /*column6_row2*/ mload(0x11e0),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
-                //                    0x17e0
-                //                ),
-                //                addmod(
-                //                    addmod(
-                //                        /*column5_row1*/ mload(0xf00),
-                //                        /*periodic_column/pedersen/points/x*/ mload(
-                //                            0x0
-                //                        ),
-                //                        PRIME
-                //                    ),
-                //                    /*column5_row5*/ mload(0xf80),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 64.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/y: pedersen__hash0__ec_subset_sum__bit_0 * (column5_row3 + column5_row7) - column6_row2 * (column5_row1 - column5_row5).
-                //    let val := addmod(
-                //        mulmod(
-                //            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
-                //                0x17e0
-                //            ),
-                //            addmod(
-                //                /*column5_row3*/ mload(0xf40),
-                //                /*column5_row7*/ mload(0xfc0),
-                //                PRIME
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            mulmod(
-                //                /*column6_row2*/ mload(0x11e0),
-                //                addmod(
-                //                    /*column5_row1*/ mload(0xf00),
-                //                    sub(PRIME, /*column5_row5*/ mload(0xf80)),
-                //                    PRIME
-                //                ),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 65.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/copy_point/x: pedersen__hash0__ec_subset_sum__bit_neg_0 * (column5_row5 - column5_row1).
-                //    let val := mulmod(
-                //        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_neg_0*/ mload(
-                //            0x1800
-                //        ),
-                //        addmod(
-                //            /*column5_row5*/ mload(0xf80),
-                //            sub(PRIME, /*column5_row1*/ mload(0xf00)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 66.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/ec_subset_sum/copy_point/y: pedersen__hash0__ec_subset_sum__bit_neg_0 * (column5_row7 - column5_row3).
-                //    let val := mulmod(
-                //        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_neg_0*/ mload(
-                //            0x1800
-                //        ),
-                //        addmod(
-                //            /*column5_row7*/ mload(0xfc0),
-                //            sub(PRIME, /*column5_row3*/ mload(0xf40)),
-                //            PRIME
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
-                //    // val *= domains[10].
-                //    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
-                //    // Denominator: point^(trace_length / 4) - 1.
-                //    // val *= denominator_invs[7].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[7]*/ mload(0x2120),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 67.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/copy_point/x: column5_row1025 - column5_row1021.
-                //    let val := addmod(
-                //        /*column5_row1025*/ mload(0x1140),
-                //        sub(PRIME, /*column5_row1021*/ mload(0x1100)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 2048) - trace_generator^(trace_length / 2).
-                //    // val *= domains[12].
-                //    val := mulmod(val, /*domains[12]*/ mload(0x1f20), PRIME)
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 68.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/copy_point/y: column5_row1027 - column5_row1023.
-                //    let val := addmod(
-                //        /*column5_row1027*/ mload(0x1160),
-                //        sub(PRIME, /*column5_row1023*/ mload(0x1120)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 2048) - trace_generator^(trace_length / 2).
-                //    // val *= domains[12].
-                //    val := mulmod(val, /*domains[12]*/ mload(0x1f20), PRIME)
-                //    // Denominator: point^(trace_length / 1024) - 1.
-                //    // val *= denominator_invs[10].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[10]*/ mload(0x2180),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 69.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/init/x: column5_row1 - pedersen/shift_point.x.
-                //    let val := addmod(
-                //        /*column5_row1*/ mload(0xf00),
-                //        sub(PRIME, /*pedersen/shift_point.x*/ mload(0x2c0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 70.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/hash0/init/y: column5_row3 - pedersen/shift_point.y.
-                //    let val := addmod(
-                //        /*column5_row3*/ mload(0xf40),
-                //        sub(PRIME, /*pedersen/shift_point.y*/ mload(0x2e0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 71.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/input0_value0: column3_row11 - column6_row0.
-                //    let val := addmod(
-                //        /*column3_row11*/ mload(0xbc0),
-                //        sub(PRIME, /*column6_row0*/ mload(0x11a0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 72.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/input0_addr: column3_row2058 - (column3_row522 + 1).
-                //    let val := addmod(
-                //        /*column3_row2058*/ mload(0xe40),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row522*/ mload(0xdc0), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(2048 * (trace_length / 2048 - 1)).
-                //    // val *= domains[19].
-                //    val := mulmod(val, /*domains[19]*/ mload(0x2000), PRIME)
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 73.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/init_addr: column3_row10 - initial_pedersen_addr.
-                //    let val := addmod(
-                //        /*column3_row10*/ mload(0xba0),
-                //        sub(PRIME, /*initial_pedersen_addr*/ mload(0x300)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 74.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/input1_value0: column3_row1035 - column6_row1024.
-                //    let val := addmod(
-                //        /*column3_row1035*/ mload(0xe20),
-                //        sub(PRIME, /*column6_row1024*/ mload(0x1400)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 75.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/input1_addr: column3_row1034 - (column3_row10 + 1).
-                //    let val := addmod(
-                //        /*column3_row1034*/ mload(0xe00),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row10*/ mload(0xba0), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 76.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/output_value0: column3_row523 - column5_row2045.
-                //    let val := addmod(
-                //        /*column3_row523*/ mload(0xde0),
-                //        sub(PRIME, /*column5_row2045*/ mload(0x1180)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 77.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for pedersen/output_addr: column3_row522 - (column3_row1034 + 1).
-                //    let val := addmod(
-                //        /*column3_row522*/ mload(0xdc0),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row1034*/ mload(0xe00), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 2048) - 1.
-                //    // val *= denominator_invs[13].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[13]*/ mload(0x21e0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 78.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for rc_builtin/value: rc_builtin__value7_0 - column3_row75.
-                //    let val := addmod(
-                //        /*intermediate_value/rc_builtin/value7_0*/ mload(
-                //            0x1900
-                //        ),
-                //        sub(PRIME, /*column3_row75*/ mload(0xd00)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 79.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for rc_builtin/addr_step: column3_row202 - (column3_row74 + 1).
-                //    let val := addmod(
-                //        /*column3_row202*/ mload(0xda0),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row74*/ mload(0xce0), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(128 * (trace_length / 128 - 1)).
-                //    // val *= domains[20].
-                //    val := mulmod(val, /*domains[20]*/ mload(0x2020), PRIME)
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 80.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for rc_builtin/init_addr: column3_row74 - initial_rc_addr.
-                //    let val := addmod(
-                //        /*column3_row74*/ mload(0xce0),
-                //        sub(PRIME, /*initial_rc_addr*/ mload(0x320)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 81.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/init_var_pool_addr: column3_row26 - initial_bitwise_addr.
-                //    let val := addmod(
-                //        /*column3_row26*/ mload(0xc40),
-                //        sub(PRIME, /*initial_bitwise_addr*/ mload(0x340)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point - 1.
-                //    // val *= denominator_invs[4].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[4]*/ mload(0x20c0),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 82.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/step_var_pool_addr: column3_row58 - (column3_row26 + 1).
-                //    let val := addmod(
-                //        /*column3_row58*/ mload(0xcc0),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row26*/ mload(0xc40), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point^(trace_length / 128) - trace_generator^(3 * trace_length / 4).
-                //    // val *= domains[7].
-                //    val := mulmod(val, /*domains[7]*/ mload(0x1e80), PRIME)
-                //    // Denominator: point^(trace_length / 32) - 1.
-                //    // val *= denominator_invs[15].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[15]*/ mload(0x2220),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 83.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/x_or_y_addr: column3_row42 - (column3_row122 + 1).
-                //    let val := addmod(
-                //        /*column3_row42*/ mload(0xc80),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row122*/ mload(0xd40), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 84.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/next_var_pool_addr: column3_row154 - (column3_row42 + 1).
-                //    let val := addmod(
-                //        /*column3_row154*/ mload(0xd80),
-                //        sub(
-                //            PRIME,
-                //            addmod(/*column3_row42*/ mload(0xc80), 1, PRIME)
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: point - trace_generator^(128 * (trace_length / 128 - 1)).
-                //    // val *= domains[20].
-                //    val := mulmod(val, /*domains[20]*/ mload(0x2020), PRIME)
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 85.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/partition: bitwise__sum_var_0_0 + bitwise__sum_var_8_0 - column3_row27.
-                //    let val := addmod(
-                //        addmod(
-                //            /*intermediate_value/bitwise/sum_var_0_0*/ mload(
-                //                0x1920
-                //            ),
-                //            /*intermediate_value/bitwise/sum_var_8_0*/ mload(
-                //                0x1940
-                //            ),
-                //            PRIME
-                //        ),
-                //        sub(PRIME, /*column3_row27*/ mload(0xc60)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 32) - 1.
-                //    // val *= denominator_invs[15].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[15]*/ mload(0x2220),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 86.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/or_is_and_plus_xor: column3_row43 - (column3_row91 + column3_row123).
-                //    let val := addmod(
-                //        /*column3_row43*/ mload(0xca0),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                /*column3_row91*/ mload(0xd20),
-                //                /*column3_row123*/ mload(0xd60),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 87.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/addition_is_xor_with_and: column1_row0 + column1_row32 - (column1_row96 + column1_row64 + column1_row64).
-                //    let val := addmod(
-                //        addmod(
-                //            /*column1_row0*/ mload(0x680),
-                //            /*column1_row32*/ mload(0x8a0),
-                //            PRIME
-                //        ),
-                //        sub(
-                //            PRIME,
-                //            addmod(
-                //                addmod(
-                //                    /*column1_row96*/ mload(0x9a0),
-                //                    /*column1_row64*/ mload(0x8e0),
-                //                    PRIME
-                //                ),
-                //                /*column1_row64*/ mload(0x8e0),
-                //                PRIME
-                //            )
-                //        ),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: (point^(trace_length / 128) - trace_generator^(trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 16)) * (point^(trace_length / 128) - trace_generator^(5 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(7 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 8)) * (point^(trace_length / 128) - trace_generator^(9 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(5 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(11 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 16)) * (point^(trace_length / 128) - trace_generator^(13 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(7 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(15 * trace_length / 64)) * domain6.
-                //    // val *= denominator_invs[16].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[16]*/ mload(0x2240),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 88.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/unique_unpacking192: (column1_row88 + column1_row120) * 16 - column1_row1.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*column1_row88*/ mload(0x920),
-                //                /*column1_row120*/ mload(0x9e0),
-                //                PRIME
-                //            ),
-                //            16,
-                //            PRIME
-                //        ),
-                //        sub(PRIME, /*column1_row1*/ mload(0x6a0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 89.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/unique_unpacking193: (column1_row90 + column1_row122) * 16 - column1_row65.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*column1_row90*/ mload(0x940),
-                //                /*column1_row122*/ mload(0xa00),
-                //                PRIME
-                //            ),
-                //            16,
-                //            PRIME
-                //        ),
-                //        sub(PRIME, /*column1_row65*/ mload(0x900)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 90.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/unique_unpacking194: (column1_row92 + column1_row124) * 16 - column1_row33.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*column1_row92*/ mload(0x960),
-                //                /*column1_row124*/ mload(0xa20),
-                //                PRIME
-                //            ),
-                //            16,
-                //            PRIME
-                //        ),
-                //        sub(PRIME, /*column1_row33*/ mload(0x8c0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 91.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
-
-                //{
-                //    // Constraint expression for bitwise/unique_unpacking195: (column1_row94 + column1_row126) * 256 - column1_row97.
-                //    let val := addmod(
-                //        mulmod(
-                //            addmod(
-                //                /*column1_row94*/ mload(0x980),
-                //                /*column1_row126*/ mload(0xa40),
-                //                PRIME
-                //            ),
-                //            256,
-                //            PRIME
-                //        ),
-                //        sub(PRIME, /*column1_row97*/ mload(0x9c0)),
-                //        PRIME
-                //    )
-
-                //    // Numerator: 1.
-                //    // val *= 1.
-                //    // Denominator: point^(trace_length / 128) - 1.
-                //    // val *= denominator_invs[14].
-                //    val := mulmod(
-                //        val,
-                //        /*denominator_invs[14]*/ mload(0x2200),
-                //        PRIME
-                //    )
-
-                //    // res += val * alpha ** 92.
-                //    res := addmod(
-                //        res,
-                //        mulmod(val, composition_alpha_pow, PRIME),
-                //        PRIME
-                //    )
-                //    composition_alpha_pow := mulmod(
-                //        composition_alpha_pow,
-                //        composition_alpha,
-                //        PRIME
-                //    )
-                //}
+                {
+                    // Constraint expression for diluted_check/last: column7_inter1_row0 - diluted_check/final_cum_val.
+                    let val := addmod(
+                        /*column7_inter1_row0*/ mload(0x1420),
+                        sub(
+                            PRIME,
+                            /*diluted_check/final_cum_val*/ mload(0x2a0)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - trace_generator^(trace_length - 1).
+                    // val *= denominator_invs[9].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[9]*/ mload(0x2160),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 53.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/last_one_is_zero: column6_row7 * (column6_row0 - (column6_row4 + column6_row4)).
+                    let val := mulmod(
+                        /*column6_row7*/ mload(0x1260),
+                        addmod(
+                            /*column6_row0*/ mload(0x11a0),
+                            sub(
+                                PRIME,
+                                addmod(
+                                    /*column6_row4*/ mload(0x1220),
+                                    /*column6_row4*/ mload(0x1220),
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 54.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones0: column6_row7 * (column6_row4 - 3138550867693340381917894711603833208051177722232017256448 * column6_row768).
+                    let val := mulmod(
+                        /*column6_row7*/ mload(0x1260),
+                        addmod(
+                            /*column6_row4*/ mload(0x1220),
+                            sub(
+                                PRIME,
+                                mulmod(
+                                    3138550867693340381917894711603833208051177722232017256448,
+                                    /*column6_row768*/ mload(0x1320),
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 55.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/cumulative_bit192: column6_row7 - column6_row1022 * (column6_row768 - (column6_row772 + column6_row772)).
+                    let val := addmod(
+                        /*column6_row7*/ mload(0x1260),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*column6_row1022*/ mload(0x13e0),
+                                addmod(
+                                    /*column6_row768*/ mload(0x1320),
+                                    sub(
+                                        PRIME,
+                                        addmod(
+                                            /*column6_row772*/ mload(0x1340),
+                                            /*column6_row772*/ mload(0x1340),
+                                            PRIME
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 56.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones192: column6_row1022 * (column6_row772 - 8 * column6_row784).
+                    let val := mulmod(
+                        /*column6_row1022*/ mload(0x13e0),
+                        addmod(
+                            /*column6_row772*/ mload(0x1340),
+                            sub(
+                                PRIME,
+                                mulmod(
+                                    8,
+                                    /*column6_row784*/ mload(0x1360),
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 57.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/cumulative_bit196: column6_row1022 - (column6_row1004 - (column6_row1008 + column6_row1008)) * (column6_row784 - (column6_row788 + column6_row788)).
+                    let val := addmod(
+                        /*column6_row1022*/ mload(0x13e0),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                addmod(
+                                    /*column6_row1004*/ mload(0x13a0),
+                                    sub(
+                                        PRIME,
+                                        addmod(
+                                            /*column6_row1008*/ mload(0x13c0),
+                                            /*column6_row1008*/ mload(0x13c0),
+                                            PRIME
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                addmod(
+                                    /*column6_row784*/ mload(0x1360),
+                                    sub(
+                                        PRIME,
+                                        addmod(
+                                            /*column6_row788*/ mload(0x1380),
+                                            /*column6_row788*/ mload(0x1380),
+                                            PRIME
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 58.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_unpacking/zeroes_between_ones196: (column6_row1004 - (column6_row1008 + column6_row1008)) * (column6_row788 - 18014398509481984 * column6_row1004).
+                    let val := mulmod(
+                        addmod(
+                            /*column6_row1004*/ mload(0x13a0),
+                            sub(
+                                PRIME,
+                                addmod(
+                                    /*column6_row1008*/ mload(0x13c0),
+                                    /*column6_row1008*/ mload(0x13c0),
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        addmod(
+                            /*column6_row788*/ mload(0x1380),
+                            sub(
+                                PRIME,
+                                mulmod(
+                                    18014398509481984,
+                                    /*column6_row1004*/ mload(0x13a0),
+                                    PRIME
+                                )
+                            ),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 59.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/booleanity_test: pedersen__hash0__ec_subset_sum__bit_0 * (pedersen__hash0__ec_subset_sum__bit_0 - 1).
+                    let val := mulmod(
+                        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
+                            0x17e0
+                        ),
+                        addmod(
+                            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
+                                0x17e0
+                            ),
+                            sub(PRIME, 1),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 60.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/bit_extraction_end: column6_row0.
+                    let val := /*column6_row0*/ mload(0x11a0)
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - trace_generator^(63 * trace_length / 64).
+                    // val *= denominator_invs[12].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[12]*/ mload(0x21c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 61.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/zeros_tail: column6_row0.
+                    let val := /*column6_row0*/ mload(0x11a0)
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= denominator_invs[11].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[11]*/ mload(0x21a0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 62.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/slope: pedersen__hash0__ec_subset_sum__bit_0 * (column5_row3 - pedersen__points__y) - column6_row2 * (column5_row1 - pedersen__points__x).
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
+                                0x17e0
+                            ),
+                            addmod(
+                                /*column5_row3*/ mload(0xf40),
+                                sub(
+                                    PRIME,
+                                    /*periodic_column/pedersen/points/y*/ mload(
+                                        0x20
+                                    )
+                                ),
+                                PRIME
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*column6_row2*/ mload(0x11e0),
+                                addmod(
+                                    /*column5_row1*/ mload(0xf00),
+                                    sub(
+                                        PRIME,
+                                        /*periodic_column/pedersen/points/x*/ mload(
+                                            0x0
+                                        )
+                                    ),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 63.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/x: column6_row2 * column6_row2 - pedersen__hash0__ec_subset_sum__bit_0 * (column5_row1 + pedersen__points__x + column5_row5).
+                    let val := addmod(
+                        mulmod(
+                            /*column6_row2*/ mload(0x11e0),
+                            /*column6_row2*/ mload(0x11e0),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
+                                    0x17e0
+                                ),
+                                addmod(
+                                    addmod(
+                                        /*column5_row1*/ mload(0xf00),
+                                        /*periodic_column/pedersen/points/x*/ mload(
+                                            0x0
+                                        ),
+                                        PRIME
+                                    ),
+                                    /*column5_row5*/ mload(0xf80),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 64.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/add_points/y: pedersen__hash0__ec_subset_sum__bit_0 * (column5_row3 + column5_row7) - column6_row2 * (column5_row1 - column5_row5).
+                    let val := addmod(
+                        mulmod(
+                            /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_0*/ mload(
+                                0x17e0
+                            ),
+                            addmod(
+                                /*column5_row3*/ mload(0xf40),
+                                /*column5_row7*/ mload(0xfc0),
+                                PRIME
+                            ),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            mulmod(
+                                /*column6_row2*/ mload(0x11e0),
+                                addmod(
+                                    /*column5_row1*/ mload(0xf00),
+                                    sub(PRIME, /*column5_row5*/ mload(0xf80)),
+                                    PRIME
+                                ),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 65.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/copy_point/x: pedersen__hash0__ec_subset_sum__bit_neg_0 * (column5_row5 - column5_row1).
+                    let val := mulmod(
+                        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_neg_0*/ mload(
+                            0x1800
+                        ),
+                        addmod(
+                            /*column5_row5*/ mload(0xf80),
+                            sub(PRIME, /*column5_row1*/ mload(0xf00)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 66.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/ec_subset_sum/copy_point/y: pedersen__hash0__ec_subset_sum__bit_neg_0 * (column5_row7 - column5_row3).
+                    let val := mulmod(
+                        /*intermediate_value/pedersen/hash0/ec_subset_sum/bit_neg_0*/ mload(
+                            0x1800
+                        ),
+                        addmod(
+                            /*column5_row7*/ mload(0xfc0),
+                            sub(PRIME, /*column5_row3*/ mload(0xf40)),
+                            PRIME
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 1024) - trace_generator^(255 * trace_length / 256).
+                    // val *= domains[10].
+                    val := mulmod(val, /*domains[10]*/ mload(0x1ee0), PRIME)
+                    // Denominator: point^(trace_length / 4) - 1.
+                    // val *= denominator_invs[7].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[7]*/ mload(0x2120),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 67.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/copy_point/x: column5_row1025 - column5_row1021.
+                    let val := addmod(
+                        /*column5_row1025*/ mload(0x1140),
+                        sub(PRIME, /*column5_row1021*/ mload(0x1100)),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 2048) - trace_generator^(trace_length / 2).
+                    // val *= domains[12].
+                    val := mulmod(val, /*domains[12]*/ mload(0x1f20), PRIME)
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 68.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/copy_point/y: column5_row1027 - column5_row1023.
+                    let val := addmod(
+                        /*column5_row1027*/ mload(0x1160),
+                        sub(PRIME, /*column5_row1023*/ mload(0x1120)),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 2048) - trace_generator^(trace_length / 2).
+                    // val *= domains[12].
+                    val := mulmod(val, /*domains[12]*/ mload(0x1f20), PRIME)
+                    // Denominator: point^(trace_length / 1024) - 1.
+                    // val *= denominator_invs[10].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[10]*/ mload(0x2180),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 69.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/init/x: column5_row1 - pedersen/shift_point.x.
+                    let val := addmod(
+                        /*column5_row1*/ mload(0xf00),
+                        sub(PRIME, /*pedersen/shift_point.x*/ mload(0x2c0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 70.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/hash0/init/y: column5_row3 - pedersen/shift_point.y.
+                    let val := addmod(
+                        /*column5_row3*/ mload(0xf40),
+                        sub(PRIME, /*pedersen/shift_point.y*/ mload(0x2e0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 71.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/input0_value0: column3_row11 - column6_row0.
+                    let val := addmod(
+                        /*column3_row11*/ mload(0xbc0),
+                        sub(PRIME, /*column6_row0*/ mload(0x11a0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 72.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/input0_addr: column3_row2058 - (column3_row522 + 1).
+                    let val := addmod(
+                        /*column3_row2058*/ mload(0xe40),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row522*/ mload(0xdc0), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(2048 * (trace_length / 2048 - 1)).
+                    // val *= domains[19].
+                    val := mulmod(val, /*domains[19]*/ mload(0x2000), PRIME)
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 73.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/init_addr: column3_row10 - initial_pedersen_addr.
+                    let val := addmod(
+                        /*column3_row10*/ mload(0xba0),
+                        sub(PRIME, /*initial_pedersen_addr*/ mload(0x300)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 74.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/input1_value0: column3_row1035 - column6_row1024.
+                    let val := addmod(
+                        /*column3_row1035*/ mload(0xe20),
+                        sub(PRIME, /*column6_row1024*/ mload(0x1400)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 75.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/input1_addr: column3_row1034 - (column3_row10 + 1).
+                    let val := addmod(
+                        /*column3_row1034*/ mload(0xe00),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row10*/ mload(0xba0), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 76.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/output_value0: column3_row523 - column5_row2045.
+                    let val := addmod(
+                        /*column3_row523*/ mload(0xde0),
+                        sub(PRIME, /*column5_row2045*/ mload(0x1180)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 77.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for pedersen/output_addr: column3_row522 - (column3_row1034 + 1).
+                    let val := addmod(
+                        /*column3_row522*/ mload(0xdc0),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row1034*/ mload(0xe00), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 2048) - 1.
+                    // val *= denominator_invs[13].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[13]*/ mload(0x21e0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 78.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for rc_builtin/value: rc_builtin__value7_0 - column3_row75.
+                    let val := addmod(
+                        /*intermediate_value/rc_builtin/value7_0*/ mload(
+                            0x1900
+                        ),
+                        sub(PRIME, /*column3_row75*/ mload(0xd00)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 79.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for rc_builtin/addr_step: column3_row202 - (column3_row74 + 1).
+                    let val := addmod(
+                        /*column3_row202*/ mload(0xda0),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row74*/ mload(0xce0), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(128 * (trace_length / 128 - 1)).
+                    // val *= domains[20].
+                    val := mulmod(val, /*domains[20]*/ mload(0x2020), PRIME)
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 80.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for rc_builtin/init_addr: column3_row74 - initial_rc_addr.
+                    let val := addmod(
+                        /*column3_row74*/ mload(0xce0),
+                        sub(PRIME, /*initial_rc_addr*/ mload(0x320)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 81.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/init_var_pool_addr: column3_row26 - initial_bitwise_addr.
+                    let val := addmod(
+                        /*column3_row26*/ mload(0xc40),
+                        sub(PRIME, /*initial_bitwise_addr*/ mload(0x340)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point - 1.
+                    // val *= denominator_invs[4].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[4]*/ mload(0x20c0),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 82.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/step_var_pool_addr: column3_row58 - (column3_row26 + 1).
+                    let val := addmod(
+                        /*column3_row58*/ mload(0xcc0),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row26*/ mload(0xc40), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point^(trace_length / 128) - trace_generator^(3 * trace_length / 4).
+                    // val *= domains[7].
+                    val := mulmod(val, /*domains[7]*/ mload(0x1e80), PRIME)
+                    // Denominator: point^(trace_length / 32) - 1.
+                    // val *= denominator_invs[15].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[15]*/ mload(0x2220),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 83.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/x_or_y_addr: column3_row42 - (column3_row122 + 1).
+                    let val := addmod(
+                        /*column3_row42*/ mload(0xc80),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row122*/ mload(0xd40), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 84.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/next_var_pool_addr: column3_row154 - (column3_row42 + 1).
+                    let val := addmod(
+                        /*column3_row154*/ mload(0xd80),
+                        sub(
+                            PRIME,
+                            addmod(/*column3_row42*/ mload(0xc80), 1, PRIME)
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: point - trace_generator^(128 * (trace_length / 128 - 1)).
+                    // val *= domains[20].
+                    val := mulmod(val, /*domains[20]*/ mload(0x2020), PRIME)
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 85.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/partition: bitwise__sum_var_0_0 + bitwise__sum_var_8_0 - column3_row27.
+                    let val := addmod(
+                        addmod(
+                            /*intermediate_value/bitwise/sum_var_0_0*/ mload(
+                                0x1920
+                            ),
+                            /*intermediate_value/bitwise/sum_var_8_0*/ mload(
+                                0x1940
+                            ),
+                            PRIME
+                        ),
+                        sub(PRIME, /*column3_row27*/ mload(0xc60)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 32) - 1.
+                    // val *= denominator_invs[15].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[15]*/ mload(0x2220),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 86.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/or_is_and_plus_xor: column3_row43 - (column3_row91 + column3_row123).
+                    let val := addmod(
+                        /*column3_row43*/ mload(0xca0),
+                        sub(
+                            PRIME,
+                            addmod(
+                                /*column3_row91*/ mload(0xd20),
+                                /*column3_row123*/ mload(0xd60),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 87.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/addition_is_xor_with_and: column1_row0 + column1_row32 - (column1_row96 + column1_row64 + column1_row64).
+                    let val := addmod(
+                        addmod(
+                            /*column1_row0*/ mload(0x680),
+                            /*column1_row32*/ mload(0x8a0),
+                            PRIME
+                        ),
+                        sub(
+                            PRIME,
+                            addmod(
+                                addmod(
+                                    /*column1_row96*/ mload(0x9a0),
+                                    /*column1_row64*/ mload(0x8e0),
+                                    PRIME
+                                ),
+                                /*column1_row64*/ mload(0x8e0),
+                                PRIME
+                            )
+                        ),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: (point^(trace_length / 128) - trace_generator^(trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 16)) * (point^(trace_length / 128) - trace_generator^(5 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(7 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(trace_length / 8)) * (point^(trace_length / 128) - trace_generator^(9 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(5 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(11 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(3 * trace_length / 16)) * (point^(trace_length / 128) - trace_generator^(13 * trace_length / 64)) * (point^(trace_length / 128) - trace_generator^(7 * trace_length / 32)) * (point^(trace_length / 128) - trace_generator^(15 * trace_length / 64)) * domain6.
+                    // val *= denominator_invs[16].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[16]*/ mload(0x2240),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 88.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/unique_unpacking192: (column1_row88 + column1_row120) * 16 - column1_row1.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*column1_row88*/ mload(0x920),
+                                /*column1_row120*/ mload(0x9e0),
+                                PRIME
+                            ),
+                            16,
+                            PRIME
+                        ),
+                        sub(PRIME, /*column1_row1*/ mload(0x6a0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 89.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/unique_unpacking193: (column1_row90 + column1_row122) * 16 - column1_row65.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*column1_row90*/ mload(0x940),
+                                /*column1_row122*/ mload(0xa00),
+                                PRIME
+                            ),
+                            16,
+                            PRIME
+                        ),
+                        sub(PRIME, /*column1_row65*/ mload(0x900)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 90.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/unique_unpacking194: (column1_row92 + column1_row124) * 16 - column1_row33.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*column1_row92*/ mload(0x960),
+                                /*column1_row124*/ mload(0xa20),
+                                PRIME
+                            ),
+                            16,
+                            PRIME
+                        ),
+                        sub(PRIME, /*column1_row33*/ mload(0x8c0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 91.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
+
+                {
+                    // Constraint expression for bitwise/unique_unpacking195: (column1_row94 + column1_row126) * 256 - column1_row97.
+                    let val := addmod(
+                        mulmod(
+                            addmod(
+                                /*column1_row94*/ mload(0x980),
+                                /*column1_row126*/ mload(0xa40),
+                                PRIME
+                            ),
+                            256,
+                            PRIME
+                        ),
+                        sub(PRIME, /*column1_row97*/ mload(0x9c0)),
+                        PRIME
+                    )
+
+                    // Numerator: 1.
+                    // val *= 1.
+                    // Denominator: point^(trace_length / 128) - 1.
+                    // val *= denominator_invs[14].
+                    val := mulmod(
+                        val,
+                        /*denominator_invs[14]*/ mload(0x2200),
+                        PRIME
+                    )
+
+                    // res += val * alpha ** 92.
+                    res := addmod(
+                        res,
+                        mulmod(val, composition_alpha_pow, PRIME),
+                        PRIME
+                    )
+                    composition_alpha_pow := mulmod(
+                        composition_alpha_pow,
+                        composition_alpha,
+                        PRIME
+                    )
+                }
 
                 mstore(0, res)
                 return(0, 0x20)
@@ -5788,4 +5788,3 @@ contract CpuConstraintPoly {
         }
     }
 }
-// ---------- End of auto-generated code. ----------

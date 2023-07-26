@@ -1,6 +1,6 @@
 {
-    "trace_path": "/home/lee/Repos/sandstorm-starkware-verifier-integration/trace.bin",
-    "memory_path": "/home/lee/Repos/sandstorm-starkware-verifier-integration/memory.bin",
+    "trace_path": "/Users/andrewmilson/projects/starkware-verifier/trace.bin",
+    "memory_path": "/Users/andrewmilson/projects/starkware-verifier/memory.bin",
     "pedersen": [
         {
             "index": 0,
