@@ -17,8 +17,9 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "MemoryMap.sol";
-import "StarkParameters.sol";
+import "./MemoryMap.sol";
+import "./StarkParameters.sol";
+import "forge-std/console.sol";
 
 contract CpuOods is MemoryMap, StarkParameters {
     // For each query point we want to invert (2 + N_ROWS_IN_MASK) items:
