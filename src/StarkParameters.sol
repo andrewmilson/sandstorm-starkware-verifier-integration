@@ -22,7 +22,7 @@ import "./PrimeFieldElement0.sol";
 contract StarkParameters is PrimeFieldElement0 {
     uint256 internal constant N_COEFFICIENTS = 93;
     uint256 internal constant N_INTERACTION_ELEMENTS = 6;
-    uint256 internal constant MASK_SIZE = 133;
+    uint256 internal constant MASK_SIZE = 14;
     uint256 internal constant N_ROWS_IN_MASK = 72;
     uint256 internal constant N_COLUMNS_IN_MASK = 10;
     uint256 internal constant N_COLUMNS_IN_TRACE0 = 7;
