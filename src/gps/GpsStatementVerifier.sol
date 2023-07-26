@@ -366,6 +366,12 @@ contract GpsStatementVerifier is
             "Not all Cairo public inputs were written."
         );
 
+        for (uint i = 0; i < publicMemory.length; i++) {
+            console.log("mem: ", publicMemory[i]);
+        }
+
+        // require(true == false);
+
         uint256 z = cairoAuxInput[cairoAuxInput.length - 2];
         uint256 alpha = cairoAuxInput[cairoAuxInput.length - 1];
         bytes32 factHash;

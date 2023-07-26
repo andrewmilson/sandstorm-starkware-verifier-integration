@@ -100,8 +100,8 @@ contract StarkNetVerifierTest is Test {
 
         bootloaderProgram = new CairoBootloaderProgram();
         // TODO: what are these? Maybe ask Starkware for the pre-images
-        // hashedSupportedCairoVerifiers = 3178097804922730583543126053422762895998573737925004508949311089390705597156;
-        hashedSupportedCairoVerifiers = 37341341331504021525228390428349719127283617351070997452015539964478373189;
+        hashedSupportedCairoVerifiers = 3178097804922730583543126053422762895998573737925004508949311089390705597156;
+        // hashedSupportedCairoVerifiers = 37341341331504021525228390428349719127283617351070997452015539964478373189;
         simpleBootloaderProgramHash = 2962621603719000361370283216422448934312521782617806945663080079725495842070;
         // TODO: in reality these addresses map to different verifiers
         // For the sake of simplicity have the same amount of verifiers
