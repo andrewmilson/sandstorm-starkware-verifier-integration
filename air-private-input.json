@@ -1,19 +1,18 @@
 {
-  "trace_path": "/Users/andrewmilson/projects/starkware-verifier/trace.bin",
-  "memory_path": "/Users/andrewmilson/projects/starkware-verifier/memory.bin",
-  "pedersen": [
-    {
-      "index": 0,
-      "x": "0x0",
-      "y": "0x706bd57414b57145b118dd7b92e0d1f040e1a6b6987b842ffb08135699a5ae4"
-    },
-    {
-      "index": 1,
-      "x": "0x3bf6a6baa7dad79b6ec242e70a2524309ae0c108c280943859a8b61562cb167",
-      "y": "0x1"
-    }
-  ],
-  "range_check": [],
-  "bitwise": [],
-  "ecdsa": []
+    "trace_path": "/home/lee/Repos/sandstorm-starkware-verifier-integration/trace.bin",
+    "memory_path": "/home/lee/Repos/sandstorm-starkware-verifier-integration/memory.bin",
+    "pedersen": [
+        {
+            "index": 0,
+            "x": "0x0",
+            "y": "0x706bd57414b57145b118dd7b92e0d1f040e1a6b6987b842ffb08135699a5ae4"
+        },
+        {
+            "index": 1,
+            "x": "0x3bf6a6baa7dad79b6ec242e70a2524309ae0c108c280943859a8b61562cb167",
+            "y": "0x1"
+        }
+    ],
+    "range_check": [],
+    "bitwise": []
 }

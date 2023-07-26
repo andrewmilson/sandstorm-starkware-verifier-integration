@@ -35,7 +35,7 @@ use sha3::Keccak256;
 use sandstorm_claims::sharp::input::CairoAuxInput;
 use sandstorm_claims::sharp::verifier::SharpMetadata;
 use ministark::stark::Stark;
-use sandstorm_layouts::starknet::{AirConfig, ExecutionTrace};
+use sandstorm_layouts::recursive::{AirConfig, ExecutionTrace};
 use std::io::Write;
 
 use crate::batched_merkle::partition_proofs;
