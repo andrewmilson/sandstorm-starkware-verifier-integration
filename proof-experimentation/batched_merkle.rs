@@ -1,13 +1,11 @@
 use ministark::hash::ElementHashFn;
 use ministark::merkle::MerkleProof;
 use ministark::merkle::MerkleTreeConfig;
-use ministark::utils::SerdeOutput;
 use ministark_gpu::fields::p3618502788666131213697322783095070105623107215331596699973092056135872020481::ark::Fp;
 use sandstorm_claims::sharp::merkle::HashedLeafConfig;
 use sandstorm_claims::sharp::merkle::MerkleTreeVariantProof;
 use sandstorm_claims::sharp::merkle::UnhashedLeafConfig;
 use sandstorm_claims::sharp::SolidityVerifierMaskedHashFn;
-use sha2::Digest;
 use std::collections::VecDeque;
 use std::iter::zip;
 
@@ -201,7 +199,7 @@ pub fn partition_proofs(
 ) -> MerkleProofsVariant<SolidityVerifierMaskedHashFn> {
     let mut hash_proofs = Vec::new();
     let mut unhash_proofs = Vec::new();
-    for proof in proofs.to_vec() {
+    for proof in proofs.iter().cloned() {
         match proof {
             MerkleTreeVariantProof::Hashed(p) => hash_proofs.push(p),
             MerkleTreeVariantProof::Unhashed(p) => unhash_proofs.push(p),
@@ -219,11 +217,9 @@ pub fn partition_proofs(
 }
 
 mod tests {
-    use super::BatchedMerkleProof;
     use ministark::merkle::MerkleTreeConfig;
     use ministark::utils::SerdeOutput;
     use sandstorm_claims::sharp::SolidityVerifierMaskedHashFn;
-    use sha2::digest::Output;
     use sha2::Digest;
     use sha3::Keccak256;
 
