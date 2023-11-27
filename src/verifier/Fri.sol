@@ -20,7 +20,7 @@ import "../MemoryMap.sol";
 import "./MemoryAccessUtils.sol";
 import "./FriLayer.sol";
 import "./HornerEvaluator.sol";
-import "forge-std/console.sol";
+// import "forge-std/console.sol";
 
 /*
   This contract computes and verifies all the FRI layer, one by one. The final layer is verified
@@ -56,14 +56,14 @@ contract Fri is MemoryMap, MemoryAccessUtils, HornerEvaluator, FriLayer {
       See FriLayer for the descriptions of the FRI context and FRI queue.
     */
     function friVerifyLayers(uint256[] memory ctx) internal view virtual {
-        console.log("made it into friVerifyLayers");
+        // console.log("made it into friVerifyLayers");
         uint256 friCtx = getPtr(ctx, MM_FRI_CTX);
         require(
             MAX_SUPPORTED_FRI_STEP_SIZE == FRI_MAX_STEP_SIZE,
             "MAX_STEP_SIZE is inconsistent in MemoryMap.sol and FriLayer.sol"
         );
         initFriGroups(friCtx);
-        console.log("initialized Fri groups");
+        // console.log("initialized Fri groups");
         uint256 channelPtr = getChannelPtr(ctx);
         uint256 merkleQueuePtr = getMerkleQueuePtr(ctx);
 

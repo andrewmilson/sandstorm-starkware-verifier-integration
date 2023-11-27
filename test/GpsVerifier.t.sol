@@ -152,8 +152,8 @@ contract StarkNetVerifierTest is Test {
         // ProofData proofData = new ProofData();
         AutoGenProofData proofData = new AutoGenProofData();
         uint256 cairoVerifierId = proofData.cairoVerifierId();
-        console.logUint(proofData.cairoVerifierId());
-        console.log(address(bootloaderProgram));
+        // console.logUint(proofData.cairoVerifierId());
+        // console.log(address(bootloaderProgram));
 
         // register merkle statements
         // 1. base trace
@@ -181,7 +181,7 @@ contract StarkNetVerifierTest is Test {
         // register fri layer statements
         FriDataLayer[] memory friDataLayers = proofData.getFriDataLayers();
         for (uint i = 0; i < friDataLayers.length; i++) {
-            console.log("verifying fri layer", i);
+            // console.log("verifying fri layer", i);
             FriDataLayer friDataLayer = friDataLayers[i];
             friStatementContract.verifyFRI(
                 friDataLayer.getProof(),

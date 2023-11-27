@@ -16,7 +16,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "forge-std/console.sol";
+// import "forge-std/console.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
 import "./PublicMemoryOffsets.sol";
@@ -257,17 +257,17 @@ contract CpuVerifier is
 
         // uint256 nPages = publicInput[24];
         // // uint256 publicInputSizeForHash = getOffsetPageProd(0, nPages);
-        console.log("num pages", nPages);
-        console.log("pub mem offset");
-        console.log(getOffsetPageProd(0, nPages));
+        // console.log("num pages", nPages);
+        // console.log("pub mem offset");
+        // console.log(getOffsetPageProd(0, nPages));
 
-        console.log("pub input first", publicInput[0]);
+        // console.log("pub input first", publicInput[0]);
 
         for (uint i = 0; i < getOffsetPageProd(0, nPages); i++) {
-            console.log(publicInput[i]);
-            console.log("yo");
+            // console.log(publicInput[i]);
+            // console.log("yo");
         }
-        console.log("pub input first", publicInput[0]);
+        // console.log("pub input first", publicInput[0]);
 
         assembly {
             publicInputHash := keccak256(
@@ -385,7 +385,7 @@ contract CpuVerifier is
     */
     function verifyMemoryPageFacts(uint256[] memory ctx) private view {
         uint256 nPublicMemoryPages = ctx[MM_N_PUBLIC_MEM_PAGES];
-        console.log("nPublicMemoryPages: ", nPublicMemoryPages);
+        // console.log("nPublicMemoryPages: ", nPublicMemoryPages);
 
         for (uint256 page = 0; page < nPublicMemoryPages; page++) {
             // Fetch page values from the public input (hash, product and size).
@@ -420,14 +420,14 @@ contract CpuVerifier is
                 }
             }
 
-            console.log(
-                "interaction element: z=",
-                ctx[MM_INTERACTION_ELEMENTS]
-            );
-            console.log(
-                "interaction element: alpha=",
-                ctx[MM_INTERACTION_ELEMENTS + 1]
-            );
+            // console.log(
+            //     "interaction element: z=",
+            //     ctx[MM_INTERACTION_ELEMENTS]
+            // );
+            // console.log(
+            //     "interaction element: alpha=",
+            //     ctx[MM_INTERACTION_ELEMENTS + 1]
+            // );
 
             // Verify that a corresponding fact is registered attesting to the consistency of the page
             // information with z and alpha.
@@ -446,7 +446,7 @@ contract CpuVerifier is
                 )
             );
 
-            console.logBytes32(factHash);
+            // console.logBytes32(factHash);
 
             require( // NOLINT: calls-loop.
                 memoryPageFactRegistry.isValid(factHash),
@@ -473,7 +473,7 @@ contract CpuVerifier is
         ctx[MM_RC16__PERM__INTERACTION_ELM] = ctx[MM_INTERACTION_ELEMENTS + 2];
         {
             uint256 public_memory_prod = computePublicMemoryQuotient(ctx);
-            console.log("public memory prod ood: ", public_memory_prod);
+            // console.log("public memory prod ood: ", public_memory_prod);
             ctx[
                 MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD
             ] = public_memory_prod;
@@ -504,14 +504,14 @@ contract CpuVerifier is
             compositionFromTraceValue := mload(p)
         }
 
-        console.log(
-            "1st cmoposition trace val",
-            ctx[MM_COMPOSITION_OODS_VALUES]
-        );
-        console.log(
-            "2nd cmoposition trace val",
-            ctx[MM_COMPOSITION_OODS_VALUES + 1]
-        );
+        // console.log(
+        //     "1st cmoposition trace val",
+        //     ctx[MM_COMPOSITION_OODS_VALUES]
+        // );
+        // console.log(
+        //     "2nd cmoposition trace val",
+        //     ctx[MM_COMPOSITION_OODS_VALUES + 1]
+        // );
 
         uint256 claimedComposition = fadd(
             ctx[MM_COMPOSITION_OODS_VALUES],

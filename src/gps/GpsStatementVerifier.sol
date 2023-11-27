@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "forge-std/console.sol";
+// import "forge-std/console.sol";
 import "./CairoBootloaderProgram.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
@@ -122,9 +122,9 @@ contract GpsStatementVerifier is
             // Each page has a page info and a cumulative product.
             // There is no 'page address' in the page info for page 0, but this 'free' slot is
             // used to store the number of pages.
-            console.log("n_pages:", nPages);
-            console.log("expected_len:", nPages * (PAGE_INFO_SIZE + 1));
-            console.log("actual_len:", publicMemoryPages.length);
+            // console.log("n_pages:", nPages);
+            // console.log("expected_len:", nPages * (PAGE_INFO_SIZE + 1));
+            // console.log("actual_len:", publicMemoryPages.length);
             require(
                 publicMemoryPages.length == nPages * (PAGE_INFO_SIZE + 1),
                 "Invalid publicMemoryPages length."
@@ -217,7 +217,7 @@ contract GpsStatementVerifier is
             1 +
             2 *
             nTasks);
-        console.log("public memory length:", publicMemoryLength);
+        // console.log("public memory length:", publicMemoryLength);
         uint256[] memory publicMemory = new uint256[](
             MEMORY_PAIR_SIZE * publicMemoryLength
         );
@@ -377,7 +377,7 @@ contract GpsStatementVerifier is
         bytes32 factHash;
         (factHash, memoryHash, prod) = memoryPageFactRegistry
             .registerRegularMemoryPage(publicMemory, z, alpha, K_MODULUS);
-        console.log("FACT HASSSSSHHSSHSHSH");
-        console.logBytes32(factHash);
+        // console.log("FACT HASSSSSHHSSHSHSH");
+        // console.logBytes32(factHash);
     }
 }

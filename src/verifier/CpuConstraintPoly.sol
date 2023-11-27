@@ -17,7 +17,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "forge-std/console.sol";
+// import "forge-std/console.sol";
 
 contract CpuConstraintPoly {
     // The Memory map during the execution of this contract is as follows:

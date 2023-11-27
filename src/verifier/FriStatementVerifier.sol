@@ -21,7 +21,7 @@ import "./MemoryAccessUtils.sol";
 import "./FriStatementContract.sol";
 import "./HornerEvaluator.sol";
 import "./VerifierChannel.sol";
-import "forge-std/console.sol";
+// import "forge-std/console.sol";
 
 /*
   This contract verifies all the FRI layer, one by one, using the FriStatementContract.
@@ -94,7 +94,7 @@ abstract contract FriStatementVerifier is
       have been registered in the FriStatementContract.
     */
     function friVerifyLayers(uint256[] memory ctx) internal view virtual {
-        console.log("doing a friVerifyLayers");
+        // console.log("doing a friVerifyLayers");
         uint256 channelPtr = getChannelPtr(ctx);
         uint256 nQueries = ctx[MM_N_UNIQUE_QUERIES];
 
@@ -117,18 +117,18 @@ abstract contract FriStatementVerifier is
             inputLayerHash := keccak256(friQueue, mul(nQueries, 0x60))
         }
 
-        console.log("friQueue[0]:", ctx[MM_FRI_QUEUE + 0]);
-        console.log("friQueue[1]:", ctx[MM_FRI_QUEUE + 1]);
-        console.log("friQueue[2]:", ctx[MM_FRI_QUEUE + 2]);
-        console.log("keckakk(friQueue)", inputLayerHash);
+        // console.log("friQueue[0]:", ctx[MM_FRI_QUEUE + 0]);
+        // console.log("friQueue[1]:", ctx[MM_FRI_QUEUE + 1]);
+        // console.log("friQueue[2]:", ctx[MM_FRI_QUEUE + 2]);
+        // console.log("keckakk(friQueue)", inputLayerHash);
 
         uint256[] memory friStepSizes = getFriStepSizes(ctx);
         uint256 nFriInnerLayers = friStepSizes.length - 1;
         uint256 friStep = 1;
         uint256 sumOfStepSizes = friStepSizes[1];
-        console.log("sum of fri step siszes:", sumOfStepSizes);
+        // console.log("sum of fri step siszes:", sumOfStepSizes);
         uint256[5] memory dataToHash;
-        console.log("num fri inner layers", nFriInnerLayers);
+        // console.log("num fri inner layers", nFriInnerLayers);
         while (friStep < nFriInnerLayers) {
             uint256 outputLayerHash = uint256(readBytes(channelPtr, true));
             // console.log("output layer hash", outputLayerHash);
@@ -155,7 +155,7 @@ abstract contract FriStatementVerifier is
             sumOfStepSizes += friStepSizes[friStep];
         }
 
-        console.log("the final hurdle");
+        // console.log("the final hurdle");
 
         dataToHash[0] = ctx[MM_FRI_EVAL_POINTS + friStep];
         dataToHash[1] = friStepSizes[friStep];
@@ -165,11 +165,11 @@ abstract contract FriStatementVerifier is
         );
         dataToHash[4] = ctx[MM_FRI_COMMITMENTS + friStep - 1];
 
-        console.log("(((evalPoint: ", dataToHash[0]);
-        console.log("(((friStepSize: ", dataToHash[1]);
-        console.log("(((inputHash: ", dataToHash[2]);
-        console.log("(((outputHash: ", dataToHash[3]);
-        console.log("(((root: ", dataToHash[4]);
+        // console.log("(((evalPoint: ", dataToHash[0]);
+        // console.log("(((friStepSize: ", dataToHash[1]);
+        // console.log("(((inputHash: ", dataToHash[2]);
+        // console.log("(((outputHash: ", dataToHash[3]);
+        // console.log("(((root: ", dataToHash[4]);
 
         require(
             friStatementContract.isValid(
