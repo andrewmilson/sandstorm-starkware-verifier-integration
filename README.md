@@ -56,4 +56,18 @@ cairo-run --program_input ./bootloader_inputs.json --program bootloader_compiled
     prove --air-private-input air-private-input.json \
           --output bootloader-proof.bin
 ``` -->
+## Test
+To test it on a testnet like Sepolia,
+- First upload all your contracts to [Remix](https://remix.ethereum.org/)
+  
+  <img width="1470" alt="image" src="https://github.com/andrewmilson/sandstorm-starkware-verifier-integration/assets/44467788/21a42f13-246d-4220-a490-1f2f3b08ba80">
+- Then compile your required solidity file with the required compiler version
+
+  <img width="367" alt="image" src="https://github.com/andrewmilson/sandstorm-starkware-verifier-integration/assets/44467788/a3ebe738-4fb7-472f-b852-570b810bf05f">
+- Deploy using your injected provider on your required chain
+
+  <img width="358" alt="image" src="https://github.com/andrewmilson/sandstorm-starkware-verifier-integration/assets/44467788/05acaf71-98e6-4d12-a3d2-e7f114a45d02">
+- On deployment, you'll get the address of your contract for you to interact with it
+
+  
 
