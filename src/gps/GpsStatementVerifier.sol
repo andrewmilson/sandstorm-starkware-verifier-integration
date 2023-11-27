@@ -366,9 +366,9 @@ contract GpsStatementVerifier is
             "Not all Cairo public inputs were written."
         );
 
-        for (uint i = 0; i < publicMemory.length; i++) {
-            console.log("mem: ", publicMemory[i]);
-        }
+        // for (uint i = 0; i < publicMemory.length; i++) {
+        //     console.log("mem: ", publicMemory[i]);
+        // }
 
         // require(true == false);
 

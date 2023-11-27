@@ -5,12 +5,32 @@
         {
             "index": 0,
             "x": "0x0",
-            "y": "0x706bd57414b57145b118dd7b92e0d1f040e1a6b6987b842ffb08135699a5ae4"
+            "y": "0x469bdcc971b6464953910073805b28b3895dd8f0cc1b7c8e2d94c97c1fc0631"
         },
         {
             "index": 1,
-            "x": "0x3bf6a6baa7dad79b6ec242e70a2524309ae0c108c280943859a8b61562cb167",
-            "y": "0x1"
+            "x": "0x1042f1b9ba8a939b56b7589f26b4c105c0c3a526cbc2d0311ac1ef4423f39c8",
+            "y": "0x62888e05610cef8b7d4c7c82cccd72bd5252797835da99a6a567d87a9373dab"
+        },
+        {
+            "index": 2,
+            "x": "0x72b9ce9fa44a05d5f248ea49560a1f410ea14ee36e54ae4f6389e0b76a1f892",
+            "y": "0x6ccac58240b515191c7153e33c894eaeff62275d55bf6da652211f3cb055c1f"
+        },
+        {
+            "index": 3,
+            "x": "0x14fda93f1f5f38e2eecc575a7ae22aa5d9e5fe213724353313a673dc9012aad",
+            "y": "0x375a25bbf06d6de58d341bd13c5a95d872eaf2db228d97968b5ae90a9cea705"
+        },
+        {
+            "index": 4,
+            "x": "0x48b9981caa185737772f73ff77b3c3cdda1acbcd0e628a806c408b31710a90d",
+            "y": "0x3e7c9bec4594e4f1521bf2f4cb282d5c05231367a02adc17ad39a4724c4094a"
+        },
+        {
+            "index": 5,
+            "x": "0x72faee07a5ad9c3c4b94a2b5c60d1f2e235d1f271caa6888104b21612a8fda7",
+            "y": "0x5"
         }
     ],
     "range_check": [],

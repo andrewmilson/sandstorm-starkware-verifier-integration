@@ -1,78 +1,54 @@
 #![feature(slice_as_chunks)]
 
-use std::collections::{BTreeSet, VecDeque};
+use std::collections::BTreeSet;
 use std::iter::zip;
-use std::str::FromStr;
-use std::{fmt::Display, fs::File, path::Path};
-
-mod batched_merkle;
-
-use ark_ff::{PrimeField, MontFp, batch_inversion};
+use std::{fmt::Display, fs::File};
+use sandstorm_layouts::CairoAirConfig;
 use ark_poly::{Radix2EvaluationDomain, EvaluationDomain};
 use ark_serialize::CanonicalDeserialize;
-use ministark::fri::get_query_values;
-use ministark::fri::fold_positions;
-use ministark::hash::ElementHashFn;
-use batched_merkle::{BatchedMerkleProof, MerkleProofsVariant};
-use ministark::fri::{FriProof, LayerProof};
-use ministark::merkle::{MerkleTreeConfig, HashedLeafConfig, MerkleTree, MatrixMerkleTree};
+use ministark::Proof;
+use ministark::channel::VerifierChannelArtifacts;
+use ministark::fri::{get_query_values, LayerProof, fold_positions};
 use ministark::utils::SerdeOutput;
 use ministark_gpu::fields::p3618502788666131213697322783095070105623107215331596699973092056135872020481::ark::Fp;
-use ministark::{Proof, merkle::MerkleProof};
 use ark_ff::Field;
-use ministark::air::AirConfig as _;
+use ministark::stark::Stark;
 use ministark_gpu::utils::bit_reverse_index;
 use num_bigint::BigUint;
 use ruint::{aliases::U256, uint};
-use sandstorm_claims::sharp::merkle::{MerkleTreeVariantProof, MerkleTreeVariant, HASH_MASK, mask_bytes};
-use sandstorm_claims::sharp::utils::to_montgomery;
-use sandstorm_claims::sharp::utils::from_montgomery;
-use sandstorm_binary::{CompiledProgram, AirPublicInput};
-use sandstorm_claims::sharp;
+use sandstorm::claims::starknet::EthVerifierClaim;
+use sandstorm::input::CairoAuxInput;
+use sandstorm_binary::{AirPublicInput, CompiledProgram, MemoryEntry};
+use sandstorm_crypto::hash::keccak::{MaskedKeccak256HashFn, CanonicalKeccak256HashFn};
+use sandstorm_crypto::merkle::{LeafVariantMerkleTree, LeafVariantMerkleTreeProof};
+use sandstorm_crypto::utils::to_montgomery;
 use sha2::Digest;
-use sha2::digest::Output;
-use ark_ff::FftField;
 use sha3::Keccak256;
-use sandstorm_claims::sharp::input::CairoAuxInput;
-use sandstorm_claims::sharp::verifier::SharpMetadata;
-use ministark::stark::Stark;
-use sandstorm_layouts::starknet::{AirConfig, ExecutionTrace};
 use std::io::Write;
-use sandstorm_claims::sharp::StarknetSolidityProof;
-use sandstorm_claims::sharp::StarknetSolidityClaim;
-use sandstorm_claims::sharp::SolidityVerifierMaskedHashFn;
 
-use crate::batched_merkle::partition_proofs;
-
-// const PROOF_BYTES: &[u8] = include_bytes!("../stark-proof.bin");
-// const PROGRAM_BYTES: &[u8] = include_bytes!("../cairo-program.json");
 const AIR_PUBLIC_INPUT_BYTES: &[u8] = include_bytes!("../air-public-input.json");
 const PROOF_BYTES: &[u8] = include_bytes!("../bootloader-proof.bin");
 const PROGRAM_BYTES: &[u8] = include_bytes!("../bootloader_compiled.json");
 
-type SharpClaim = StarknetSolidityClaim;
-type SharpProof = StarknetSolidityProof;
+type SharpClaim = EthVerifierClaim;
+type SharpProof = Proof<EthVerifierClaim>;
 
 fn fri_io_hash<const N: usize>(
     domain_size: usize,
     indices: &[usize],
-    layer: &LayerProof<Fp, SerdeOutput<Keccak256>, MerkleTreeVariant<SolidityVerifierMaskedHashFn>>,
-    layer_idx: usize,
+    layer: &LayerProof<
+        Fp,
+        SerdeOutput<Keccak256>,
+        LeafVariantMerkleTree<MaskedKeccak256HashFn<20>>,
+    >,
 ) -> SerdeOutput<Keccak256> {
-    // let domain_offset = Fp::GENERATOR * domain_generator.pow([bit_rev_position as u64]);
-    // let domain = Radix2EvaluationDomain::<Fp>::new_coset(domain_size, Fp::GENERATOR.pow([N as u64])).unwrap();
-    // let domain = Radix2EvaluationDomain::<Fp>::new_coset(
-    //     domain_size,
-    //     Fp::GENERATOR.pow([N.pow(layer_idx as u32) as u64]),
-    // )
-    // .unwrap();
     let domain = Radix2EvaluationDomain::<Fp>::new(domain_size).unwrap();
     let (chunks, _) = layer.flattenend_rows.as_chunks::<N>();
     let evals = get_query_values(chunks, indices, &fold_positions(indices, N));
     let mut hasher = Keccak256::new();
     for (index, eval) in zip(indices, evals) {
         hasher.update(U256::from(index + domain_size).to_be_bytes::<32>());
-        hasher.update(U256::from(to_montgomery(eval)).to_be_bytes::<32>());
+        hasher.update(to_montgomery(eval).to_be_bytes::<32>());
         hasher.update(
             U256::from(BigUint::from(
                 domain
@@ -87,60 +63,20 @@ fn fri_io_hash<const N: usize>(
 }
 
 fn main() -> std::io::Result<()> {
-    // println!("Yo: {}", Fp::get_root_of_unity(1 << 4).unwrap());
-    // let domain_size = 4194304 * 4;
-    // let idx = 57283;
-    // // let offset =
-    // //     MontFp!("2273851973667592803299288314787150809866023989440273296559131652943422927077");
-    // let domain = Radix2EvaluationDomain::<Fp>::new(domain_size).unwrap();
-    // let my_int = BigUint::from_str(
-    //     "3337027627671558814734894389506401992120543545898370420159417711873149678686",
-    // )
-    // .unwrap();
-    // let element_to_find =
-    //     MontFp!("3337027627671558814734894389506401992120543545898370420159417711873149678686");
-    // // let element_to_find = from_montgomery(my_int);
-    // println!("generator: {}", Fp::GENERATOR);
-    // let mut elements = domain.elements().collect::<Vec<_>>();
-    // batch_inversion(&mut elements);
-    // println!(
-    //     "ELEM: {:?}",
-    //     elements.iter().find(|v| **v == element_to_find)
-    // );
-    // println!(
-    //     "e: {}",
-    //     to_montgomery(
-    //         domain
-    //             .element(bit_reverse_index(domain_size, idx))
-    //             .inverse()
-    //             .unwrap()
-    //     )
-    // );
-    // Ok(())
-
     let air_public_input: AirPublicInput<Fp> =
         serde_json::from_reader(AIR_PUBLIC_INPUT_BYTES).unwrap();
     let program: CompiledProgram<Fp> = serde_json::from_reader(PROGRAM_BYTES).unwrap();
     let claim = SharpClaim::new(program, air_public_input);
     let proof: SharpProof = Proof::deserialize_compressed(PROOF_BYTES).unwrap();
-    let metadata = claim.verify_sharp(proof.clone()).unwrap();
-
-    // gen_fri_statement(&metadata, &proof);
+    let verification_artifacts = claim.verify(proof.clone(), 80).unwrap();
 
     let mut output = File::create("./test/AutoGenProofData.sol")?;
-    write!(output, "{}", gen_proof_data_class(claim, metadata, proof))
+    write!(
+        output,
+        "{}",
+        gen_proof_data_class(claim, verification_artifacts, proof)
+    )
 }
-
-// fn gen_fri_statement(metadata: &SharpMetadata, proof: &SharpProof) {
-//     // todo!()
-//     match proof.options.fri_folding_factor {
-//         2 => gen_fri_statement_generic::<2>(metadata, proof),
-//         4 => gen_fri_statement_generic::<4>(metadata, proof),
-//         8 => gen_fri_statement_generic::<8>(metadata, proof),
-//         16 => gen_fri_statement_generic::<16>(metadata, proof),
-//         _ => unreachable!(),
-//     }
-// }
 
 struct FriLayerStatement {
     fri_queue: Vec<U256>,
@@ -154,35 +90,27 @@ struct FriLayerStatement {
 fn gen_fri_layer_statement<const N: usize>(
     positions: &[usize],
     evaluations: &[Fp],
-    layer: &LayerProof<Fp, SerdeOutput<Keccak256>, MerkleTreeVariant<SolidityVerifierMaskedHashFn>>,
-    layer_idx: usize,
+    layer: &LayerProof<
+        Fp,
+        SerdeOutput<Keccak256>,
+        LeafVariantMerkleTree<MaskedKeccak256HashFn<20>>,
+    >,
     domain_size: usize,
     alpha: Fp,
 ) -> FriLayerStatement {
     let mut fri_queue = Vec::new();
-    // let lde_domain = Radix2EvaluationDomain::<Fp>::new_coset(
-    //     domain_size,
-    //     Fp::GENERATOR.pow([N.pow(layer_idx as u32) as u64]),
-    // )
-    // .unwrap();
     let lde_domain = Radix2EvaluationDomain::<Fp>::new(domain_size).unwrap();
 
     for (pos, deep_eval) in zip(positions, evaluations) {
         // each fri_queue input (query_index, FRI_value, FRI_inverse_point)
         fri_queue.push(U256::from(*pos + domain_size));
-        fri_queue.push(U256::from(to_montgomery(*deep_eval)));
+        fri_queue.push(to_montgomery(*deep_eval));
         fri_queue.push(U256::from(BigUint::from(
             lde_domain
                 .element(bit_reverse_index(domain_size, *pos))
                 .inverse()
                 .unwrap(),
         )));
-        // fri_queue.push(U256::from(BigUint::from(
-        //     lde_domain
-        //         .element(bit_reverse_index(domain_size, *pos))
-        //         .inverse()
-        //         .unwrap(),
-        // )));
     }
 
     // add delimiter cell
@@ -190,76 +118,30 @@ fn gen_fri_layer_statement<const N: usize>(
 
     let mut fri_proof = Vec::new();
 
-    // let mut merkle_positions = Vec::new();
     let cosets = layer.flattenend_rows.chunks(N);
-    // assert_eq!(positions.len(), cosets.len());
     println!("pos len: {}", positions.len());
-    println!("folded pos len: {}", fold_positions(&positions, N).len());
+    println!("folded pos len: {}", fold_positions(positions, N).len());
     println!("cosets len: {}", cosets.len());
-    println!("proofs len: {}", layer.proofs.len());
-    // let mut position_queue = VecDeque::from_iter(zip(zip(positions, cosets), &layer.proofs));
-    // while let Some(((position, coset), proof)) = position_queue.pop_front() {
-    //     // let merkle_position = position / N;
-    //     // merkle_positions.push((merkle_position, proof.clone()));
-    //     // let coset_idx = merkle_position * N;
-    //     let coset_idx = (position / N) * N;
-    //     'inner: for (i, v) in coset.iter().enumerate() {
-    //         if let Some(&((next_position, _), _)) = position_queue.front() {
-    //             // don't bother adding to proof since value can be obtained from fri queue
-    //             if coset_idx + i == *next_position {
-    //                 // println!("made it here, {}", merkle_position + domain_size / N);
-    //                 // position_queue.pop_front();
-    //                 continue 'inner;
-    //             }
-    //         }
-    //         if i == position % N {
-    //             // println!("also made it here!!!");
-    //             continue;
-    //         }
-    //         fri_proof.push(U256::from(to_montgomery(*v)))
-    //     }
-    // }
 
-    let posSet = BTreeSet::from_iter(positions);
+    let pos_set = BTreeSet::from_iter(positions);
     for (pos, coset) in zip(fold_positions(positions, N), cosets) {
         for (i, v) in coset.iter().enumerate() {
-            if !posSet.contains(&(pos * N + i)) {
-                fri_proof.push(U256::from(to_montgomery(*v)))
+            if !pos_set.contains(&(pos * N + i)) {
+                fri_proof.push(to_montgomery(*v))
             }
         }
     }
 
-    let merkle_positions = zip(fold_positions(positions, N), layer.proofs.clone());
-
-    for (index, proof) in merkle_positions.clone() {
-        if layer_idx == 3 {
-            // println!("merkleIndex[] {}", index + domain_size / N);
-
-            let leaf = match &proof {
-                MerkleTreeVariantProof::Hashed(p) => U256::try_from_be_slice(&*p.leaf()).unwrap(),
-                _ => unreachable!(),
-            };
-
-            println!("merkleHash[] {}", leaf);
-        }
-    }
-
-    let (indices, proofs): (Vec<_>, Vec<_>) = merkle_positions.unzip();
-    let fri_merkle_proofs = partition_proofs(&proofs);
+    let indices = fold_positions(positions, N);
     let fri_merkle_vals =
-        get_merkle_statement_values(&layer.commitment, &fri_merkle_proofs, &indices);
+        get_merkle_statement_values(&layer.commitment, layer.merkle_proof.clone(), &indices);
     fri_proof.extend(fri_merkle_vals.view);
 
-    // for position in positions {
-    //     let mut position_queue = VecDeque::from_iter(positions);
-    //     let coset_idx = (position / N) * N;
-    // }
     let root = U256::try_from_be_slice(&layer.commitment[0..32]).unwrap();
     println!("fri root is: {}", root);
 
     let input_hash =
-        U256::try_from_be_slice(&fri_io_hash::<N>(domain_size, positions, layer, layer_idx)[0..32])
-            .unwrap();
+        U256::try_from_be_slice(&fri_io_hash::<N>(domain_size, positions, layer)[0..32]).unwrap();
 
     FriLayerStatement {
         fri_queue,
@@ -271,23 +153,34 @@ fn gen_fri_layer_statement<const N: usize>(
     }
 }
 
-fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: SharpProof) -> String {
+fn gen_proof_data_class(
+    claim: SharpClaim,
+    metadata: VerifierChannelArtifacts<Fp>,
+    proof: SharpProof,
+) -> String {
     let mut res = String::new();
 
-    println!(
-        "YOO public memory product: {}",
-        metadata.public_memory_quotient
-    );
+    type A = <SharpClaim as Stark>::AirConfig;
+    let (public_memory_z, public_memory_alpha) =
+        A::public_memory_challenges(&metadata.air_challenges);
+    let public_memory_quotient = A::public_memory_quotient(&metadata.air_hints);
+    let mut public_memory_product = Fp::ONE;
+    for &MemoryEntry { address, value } in &claim.public_input().public_memory {
+        let address = Fp::from(address);
+        public_memory_product *= public_memory_z - (address + value * public_memory_alpha);
+    }
+
+    println!("YOO public memory product: {}", public_memory_quotient);
 
     let public_inputs = claim.get_public_inputs();
     let sharp_public_input = CairoAuxInput(&public_inputs);
 
-    let public_memory_product: BigUint = metadata.public_memory_product.into();
-    let public_memory_z: BigUint = metadata.public_memory_z.into();
-    let public_memory_alpha: BigUint = metadata.public_memory_alpha.into();
+    let public_memory_product: BigUint = public_memory_product.into();
+    let public_memory_z: BigUint = public_memory_z.into();
+    let public_memory_alpha: BigUint = public_memory_alpha.into();
 
     let cairo_aux_elements = [
-        sharp_public_input.public_input_elements(),
+        sharp_public_input.public_input_elements::<CanonicalKeccak256HashFn>(),
         vec![
             U256::from(public_memory_product),
             U256::from(public_memory_z),
@@ -306,12 +199,11 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
         U256::try_from_be_slice(&proof.composition_trace_commitment).unwrap(),
     ]);
     for eval in &proof.execution_trace_ood_evals {
-        // proof_elements.push(U256::from(BigUint::from(eval)));
-        proof_elements.push(U256::from(to_montgomery(*eval)));
+        proof_elements.push(to_montgomery(*eval));
     }
     for eval in &proof.composition_trace_ood_evals {
         println!("ood eval: {}", eval);
-        proof_elements.push(U256::from(to_montgomery(*eval)));
+        proof_elements.push(to_montgomery(*eval));
     }
     for layer in &proof.fri_proof.layers {
         let commitment = U256::try_from_be_slice(&layer.commitment).unwrap();
@@ -329,34 +221,24 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
 
     remainder_bytes.extend(proof.pow_nonce.to_be_bytes());
 
-    // let shifted_nonce = U256::from(proof.pow_nonce) << (256 - 64);
-    // proof_elements.push(shifted_nonce);
-
-    // let base_trace_rows = proof
-    //     .trace_queries
-    //     .base_trace_values
-    //     .chunks(AirConfig::NUM_BASE_COLUMNS)
-    //     .collect::<Vec<_>>();
-
     println!(
         "first item: {}",
-        U256::from(to_montgomery(proof.trace_queries.base_trace_values[0]))
+        to_montgomery(proof.trace_queries.base_trace_values[0])
     );
 
     for val in &proof.trace_queries.base_trace_values {
-        remainder_bytes.extend(U256::from(to_montgomery(*val)).to_be_bytes::<32>());
+        remainder_bytes.extend(to_montgomery(*val).to_be_bytes::<32>());
     }
     for val in &proof.trace_queries.extension_trace_values {
-        remainder_bytes.extend(U256::from(to_montgomery(*val)).to_be_bytes::<32>());
+        remainder_bytes.extend(to_montgomery(*val).to_be_bytes::<32>());
     }
     for val in &proof.trace_queries.composition_trace_values {
-        remainder_bytes.extend(U256::from(to_montgomery(*val)).to_be_bytes::<32>());
+        remainder_bytes.extend(to_montgomery(*val).to_be_bytes::<32>());
     }
 
-    let base_trace_merkle_proofs = partition_proofs(&proof.trace_queries.base_trace_proofs);
     let base_trace_merkle_statement = get_merkle_statement_values(
         &proof.base_trace_commitment,
-        &base_trace_merkle_proofs,
+        proof.trace_queries.base_trace_proof.clone(),
         &metadata.query_positions,
     );
     let base_trace_merkle_view = fmt_array_items(&base_trace_merkle_statement.view);
@@ -369,11 +251,9 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     let base_trace_merkle_height = base_trace_merkle_statement.height;
     let base_trace_merkle_root = base_trace_merkle_statement.root;
 
-    let extension_trace_merkle_proofs =
-        partition_proofs(&proof.trace_queries.extension_trace_proofs);
     let extension_trace_merkle_statement = get_merkle_statement_values(
         proof.extension_trace_commitment.as_ref().as_ref().unwrap(),
-        &extension_trace_merkle_proofs,
+        proof.trace_queries.extension_trace_proof.clone().unwrap(),
         &metadata.query_positions,
     );
     let extension_trace_merkle_view = fmt_array_items(&extension_trace_merkle_statement.view);
@@ -386,11 +266,9 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     let extension_trace_merkle_height = extension_trace_merkle_statement.height;
     let extension_trace_merkle_root = extension_trace_merkle_statement.root;
 
-    let composition_trace_merkle_proofs =
-        partition_proofs(&proof.trace_queries.composition_trace_proofs);
     let composition_trace_merkle_statement = get_merkle_statement_values(
         &proof.composition_trace_commitment,
-        &composition_trace_merkle_proofs,
+        proof.trace_queries.composition_trace_proof.clone(),
         &metadata.query_positions,
     );
     let composition_trace_merkle_view = fmt_array_items(&composition_trace_merkle_statement.view);
@@ -403,17 +281,7 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
     let composition_trace_merkle_height = composition_trace_merkle_statement.height;
     let composition_trace_merkle_root = composition_trace_merkle_statement.root;
 
-    let lde_domain_size = proof.trace_len * proof.options.lde_blowup_factor as usize;
     let fri_folding_factor = proof.options.fri_folding_factor as usize;
-    let queried_vals = get_query_values(
-        proof.fri_proof.layers[0].flattenend_rows.as_chunks::<8>().0,
-        &metadata.query_positions,
-        &fold_positions(&metadata.query_positions, fri_folding_factor),
-    );
-    // for val in  {
-    //     println!("val is: {val}");
-    // }
-    assert_eq!(queried_vals, metadata.deep_evaluations);
     let query_positions = &metadata.query_positions;
     let fri_alphas = &metadata.fri_alphas;
     let fri_statements = match fri_folding_factor {
@@ -428,30 +296,6 @@ fn gen_proof_data_class(claim: SharpClaim, metadata: SharpMetadata, proof: Sharp
         "last statement root: {}",
         fri_statements.last().unwrap().root
     );
-
-    // let first_fri_layer_statement = gen_fri_layer_statement::<Keccak256>(
-    //     &metadata.query_positions,
-    //     &metadata.deep_evaluations,
-    //     &proof.fri_proof.layers[0],
-    //     lde_domain_size,
-    //     metadata.fri_alphas[0],
-    //     fri_folding_factor,
-    // );
-    // println!("DDDD folding factor {fri_folding_factor}");
-    // println!("DDDD fri alpha {}", metadata.fri_alphas[0]);
-    // let first_fri_statements = print_fri_statements(&[first_fri_layer_statement]);
-
-    // uint256 public logFriFoldingFactor = {log_fri_folding_factor};
-    // uint256 public firstFriEvalPoint = {first_fri_eval_point};
-    // uint256[] public friFirstLayerQueue = {first_fri_queue};
-    // uint256[] public friFirstLayerProof = {first_fri_proof};
-    // uint256 public friFirstCommitment = {first_fri_commitment};
-
-    // TODO docs
-    // println!("1st item {}", fri_statements[1].fri_queue[0]);
-    // println!("2nd item {}", fri_statements[1].fri_queue[1]);
-    // println!("3rd item {}", fri_statements[1].fri_queue[2]);
-    // println!("first queue hash {}", fri_statements[1].input_hash);
 
     println!("1st item {}", fri_statements[0].fri_queue[0]);
     println!("2nd item {}", fri_statements[0].fri_queue[1]);
@@ -618,41 +462,39 @@ struct BatchMerkleProofValues {
     root: U256,
     view: Vec<U256>,
     initials: Vec<(usize, U256)>,
-    height: usize,
+    height: u32,
 }
 
 fn get_merkle_statement_values(
     root: &SerdeOutput<Keccak256>,
-    proofs: &MerkleProofsVariant<SolidityVerifierMaskedHashFn>,
+    proof: LeafVariantMerkleTreeProof<MaskedKeccak256HashFn<20>>,
     indices: &[usize],
 ) -> BatchMerkleProofValues {
     let nodes: Vec<SerdeOutput<Keccak256>>;
-    let height: usize;
+    let height: u32;
     let mut leaf_siblings = Vec::new();
     let mut initial_leaves = Vec::new();
-    match proofs {
-        MerkleProofsVariant::Hashed(proofs) => {
-            let batch_proof = BatchedMerkleProof::from_proofs(proofs, indices);
-            height = batch_proof.height;
-            nodes = batch_proof.nodes;
-            for leaf in batch_proof.initial_leaves {
+    match proof {
+        LeafVariantMerkleTreeProof::Hashed(proof) => {
+            height = proof.height;
+            nodes = proof.nodes;
+            for leaf in proof.initial_leaves {
                 initial_leaves.push(U256::try_from_be_slice(&leaf).unwrap())
             }
-            for sibling in batch_proof.sibling_leaves {
+            for sibling in proof.sibling_leaves {
                 leaf_siblings.push(U256::try_from_be_slice(&sibling).unwrap())
             }
         }
-        MerkleProofsVariant::Unhashed(proofs) => {
-            let batch_proof = BatchedMerkleProof::from_proofs(proofs, indices);
-            height = batch_proof.height;
-            nodes = batch_proof.nodes;
-            for leaf in batch_proof.initial_leaves {
+        LeafVariantMerkleTreeProof::Unhashed(proof) => {
+            height = proof.height;
+            nodes = proof.nodes;
+            for leaf in proof.initial_leaves {
                 let num = to_montgomery(leaf);
-                initial_leaves.push(U256::from(num))
+                initial_leaves.push(num)
             }
-            for sibling in batch_proof.sibling_leaves {
+            for sibling in proof.sibling_leaves {
                 let num = to_montgomery(sibling);
-                leaf_siblings.push(U256::from(num))
+                leaf_siblings.push(num)
             }
         }
     }
@@ -699,15 +541,12 @@ fn gen_fri_statements<const N: usize>(
     let mut res = Vec::new();
     let num_layers = proof.fri_proof.layers.len();
     println!("num layers: {num_layers}");
-    for i in 0..num_layers {
-        let layer = &proof.fri_proof.layers[i];
-        let alpha = fri_alphas[i];
+    for (layer, &alpha) in zip(&proof.fri_proof.layers, fri_alphas) {
         let folded_positions = fold_positions(&positions, N);
         let (chunks, _) = layer.flattenend_rows.as_chunks::<N>();
         let evals = get_query_values(chunks, &positions, &folded_positions);
-        println!("=====DOING STATEMENT: {i}");
         let fri_layer_statement =
-            gen_fri_layer_statement::<N>(&positions, &evals, layer, i, domain_size, alpha);
+            gen_fri_layer_statement::<N>(&positions, &evals, layer, domain_size, alpha);
         res.push(fri_layer_statement);
         positions = folded_positions;
         domain_size /= N;
