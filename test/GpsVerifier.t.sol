@@ -192,6 +192,10 @@ contract StarkNetVerifierTest is Test {
             );
         }
 
+        uint256 publicInputNonce = ;
+        uint256 publicInputHashLow = ;
+        uint256 publicInputHashHigh = ;
+
         gpsStatementVerifier.verifyProofAndRegister(
             proofData.getProofParams(),
             proofData.getProof(),

@@ -82,7 +82,10 @@ contract GpsStatementVerifier is
         uint256[] calldata proof,
         uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
-        uint256 cairoVerifierId
+        uint256 cairoVerifierId,
+        uint256 publicInputNonce,
+        uint256 publicInputHashLow,
+        uint256 publicInputHashHigh,
     ) external {
         require(
             cairoVerifierId < cairoVerifierContractAddresses.length,
@@ -138,7 +141,10 @@ contract GpsStatementVerifier is
             ) = registerPublicMemoryMainPage(
                     taskMetadata,
                     cairoAuxInput,
-                    selectedBuiltins
+                    selectedBuiltins,
+                    publicInputNonce,
+                    publicInputHashLow,
+                    publicInputHashHigh,
                 );
 
             // require(false == true);
@@ -202,6 +208,9 @@ contract GpsStatementVerifier is
         uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
         uint256 selectedBuiltins
+        uint256 publicInputNonce,
+        uint256 publicInputHashLow,
+        uint256 publicInputHashHigh,
     )
         private
         returns (uint256 publicMemoryLength, uint256 memoryHash, uint256 prod)
@@ -218,11 +227,13 @@ contract GpsStatementVerifier is
             N_MAIN_ARGS +
             N_MAIN_RETURN_VALUES +
             // Bootloader config size =
-            2 +
+            // 2 +
             // Number of tasks cell =
-            1 +
-            2 *
-            nTasks);
+            // 1 +
+            // 2 *
+            // nTasks
+            3
+            );
         console.log("public memory length:", publicMemoryLength);
         uint256[] memory publicMemory = new uint256[](
             MEMORY_PAIR_SIZE * publicMemoryLength
@@ -304,66 +315,74 @@ contract GpsStatementVerifier is
         // Program output.
         {
             {
-                uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
+                publicMemory[offset + 0] = publicInputNonce;
+                publicMemory[offset + 1] = publicInputHashLow;
+                publicMemory[offset + 2] = publicInputHashHigh;
+                offset += 3;
+
+                // uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
                 // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
                 // bootloader config (which is 2 words size).
-                publicMemory[offset + 0] = outputAddress;
-                publicMemory[offset + 1] = simpleBootloaderProgramHash_;
-                publicMemory[offset + 2] = outputAddress + 1;
-                publicMemory[offset + 3] = hashedSupportedCairoVerifiers_;
+                
+                // bootloader config
+                // publicMemory[offset + 0] = outputAddress;
+                // publicMemory[offset + 1] = simpleBootloaderProgramHash_;
+                // publicMemory[offset + 2] = outputAddress + 1;
+                // publicMemory[offset + 3] = hashedSupportedCairoVerifiers_;
+
                 // Force that memory[outputAddress + 2] = nTasks.
-                publicMemory[offset + 4] = outputAddress + 2;
-                publicMemory[offset + 5] = nTasks;
-                offset += 6;
-                outputAddress += 3;
+                // publicMemory[offset + 4] = outputAddress + 2;
+                // publicMemory[offset + 5] = nTasks;
+                // offset += 6;
+                // outputAddress += 3;
 
-                uint256[]
-                    calldata taskMetadataSlice = taskMetadata[METADATA_TASKS_OFFSET:];
-                for (uint256 task = 0; task < nTasks; task++) {
-                    uint256 outputSize = taskMetadataSlice[
-                        METADATA_OFFSET_TASK_OUTPUT_SIZE
-                    ];
+                // uint256[]
+                //     calldata taskMetadataSlice = taskMetadata[METADATA_TASKS_OFFSET:];
+                // for (uint256 task = 0; task < nTasks; task++) {
+                //     uint256 outputSize = taskMetadataSlice[
+                //         METADATA_OFFSET_TASK_OUTPUT_SIZE
+                //     ];
 
-                    // Ensure 'outputSize' is at least 2 and bounded from above as a sanity check
-                    // (the bound is somewhat arbitrary).
-                    require(
-                        2 <= outputSize && outputSize < 2 ** 30,
-                        "Invalid task output size."
-                    );
-                    uint256 programHash = taskMetadataSlice[
-                        METADATA_OFFSET_TASK_PROGRAM_HASH
-                    ];
-                    uint256 nTreePairs = taskMetadataSlice[
-                        METADATA_OFFSET_TASK_N_TREE_PAIRS
-                    ];
+                //     // Ensure 'outputSize' is at least 2 and bounded from above as a sanity check
+                //     // (the bound is somewhat arbitrary).
+                //     require(
+                //         2 <= outputSize && outputSize < 2 ** 30,
+                //         "Invalid task output size."
+                //     );
+                //     uint256 programHash = taskMetadataSlice[
+                //         METADATA_OFFSET_TASK_PROGRAM_HASH
+                //     ];
+                //     uint256 nTreePairs = taskMetadataSlice[
+                //         METADATA_OFFSET_TASK_N_TREE_PAIRS
+                //     ];
 
-                    // Ensure 'nTreePairs' is at least 1 and bounded from above as a sanity check
-                    // (the bound is somewhat arbitrary).
-                    require(
-                        1 <= nTreePairs && nTreePairs < 2 ** 20,
-                        "Invalid number of pairs in the Merkle tree structure."
-                    );
-                    // Force that memory[outputAddress] = outputSize.
-                    publicMemory[offset + 0] = outputAddress;
-                    publicMemory[offset + 1] = outputSize;
-                    // Force that memory[outputAddress + 1] = programHash.
-                    publicMemory[offset + 2] = outputAddress + 1;
-                    publicMemory[offset + 3] = programHash;
-                    offset += 4;
-                    outputAddress += outputSize;
-                    taskMetadataSlice = taskMetadataSlice[METADATA_TASK_HEADER_SIZE +
-                        2 *
-                        nTreePairs:];
-                }
-                require(
-                    taskMetadataSlice.length == 0,
-                    "Invalid length of taskMetadata."
-                );
+                //     // Ensure 'nTreePairs' is at least 1 and bounded from above as a sanity check
+                //     // (the bound is somewhat arbitrary).
+                //     require(
+                //         1 <= nTreePairs && nTreePairs < 2 ** 20,
+                //         "Invalid number of pairs in the Merkle tree structure."
+                //     );
+                //     // Force that memory[outputAddress] = outputSize.
+                //     publicMemory[offset + 0] = outputAddress;
+                //     publicMemory[offset + 1] = outputSize;
+                //     // Force that memory[outputAddress + 1] = programHash.
+                //     publicMemory[offset + 2] = outputAddress + 1;
+                //     publicMemory[offset + 3] = programHash;
+                //     offset += 4;
+                //     outputAddress += outputSize;
+                //     taskMetadataSlice = taskMetadataSlice[METADATA_TASK_HEADER_SIZE +
+                //         2 *
+                //         nTreePairs:];
+                // }
+                // require(
+                //     taskMetadataSlice.length == 0,
+                //     "Invalid length of taskMetadata."
+                // );
 
-                require(
-                    cairoAuxInput[OFFSET_OUTPUT_STOP_PTR] == outputAddress,
-                    "Inconsistent program output length."
-                );
+                // require(
+                //     cairoAuxInput[OFFSET_OUTPUT_STOP_PTR] == outputAddress,
+                //     "Inconsistent program output length."
+                // );
             }
         }
 
