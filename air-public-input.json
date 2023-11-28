@@ -9,36 +9,36 @@
             "stop_ptr": 5
         },
         "execution": {
-            "begin_addr": 1768,
-            "stop_ptr": 14150
+            "begin_addr": 1769,
+            "stop_ptr": 14153
         },
         "output": {
-            "begin_addr": 14150,
-            "stop_ptr": 14153
+            "begin_addr": 14153,
+            "stop_ptr": 14156
         },
         "pedersen": {
-            "begin_addr": 14153,
-            "stop_ptr": 14153
+            "begin_addr": 14156,
+            "stop_ptr": 14156
         },
         "range_check": {
-            "begin_addr": 38729,
-            "stop_ptr": 39069
+            "begin_addr": 38732,
+            "stop_ptr": 39072
         },
         "ecdsa": {
-            "begin_addr": 55113,
-            "stop_ptr": 55113
+            "begin_addr": 55116,
+            "stop_ptr": 55116
         },
         "bitwise": {
-            "begin_addr": 55369,
-            "stop_ptr": 71309
+            "begin_addr": 55372,
+            "stop_ptr": 71312
         },
         "ec_op": {
-            "begin_addr": 75849,
-            "stop_ptr": 75849
+            "begin_addr": 75852,
+            "stop_ptr": 75852
         },
         "poseidon": {
-            "begin_addr": 77641,
-            "stop_ptr": 77641
+            "begin_addr": 77644,
+            "stop_ptr": 77644
         }
     },
     "public_memory": [
@@ -49,7 +49,7 @@
         },
         {
             "address": 2,
-            "value": "0x7",
+            "value": "0x8",
             "page": 0
         },
         {
@@ -8749,47 +8749,47 @@
         },
         {
             "address": 1742,
-            "value": "0x400380007ff78000",
+            "value": "0x400380007ff68000",
             "page": 0
         },
         {
             "address": 1743,
-            "value": "0x400380017ff78001",
+            "value": "0x400380017ff68001",
             "page": 0
         },
         {
             "address": 1744,
-            "value": "0x400380027ff78002",
+            "value": "0x400380027ff68002",
             "page": 0
         },
         {
             "address": 1745,
-            "value": "0x480a7ff77fff8000",
+            "value": "0x480a7ff67fff8000",
             "page": 0
         },
         {
             "address": 1746,
-            "value": "0x480a7ff87fff8000",
+            "value": "0x480a7ff77fff8000",
             "page": 0
         },
         {
             "address": 1747,
-            "value": "0x480a7ff97fff8000",
+            "value": "0x480a7ff87fff8000",
             "page": 0
         },
         {
             "address": 1748,
-            "value": "0x480a7ffa7fff8000",
+            "value": "0x480a7ff97fff8000",
             "page": 0
         },
         {
             "address": 1749,
-            "value": "0x480a7ffb7fff8000",
+            "value": "0x480a7ffa7fff8000",
             "page": 0
         },
         {
             "address": 1750,
-            "value": "0x480a7ffc7fff8000",
+            "value": "0x480a7ffb7fff8000",
             "page": 0
         },
         {
@@ -8799,17 +8799,17 @@
         },
         {
             "address": 1752,
-            "value": "0x480280007ff78000",
+            "value": "0x480280007ff68000",
             "page": 0
         },
         {
             "address": 1753,
-            "value": "0x480280027ff78000",
+            "value": "0x480280027ff68000",
             "page": 0
         },
         {
             "address": 1754,
-            "value": "0x480280017ff78000",
+            "value": "0x480280017ff68000",
             "page": 0
         },
         {
@@ -8859,27 +8859,27 @@
         },
         {
             "address": 1764,
-            "value": "0x48127ff97fff8000",
+            "value": "0x480a7ffc7fff8000",
             "page": 0
         },
         {
             "address": 1765,
-            "value": "0x208b7fff7fff7ffe",
+            "value": "0x48127ff87fff8000",
             "page": 0
         },
         {
             "address": 1766,
-            "value": "0x6e8",
+            "value": "0x208b7fff7fff7ffe",
             "page": 0
         },
         {
             "address": 1767,
-            "value": "0x0",
+            "value": "0x6e9",
             "page": 0
         },
         {
             "address": 1768,
-            "value": "0x3746",
+            "value": "0x0",
             "page": 0
         },
         {
@@ -8889,76 +8889,91 @@
         },
         {
             "address": 1770,
-            "value": "0x9749",
+            "value": "0x374c",
             "page": 0
         },
         {
             "address": 1771,
-            "value": "0xd749",
+            "value": "0x974c",
             "page": 0
         },
         {
             "address": 1772,
-            "value": "0xd849",
+            "value": "0xd74c",
             "page": 0
         },
         {
             "address": 1773,
-            "value": "0x12849",
+            "value": "0xd84c",
             "page": 0
         },
         {
             "address": 1774,
-            "value": "0x12f49",
+            "value": "0x1284c",
             "page": 0
         },
         {
-            "address": 14143,
-            "value": "0x3749",
+            "address": 1775,
+            "value": "0x0",
             "page": 0
         },
         {
-            "address": 14144,
-            "value": "0x3749",
+            "address": 1776,
+            "value": "0x12f4c",
             "page": 0
         },
         {
             "address": 14145,
-            "value": "0x989d",
+            "value": "0x374c",
             "page": 0
         },
         {
             "address": 14146,
-            "value": "0xd749",
+            "value": "0x374c",
             "page": 0
         },
         {
             "address": 14147,
-            "value": "0x1168d",
+            "value": "0x98a0",
             "page": 0
         },
         {
             "address": 14148,
-            "value": "0x12849",
+            "value": "0xd74c",
             "page": 0
         },
         {
             "address": 14149,
-            "value": "0x12f49",
+            "value": "0x11690",
             "page": 0
         },
         {
             "address": 14150,
-            "value": "0x1",
+            "value": "0x1284c",
             "page": 0
         },
         {
             "address": 14151,
-            "value": "0xf1f23c1ed6d94232b00896e6b82d7020",
+            "value": "0x0",
             "page": 0
         },
         {
             "address": 14152,
+            "value": "0x12f4c",
+            "page": 0
+        },
+        {
+            "address": 14153,
+            "value": "0x1",
+            "page": 0
+        },
+        {
+            "address": 14154,
+            "value": "0xf1f23c1ed6d94232b00896e6b82d7020",
+            "page": 0
+        },
+        {
+            "address": 14155,
             "value": "0x71d32ad8bfb708c2a5089b0cfd3724f5",
             "page": 0
         }
