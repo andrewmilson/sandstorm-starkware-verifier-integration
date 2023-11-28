@@ -116,6 +116,7 @@ contract GpsStatementVerifier is
             publicMemoryPages = (uint256[])(
                 cairoPublicInput[publicMemoryOffset:]
             );
+            console.log("public mem0: ", publicMemoryPages[0]);
             uint256 nPages = publicMemoryPages[0];
             require(nPages < 10000, "Invalid nPages.");
 
@@ -155,6 +156,10 @@ contract GpsStatementVerifier is
                 publicMemoryPages[PAGE_INFO_SIZE_OFFSET]
             );
             console.log("publicMemoryLength: ", publicMemoryLength);
+            console.log(
+                "publicMemoryLength_expected: ",
+                publicMemoryPages[PAGE_INFO_SIZE_OFFSET]
+            );
 
             require(
                 publicMemoryPages[PAGE_INFO_SIZE_OFFSET] == publicMemoryLength,
@@ -314,12 +319,13 @@ contract GpsStatementVerifier is
             {
                 uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
                 publicMemory[offset + 0] = outputAddress;
-                publicMemory[offset + 0] = publicMemoryData[0]; //publicInputNonce;
-                publicMemory[offset + 0] = outputAddress + 1; //publicInputNonce;
-                publicMemory[offset + 1] = publicMemoryData[1]; //publicInputHashLow;
-                publicMemory[offset + 2] = outputAddress + 2;
-                publicMemory[offset + 2] = publicMemoryData[2]; //publicInputHashHigh;
-                offset += 3;
+                publicMemory[offset + 1] = publicMemoryData[0]; //publicInputNonce;
+                publicMemory[offset + 2] = outputAddress + 1; //publicInputNonce;
+                publicMemory[offset + 3] = publicMemoryData[1]; //publicInputHashLow;
+                publicMemory[offset + 4] = outputAddress + 2;
+                publicMemory[offset + 5] = publicMemoryData[2]; //publicInputHashHigh;
+                offset += 6;
+                outputAddress += 3;
 
                 // // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
                 // bootloader config (which is 2 words size).
@@ -379,10 +385,10 @@ contract GpsStatementVerifier is
                 //     "Invalid length of taskMetadata."
                 // );
 
-                // require(
-                //     cairoAuxInput[OFFSET_OUTPUT_STOP_PTR] == outputAddress,
-                //     "Inconsistent program output length."
-                // );
+                require(
+                    cairoAuxInput[OFFSET_OUTPUT_STOP_PTR] == outputAddress,
+                    "Inconsistent program output length."
+                );
             }
         }
 
