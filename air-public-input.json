@@ -9,36 +9,36 @@
             "stop_ptr": 5
         },
         "execution": {
-            "begin_addr": 1752,
-            "stop_ptr": 14114
+            "begin_addr": 1768,
+            "stop_ptr": 14150
         },
         "output": {
-            "begin_addr": 14114,
-            "stop_ptr": 14117
+            "begin_addr": 14150,
+            "stop_ptr": 14153
         },
         "pedersen": {
-            "begin_addr": 14117,
-            "stop_ptr": 14117
+            "begin_addr": 14153,
+            "stop_ptr": 14153
         },
         "range_check": {
-            "begin_addr": 38693,
-            "stop_ptr": 39033
+            "begin_addr": 38729,
+            "stop_ptr": 39069
         },
         "ecdsa": {
-            "begin_addr": 55077,
-            "stop_ptr": 55077
+            "begin_addr": 55113,
+            "stop_ptr": 55113
         },
         "bitwise": {
-            "begin_addr": 55333,
-            "stop_ptr": 71273
+            "begin_addr": 55369,
+            "stop_ptr": 71309
         },
         "ec_op": {
-            "begin_addr": 75813,
-            "stop_ptr": 75813
+            "begin_addr": 75849,
+            "stop_ptr": 75849
         },
         "poseidon": {
-            "begin_addr": 77605,
-            "stop_ptr": 77605
+            "begin_addr": 77641,
+            "stop_ptr": 77641
         }
     },
     "public_memory": [
@@ -49,7 +49,7 @@
         },
         {
             "address": 2,
-            "value": "0x3",
+            "value": "0x7",
             "page": 0
         },
         {
@@ -59,7 +59,7 @@
         },
         {
             "address": 4,
-            "value": "0x6c2",
+            "value": "0x6c9",
             "page": 0
         },
         {
@@ -8424,7 +8424,7 @@
         },
         {
             "address": 1677,
-            "value": "0x480a7ff97fff8000",
+            "value": "0x480a7ff67fff8000",
             "page": 0
         },
         {
@@ -8479,7 +8479,7 @@
         },
         {
             "address": 1688,
-            "value": "0x480a7ffa7fff8000",
+            "value": "0x480a7ff87fff8000",
             "page": 0
         },
         {
@@ -8699,146 +8699,266 @@
         },
         {
             "address": 1732,
-            "value": "0x208b7fff7fff7ffe",
+            "value": "0x480a7ff47fff8000",
             "page": 0
         },
         {
             "address": 1733,
-            "value": "0x40780017fff7fff",
+            "value": "0x480a7ff57fff8000",
             "page": 0
         },
         {
             "address": 1734,
-            "value": "0x3",
+            "value": "0x48127ffc7fff8000",
             "page": 0
         },
         {
             "address": 1735,
-            "value": "0x400380007ffb8000",
+            "value": "0x480a7ff77fff8000",
             "page": 0
         },
         {
             "address": 1736,
-            "value": "0x400380017ffb8001",
+            "value": "0x48127ffb7fff8000",
             "page": 0
         },
         {
             "address": 1737,
-            "value": "0x400380027ffb8002",
+            "value": "0x480a7ff97fff8000",
             "page": 0
         },
         {
             "address": 1738,
-            "value": "0x480a7ffc7fff8000",
+            "value": "0x480a7ffa7fff8000",
             "page": 0
         },
         {
             "address": 1739,
-            "value": "0x480a7ffd7fff8000",
-            "page": 0
-        },
-        {
-            "address": 1740,
-            "value": "0x480280007ffb8000",
-            "page": 0
-        },
-        {
-            "address": 1741,
-            "value": "0x480280027ffb8000",
-            "page": 0
-        },
-        {
-            "address": 1742,
-            "value": "0x480280017ffb8000",
-            "page": 0
-        },
-        {
-            "address": 1743,
-            "value": "0x1104800180018000",
-            "page": 0
-        },
-        {
-            "address": 1744,
-            "value": "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffba",
-            "page": 0
-        },
-        {
-            "address": 1745,
-            "value": "0x482680017ffb8000",
-            "page": 0
-        },
-        {
-            "address": 1746,
-            "value": "0x3",
-            "page": 0
-        },
-        {
-            "address": 1747,
-            "value": "0x48127ffd7fff8000",
-            "page": 0
-        },
-        {
-            "address": 1748,
-            "value": "0x48127ffd7fff8000",
-            "page": 0
-        },
-        {
-            "address": 1749,
             "value": "0x208b7fff7fff7ffe",
             "page": 0
         },
         {
+            "address": 1740,
+            "value": "0x40780017fff7fff",
+            "page": 0
+        },
+        {
+            "address": 1741,
+            "value": "0x3",
+            "page": 0
+        },
+        {
+            "address": 1742,
+            "value": "0x400380007ff78000",
+            "page": 0
+        },
+        {
+            "address": 1743,
+            "value": "0x400380017ff78001",
+            "page": 0
+        },
+        {
+            "address": 1744,
+            "value": "0x400380027ff78002",
+            "page": 0
+        },
+        {
+            "address": 1745,
+            "value": "0x480a7ff77fff8000",
+            "page": 0
+        },
+        {
+            "address": 1746,
+            "value": "0x480a7ff87fff8000",
+            "page": 0
+        },
+        {
+            "address": 1747,
+            "value": "0x480a7ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1748,
+            "value": "0x480a7ffa7fff8000",
+            "page": 0
+        },
+        {
+            "address": 1749,
+            "value": "0x480a7ffb7fff8000",
+            "page": 0
+        },
+        {
             "address": 1750,
-            "value": "0x6d8",
+            "value": "0x480a7ffc7fff8000",
             "page": 0
         },
         {
             "address": 1751,
-            "value": "0x0",
+            "value": "0x480a7ffd7fff8000",
             "page": 0
         },
         {
             "address": 1752,
-            "value": "0x3722",
+            "value": "0x480280007ff78000",
             "page": 0
         },
         {
             "address": 1753,
-            "value": "0x9725",
+            "value": "0x480280027ff78000",
             "page": 0
         },
         {
             "address": 1754,
-            "value": "0xd825",
+            "value": "0x480280017ff78000",
             "page": 0
         },
         {
-            "address": 14111,
-            "value": "0x3725",
+            "address": 1755,
+            "value": "0x1104800180018000",
             "page": 0
         },
         {
-            "address": 14112,
-            "value": "0x9879",
+            "address": 1756,
+            "value": "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffae",
             "page": 0
         },
         {
-            "address": 14113,
-            "value": "0x11669",
+            "address": 1757,
+            "value": "0x482480017ff98000",
             "page": 0
         },
         {
-            "address": 14114,
+            "address": 1758,
+            "value": "0x3",
+            "page": 0
+        },
+        {
+            "address": 1759,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1760,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1761,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1762,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1763,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1764,
+            "value": "0x48127ff97fff8000",
+            "page": 0
+        },
+        {
+            "address": 1765,
+            "value": "0x208b7fff7fff7ffe",
+            "page": 0
+        },
+        {
+            "address": 1766,
+            "value": "0x6e8",
+            "page": 0
+        },
+        {
+            "address": 1767,
+            "value": "0x0",
+            "page": 0
+        },
+        {
+            "address": 1768,
+            "value": "0x3746",
+            "page": 0
+        },
+        {
+            "address": 1769,
+            "value": "0x3749",
+            "page": 0
+        },
+        {
+            "address": 1770,
+            "value": "0x9749",
+            "page": 0
+        },
+        {
+            "address": 1771,
+            "value": "0xd749",
+            "page": 0
+        },
+        {
+            "address": 1772,
+            "value": "0xd849",
+            "page": 0
+        },
+        {
+            "address": 1773,
+            "value": "0x12849",
+            "page": 0
+        },
+        {
+            "address": 1774,
+            "value": "0x12f49",
+            "page": 0
+        },
+        {
+            "address": 14143,
+            "value": "0x3749",
+            "page": 0
+        },
+        {
+            "address": 14144,
+            "value": "0x3749",
+            "page": 0
+        },
+        {
+            "address": 14145,
+            "value": "0x989d",
+            "page": 0
+        },
+        {
+            "address": 14146,
+            "value": "0xd749",
+            "page": 0
+        },
+        {
+            "address": 14147,
+            "value": "0x1168d",
+            "page": 0
+        },
+        {
+            "address": 14148,
+            "value": "0x12849",
+            "page": 0
+        },
+        {
+            "address": 14149,
+            "value": "0x12f49",
+            "page": 0
+        },
+        {
+            "address": 14150,
             "value": "0x1",
             "page": 0
         },
         {
-            "address": 14115,
+            "address": 14151,
             "value": "0xf1f23c1ed6d94232b00896e6b82d7020",
             "page": 0
         },
         {
-            "address": 14116,
+            "address": 14152,
             "value": "0x71d32ad8bfb708c2a5089b0cfd3724f5",
             "page": 0
         }

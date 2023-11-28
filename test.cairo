@@ -1,6 +1,7 @@
-%builtins output range_check bitwise
+%builtins output pedersen range_check ecdsa bitwise ec_op poseidon
 
 from starkware.cairo.common.alloc import alloc
+from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.cairo_keccak.keccak import cairo_keccak_uint256s_bigend, finalize_keccak
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 from starkware.cairo.common.cairo_secp.ec import EcPoint
@@ -8,7 +9,7 @@ from starkware.cairo.common.cairo_secp.bigint import BigInt3, uint256_to_bigint
 from starkware.cairo.common.cairo_secp.signature import public_key_point_to_eth_address
 from starkware.cairo.common.uint256 import Uint256, felt_to_uint256
 
-func proof{range_check_ptr, bitwise_ptr: BitwiseBuiltin*}(nonce: felt, hash: Uint256) -> () {
+func proof{output_ptr: felt*,pedersen_ptr: HashBuiltin*,range_check_ptr,ecdsa_ptr,bitwise_ptr: BitwiseBuiltin*,ec_op_ptr,poseidon_ptr}(nonce: felt, hash: Uint256) -> () {
     alloc_locals;
     let (keccak_ptr: felt*) = alloc();
     local keccak_ptr_start: felt* = keccak_ptr;
@@ -45,7 +46,7 @@ func proof{range_check_ptr, bitwise_ptr: BitwiseBuiltin*}(nonce: felt, hash: Uin
     return ();
 }
 
-func main{output_ptr: felt*, range_check_ptr, bitwise_ptr: BitwiseBuiltin*}() -> () {
+func main{output_ptr: felt*,pedersen_ptr: HashBuiltin*,range_check_ptr,ecdsa_ptr,bitwise_ptr: BitwiseBuiltin*,ec_op_ptr,poseidon_ptr}() -> () {
     alloc_locals;
     local nonce;
     %{ ids.nonce = program_input['nonce'] %}
