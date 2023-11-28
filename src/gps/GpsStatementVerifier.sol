@@ -146,6 +146,12 @@ contract GpsStatementVerifier is
             // Make sure the first page is valid.
             // If the size or the hash are invalid, it may indicate that there is a mismatch
             // between the prover and the verifier on the bootloader program or bootloader config.
+            console.log(
+                "publicMemoryPages[PAGE_INFO_SIZE_OFFSET]: ",
+                publicMemoryPages[PAGE_INFO_SIZE_OFFSET]
+            );
+            console.log("publicMemoryLength: ", publicMemoryLength);
+
             require(
                 publicMemoryPages[PAGE_INFO_SIZE_OFFSET] == publicMemoryLength,
                 "Invalid size for memory page 0."

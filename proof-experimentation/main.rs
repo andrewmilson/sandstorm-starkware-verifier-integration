@@ -65,6 +65,7 @@ fn fri_io_hash<const N: usize>(
 fn main() -> std::io::Result<()> {
     let air_public_input: AirPublicInput<Fp> =
         serde_json::from_reader(AIR_PUBLIC_INPUT_BYTES).unwrap();
+    println!("public input: {:?}", air_public_input);
     let program: CompiledProgram<Fp> = serde_json::from_reader(PROGRAM_BYTES).unwrap();
     let claim = SharpClaim::new(program, air_public_input);
     let proof: SharpProof = Proof::deserialize_compressed(PROOF_BYTES).unwrap();
@@ -174,6 +175,7 @@ fn gen_proof_data_class(
 
     let public_inputs = claim.get_public_inputs();
     let sharp_public_input = CairoAuxInput(&public_inputs);
+    println!("sharp public input: {:?}", sharp_public_input.public_input_elements::<CanonicalKeccak256HashFn>());
 
     let public_memory_product: BigUint = public_memory_product.into();
     let public_memory_z: BigUint = public_memory_z.into();
