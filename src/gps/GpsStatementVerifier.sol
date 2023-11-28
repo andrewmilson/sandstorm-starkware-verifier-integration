@@ -312,12 +312,15 @@ contract GpsStatementVerifier is
         // Program output.
         {
             {
+                uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
+                publicMemory[offset + 0] = outputAddress;
                 publicMemory[offset + 0] = publicMemoryData[0]; //publicInputNonce;
+                publicMemory[offset + 0] = outputAddress + 1; //publicInputNonce;
                 publicMemory[offset + 1] = publicMemoryData[1]; //publicInputHashLow;
+                publicMemory[offset + 2] = outputAddress + 2;
                 publicMemory[offset + 2] = publicMemoryData[2]; //publicInputHashHigh;
                 offset += 3;
 
-                // uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
                 // // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
                 // bootloader config (which is 2 words size).
 
