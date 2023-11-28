@@ -207,7 +207,7 @@ contract StarkNetVerifierTest is Test {
         gpsStatementVerifier.verifyProofAndRegister(
             proofData.getProofParams(),
             proofData.getProof(),
-            proofData.getTaskMetadata(),
+            // proofData.getTaskMetadata(),
             proofData.getCairoAuxInput(),
             proofData.cairoVerifierId(),
             publicMemoryData

@@ -80,7 +80,7 @@ contract GpsStatementVerifier is
     function verifyProofAndRegister(
         uint256[] calldata proofParams,
         uint256[] calldata proof,
-        uint256[] calldata taskMetadata,
+        // uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
         uint256 cairoVerifierId,
         uint256[] calldata publicMemoryData
@@ -137,7 +137,6 @@ contract GpsStatementVerifier is
                 uint256 memoryHash,
                 uint256 prod
             ) = registerPublicMemoryMainPage(
-                    taskMetadata,
                     cairoAuxInput,
                     selectedBuiltins,
                     publicMemoryData
@@ -178,8 +177,10 @@ contract GpsStatementVerifier is
             (uint256[])(cairoPublicInput)
         );
 
+        // uint256[] memory taskMetadata = [0];
         registerGpsFacts(
-            taskMetadata,
+            // [0], // taskMetadata,
+            // taskMetadata, // taskMetadata,
             publicMemoryPages,
             cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR]
         );
@@ -204,7 +205,7 @@ contract GpsStatementVerifier is
       Guarantees: taskMetadata is consistent with the public memory, with some sanity checks.
     */
     function registerPublicMemoryMainPage(
-        uint256[] calldata taskMetadata,
+        // uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
         uint256 selectedBuiltins,
         uint256[] calldata publicMemoryData
@@ -213,7 +214,7 @@ contract GpsStatementVerifier is
         returns (uint256 publicMemoryLength, uint256 memoryHash, uint256 prod)
     {
         // TODO: find out what task metadata is for
-        uint256 nTasks = taskMetadata[0];
+        uint256 nTasks = 0; //taskMetadata[0];
         // Ensure 'nTasks' is bounded as a sanity check (the bound is somewhat arbitrary).
         require(nTasks < 2 ** 30, "Invalid number of tasks.");
 
