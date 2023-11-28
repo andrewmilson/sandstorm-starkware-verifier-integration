@@ -83,9 +83,7 @@ contract GpsStatementVerifier is
         uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
         uint256 cairoVerifierId,
-        uint256 publicInputNonce,
-        uint256 publicInputHashLow,
-        uint256 publicInputHashHigh,
+        uint256[] calldata publicMemoryData
     ) external {
         require(
             cairoVerifierId < cairoVerifierContractAddresses.length,
@@ -142,9 +140,10 @@ contract GpsStatementVerifier is
                     taskMetadata,
                     cairoAuxInput,
                     selectedBuiltins,
-                    publicInputNonce,
-                    publicInputHashLow,
-                    publicInputHashHigh,
+                    publicMemoryData
+                    // publicInputNonce,
+                    // publicInputHashLow,
+                    // publicInputHashHigh
                 );
 
             // require(false == true);
@@ -207,10 +206,8 @@ contract GpsStatementVerifier is
     function registerPublicMemoryMainPage(
         uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
-        uint256 selectedBuiltins
-        uint256 publicInputNonce,
-        uint256 publicInputHashLow,
-        uint256 publicInputHashHigh,
+        uint256 selectedBuiltins,
+        uint256[] calldata publicMemoryData
     )
         private
         returns (uint256 publicMemoryLength, uint256 memoryHash, uint256 prod)
@@ -232,8 +229,7 @@ contract GpsStatementVerifier is
             // 1 +
             // 2 *
             // nTasks
-            3
-            );
+            3);
         console.log("public memory length:", publicMemoryLength);
         uint256[] memory publicMemory = new uint256[](
             MEMORY_PAIR_SIZE * publicMemoryLength
@@ -315,15 +311,15 @@ contract GpsStatementVerifier is
         // Program output.
         {
             {
-                publicMemory[offset + 0] = publicInputNonce;
-                publicMemory[offset + 1] = publicInputHashLow;
-                publicMemory[offset + 2] = publicInputHashHigh;
+                publicMemory[offset + 0] = publicMemoryData[0]; //publicInputNonce;
+                publicMemory[offset + 1] = publicMemoryData[1]; //publicInputHashLow;
+                publicMemory[offset + 2] = publicMemoryData[2]; //publicInputHashHigh;
                 offset += 3;
 
                 // uint256 outputAddress = cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR];
-                // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
+                // // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
                 // bootloader config (which is 2 words size).
-                
+
                 // bootloader config
                 // publicMemory[offset + 0] = outputAddress;
                 // publicMemory[offset + 1] = simpleBootloaderProgramHash_;

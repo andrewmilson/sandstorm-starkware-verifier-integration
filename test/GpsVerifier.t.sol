@@ -58,6 +58,8 @@ contract StarkNetVerifierTest is Test {
     uint256 simpleBootloaderProgramHash;
     GpsStatementVerifier public gpsStatementVerifier;
 
+    uint256[] public publicMemoryData;
+
     function setUp() public {
         // TODO: find out what the MemoryPageFactRegistry does
         memoryPageFactRegistry = new MemoryPageFactRegistry();
@@ -192,16 +194,23 @@ contract StarkNetVerifierTest is Test {
             );
         }
 
-        uint256 publicInputNonce = ;
-        uint256 publicInputHashLow = ;
-        uint256 publicInputHashHigh = ;
+        uint256 publicInputNonce = 1;
+        uint256 publicInputHashLow = 2;
+        uint256 publicInputHashHigh = 3;
+
+        publicMemoryData = [
+            publicInputNonce,
+            publicInputHashLow,
+            publicInputHashHigh
+        ];
 
         gpsStatementVerifier.verifyProofAndRegister(
             proofData.getProofParams(),
             proofData.getProof(),
             proofData.getTaskMetadata(),
             proofData.getCairoAuxInput(),
-            proofData.cairoVerifierId()
+            proofData.cairoVerifierId(),
+            publicMemoryData
         );
     }
 
