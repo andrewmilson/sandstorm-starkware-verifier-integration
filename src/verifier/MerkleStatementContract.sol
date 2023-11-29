@@ -41,10 +41,6 @@ contract MerkleStatementContract is MerkleVerifier, FactRegistry {
         );
         require(initialMerkleQueue.length % 2 == 0, "ODD_MERKLE_QUEUE_SIZE");
 
-        for (uint i = 0; i < 5; i++) {
-            console.log("Merkle queue", i, initialMerkleQueue[i]);
-        }
-
         uint256 merkleQueuePtr;
         uint256 channelPtr;
         uint256 nQueries;
@@ -127,9 +123,6 @@ contract MerkleStatementContract is MerkleVerifier, FactRegistry {
             dataToHashPtr := add(channelPtr, 0x20)
             factHash := keccak256(dataToHashPtr, add(mul(nQueries, 0x40), 0x20))
         }
-
-        console.log("merkle fact hash:");
-        console.logBytes32(factHash);
 
         registerFact(factHash);
     }

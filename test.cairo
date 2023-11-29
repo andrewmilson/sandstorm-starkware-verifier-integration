@@ -9,9 +9,9 @@ from starkware.cairo.common.cairo_secp.bigint import BigInt3, uint256_to_bigint
 from starkware.cairo.common.cairo_secp.signature import public_key_point_to_eth_address
 from starkware.cairo.common.uint256 import Uint256, felt_to_uint256
 
-func proof{output_ptr: felt*,pedersen_ptr: HashBuiltin*,range_check_ptr,ecdsa_ptr,bitwise_ptr: BitwiseBuiltin*,ec_op_ptr,keccak_ptr: felt*,poseidon_ptr}(nonce: felt, hash: Uint256) -> () {
+func proof{output_ptr: felt*,pedersen_ptr: HashBuiltin*,range_check_ptr,ecdsa_ptr,bitwise_ptr: BitwiseBuiltin*,ec_op_ptr,poseidon_ptr}(nonce: felt, hash: Uint256) -> () {
     alloc_locals;
-    // let (keccak_ptr: felt*) = alloc();
+    let (keccak_ptr: felt*) = alloc();
     local keccak_ptr_start: felt* = keccak_ptr;
 
     local x_high;

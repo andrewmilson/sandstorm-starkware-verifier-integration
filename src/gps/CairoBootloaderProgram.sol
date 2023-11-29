@@ -1781,4 +1781,3 @@ contract CairoBootloaderProgram is CairoBootloaderProgramSize {
         ];
     }
 }
-// ---------- End of auto-generated code. ----------

@@ -16,7 +16,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "forge-std/console.sol";
 import "./IMerkleVerifier.sol";
 
 contract MerkleVerifier is IMerkleVerifier {
@@ -57,13 +56,6 @@ contract MerkleVerifier is IMerkleVerifier {
         uint256 n
     ) internal view virtual override returns (bytes32 hash) {
         require(n <= MAX_N_MERKLE_VERIFIER_QUERIES, "TOO_MANY_MERKLE_QUERIES");
-
-        // channel[0] == merkle view == proofPtr
-        // what is a merkle view?
-        //
-
-        console.log("merkle root is");
-        console.logBytes32(root);
 
         assembly {
             // queuePtr + i * MERKLE_SLOT_SIZE_IN_BYTES gives the i'th index in the queue.

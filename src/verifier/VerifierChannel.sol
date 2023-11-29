@@ -17,7 +17,6 @@
 pragma solidity ^0.6.12;
 
 import "./Prng.sol";
-import "forge-std/console.sol";
 
 /*
   Implements the communication channel from the verifier to the prover in the non-interactive case
@@ -265,9 +264,6 @@ contract VerifierChannel is Prng {
 
             mstore(channelPtr, add(proofPtr, 0x8))
         }
-
-        console.log("prefix digest", prefixDigest);
-        console.log("proof of work digest", proofOfWorkDigest);
 
         uint256 proofOfWorkThreshold = uint256(1) << (256 - proofOfWorkBits);
         require(

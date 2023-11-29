@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 pragma solidity ^0.6.12;
 
-import "forge-std/console.sol";
 import "./CairoBootloaderProgram.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
@@ -80,7 +79,6 @@ contract GpsStatementVerifier is
     function verifyProofAndRegister(
         uint256[] calldata proofParams,
         uint256[] calldata proof,
-        // uint256[] calldata taskMetadata,
         uint256[] calldata cairoAuxInput,
         uint256 cairoVerifierId,
         uint256[] calldata publicMemoryData
@@ -116,7 +114,6 @@ contract GpsStatementVerifier is
             publicMemoryPages = (uint256[])(
                 cairoPublicInput[publicMemoryOffset:]
             );
-            console.log("public mem0: ", publicMemoryPages[0]);
             uint256 nPages = publicMemoryPages[0];
             require(nPages < 10000, "Invalid nPages.");
 
@@ -124,9 +121,6 @@ contract GpsStatementVerifier is
             // Each page has a page info and a cumulative product.
             // There is no 'page address' in the page info for page 0, but this 'free' slot is
             // used to store the number of pages.
-            console.log("n_pages:", nPages);
-            console.log("expected_len:", nPages * (PAGE_INFO_SIZE + 1));
-            console.log("actual_len:", publicMemoryPages.length);
             require(
                 publicMemoryPages.length == nPages * (PAGE_INFO_SIZE + 1),
                 "Invalid publicMemoryPages length."
@@ -141,25 +135,11 @@ contract GpsStatementVerifier is
                     cairoAuxInput,
                     selectedBuiltins,
                     publicMemoryData
-                    // publicInputNonce,
-                    // publicInputHashLow,
-                    // publicInputHashHigh
                 );
-
-            // require(false == true);
 
             // Make sure the first page is valid.
             // If the size or the hash are invalid, it may indicate that there is a mismatch
             // between the prover and the verifier on the bootloader program or bootloader config.
-            console.log(
-                "publicMemoryPages[PAGE_INFO_SIZE_OFFSET]: ",
-                publicMemoryPages[PAGE_INFO_SIZE_OFFSET]
-            );
-            console.log("publicMemoryLength: ", publicMemoryLength);
-            console.log(
-                "publicMemoryLength_expected: ",
-                publicMemoryPages[PAGE_INFO_SIZE_OFFSET]
-            );
 
             require(
                 publicMemoryPages[PAGE_INFO_SIZE_OFFSET] == publicMemoryLength,
@@ -182,10 +162,7 @@ contract GpsStatementVerifier is
             (uint256[])(cairoPublicInput)
         );
 
-        // uint256[] memory taskMetadata = [0];
         registerGpsFacts(
-            // [0], // taskMetadata,
-            // taskMetadata, // taskMetadata,
             publicMemoryPages,
             cairoAuxInput[OFFSET_OUTPUT_BEGIN_ADDR]
         );
@@ -229,14 +206,7 @@ contract GpsStatementVerifier is
             2 +
             N_MAIN_ARGS +
             N_MAIN_RETURN_VALUES +
-            // Bootloader config size =
-            // 2 +
-            // Number of tasks cell =
-            // 1 +
-            // 2 *
-            // nTasks
             3);
-        console.log("public memory length:", publicMemoryLength);
         uint256[] memory publicMemory = new uint256[](
             MEMORY_PAIR_SIZE * publicMemoryLength
         );
@@ -327,64 +297,6 @@ contract GpsStatementVerifier is
                 offset += 6;
                 outputAddress += 3;
 
-                // // Force that memory[outputAddress] and memory[outputAddress + 1] contain the
-                // bootloader config (which is 2 words size).
-
-                // bootloader config
-                // publicMemory[offset + 0] = outputAddress;
-                // publicMemory[offset + 1] = simpleBootloaderProgramHash_;
-                // publicMemory[offset + 2] = outputAddress + 1;
-                // publicMemory[offset + 3] = hashedSupportedCairoVerifiers_;
-
-                // Force that memory[outputAddress + 2] = nTasks.
-                // publicMemory[offset + 4] = outputAddress + 2;
-                // publicMemory[offset + 5] = nTasks;
-                // offset += 6;
-                // outputAddress += 3;
-
-                // uint256[]
-                //     calldata taskMetadataSlice = taskMetadata[METADATA_TASKS_OFFSET:];
-                // for (uint256 task = 0; task < nTasks; task++) {
-                //     uint256 outputSize = taskMetadataSlice[
-                //         METADATA_OFFSET_TASK_OUTPUT_SIZE
-                //     ];
-
-                //     // Ensure 'outputSize' is at least 2 and bounded from above as a sanity check
-                //     // (the bound is somewhat arbitrary).
-                //     require(
-                //         2 <= outputSize && outputSize < 2 ** 30,
-                //         "Invalid task output size."
-                //     );
-                //     uint256 programHash = taskMetadataSlice[
-                //         METADATA_OFFSET_TASK_PROGRAM_HASH
-                //     ];
-                //     uint256 nTreePairs = taskMetadataSlice[
-                //         METADATA_OFFSET_TASK_N_TREE_PAIRS
-                //     ];
-
-                //     // Ensure 'nTreePairs' is at least 1 and bounded from above as a sanity check
-                //     // (the bound is somewhat arbitrary).
-                //     require(
-                //         1 <= nTreePairs && nTreePairs < 2 ** 20,
-                //         "Invalid number of pairs in the Merkle tree structure."
-                //     );
-                //     // Force that memory[outputAddress] = outputSize.
-                //     publicMemory[offset + 0] = outputAddress;
-                //     publicMemory[offset + 1] = outputSize;
-                //     // Force that memory[outputAddress + 1] = programHash.
-                //     publicMemory[offset + 2] = outputAddress + 1;
-                //     publicMemory[offset + 3] = programHash;
-                //     offset += 4;
-                //     outputAddress += outputSize;
-                //     taskMetadataSlice = taskMetadataSlice[METADATA_TASK_HEADER_SIZE +
-                //         2 *
-                //         nTreePairs:];
-                // }
-                // require(
-                //     taskMetadataSlice.length == 0,
-                //     "Invalid length of taskMetadata."
-                // );
-
                 require(
                     cairoAuxInput[OFFSET_OUTPUT_STOP_PTR] == outputAddress,
                     "Inconsistent program output length."
@@ -397,18 +309,10 @@ contract GpsStatementVerifier is
             "Not all Cairo public inputs were written."
         );
 
-        // for (uint i = 0; i < publicMemory.length; i++) {
-        //     console.log("mem: ", publicMemory[i]);
-        // }
-
-        // require(true == false);
-
         uint256 z = cairoAuxInput[cairoAuxInput.length - 2];
         uint256 alpha = cairoAuxInput[cairoAuxInput.length - 1];
         bytes32 factHash;
         (factHash, memoryHash, prod) = memoryPageFactRegistry
             .registerRegularMemoryPage(publicMemory, z, alpha, K_MODULUS);
-        console.log("FACT HASSSSSHHSSHSHSH");
-        console.logBytes32(factHash);
     }
 }

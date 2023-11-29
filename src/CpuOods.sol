@@ -19,7 +19,6 @@ pragma solidity ^0.6.12;
 
 import "./MemoryMap.sol";
 import "./StarkParameters.sol";
-import "forge-std/console.sol";
 
 contract CpuOods is MemoryMap, StarkParameters {
     // For each query point we want to invert (2 + N_ROWS_IN_MASK) items:
@@ -64,8 +63,6 @@ contract CpuOods is MemoryMap, StarkParameters {
             2 * n_queries * BATCH_INVERSE_CHUNK
         );
         oodsPrepareInverses(ctx, batchInverseArray);
-
-        console.log("inside OODS YOYOYYOYOYOYO!");
 
         uint256 kMontgomeryRInv = PrimeFieldElement0.K_MONTGOMERY_R_INV;
 
@@ -7023,7 +7020,6 @@ contract CpuOods is MemoryMap, StarkParameters {
                 denominatorsPtr := add(denominatorsPtr, 0x1820)
             }
         }
-        console.log("First HHH eval inv:", firstEvalInv);
         assembly {
             let context := ctx
             return(/*friQueue*/ add(context, 0xdc0), 0x1200)

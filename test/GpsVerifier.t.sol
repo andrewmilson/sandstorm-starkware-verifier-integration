@@ -194,9 +194,9 @@ contract StarkNetVerifierTest is Test {
             );
         }
 
-        uint256 publicInputNonce = 1;
-        uint256 publicInputHashLow = 0xf1f23c1ed6d94232b00896e6b82d7020;
-        uint256 publicInputHashHigh = 0x71d32ad8bfb708c2a5089b0cfd3724f5;
+        uint256 publicInputNonce = 2;
+        uint256 publicInputHashLow = 0xaea8ed2e203f7d1a8f3e4ca5155d8a33;
+        uint256 publicInputHashHigh = 0xf3b0189f6aaff24aee6f0562526781bf;
 
         publicMemoryData = [
             publicInputNonce,

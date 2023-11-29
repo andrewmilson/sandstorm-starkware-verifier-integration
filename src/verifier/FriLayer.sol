@@ -18,7 +18,6 @@ pragma solidity ^0.6.12;
 
 import "./MerkleVerifier.sol";
 import "./FriTransform.sol";
-import "forge-std/console.sol";
 
 /*
   The main component of FRI is the FRI step which takes
@@ -275,8 +274,6 @@ contract FriLayer is MerkleVerifier, FriTransform {
                 friCosetSize
             );
 
-            // console.log("coset offset is:", cosetOffset);
-
             // Compute the index of the coset evaluations in the Merkle queue.
             index /= friCosetSize;
 
@@ -299,8 +296,6 @@ contract FriLayer is MerkleVerifier, FriTransform {
                 merkleHash := mload(add(merkleQueuePtr, 0x20))
             }
             merkleQueuePtr += MERKLE_SLOT_SIZE_IN_BYTES;
-            // console.log("merkleIndex[]", merkleIndex);
-            console.log("merkleHash[]", merkleHash);
 
             (uint256 friValue, uint256 FriInversedPoint) = transformCoset(
                 friCtx + FRI_CTX_TO_FRI_HALF_INV_GROUP_OFFSET,

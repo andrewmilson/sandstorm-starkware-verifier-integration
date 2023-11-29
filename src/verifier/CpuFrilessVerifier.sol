@@ -19,7 +19,6 @@ pragma solidity ^0.6.12;
 import "./CpuVerifier.sol";
 import "./FriStatementVerifier.sol";
 import "./MerkleStatementVerifier.sol";
-import "forge-std/console.sol";
 
 contract CpuFrilessVerifier is
     CpuVerifier,
@@ -65,7 +64,6 @@ contract CpuFrilessVerifier is
     function friVerifyLayers(
         uint256[] memory ctx
     ) internal view override(FriStatementVerifier, Fri) {
-        console.log("YOYO in the friVerifyLayers");
         FriStatementVerifier.friVerifyLayers(ctx);
     }
 }

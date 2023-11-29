@@ -17,7 +17,6 @@
 pragma solidity ^0.6.12;
 
 import "./Fri.sol";
-import "forge-std/console.sol";
 import "../MemoryMap.sol";
 import "./MemoryAccessUtils.sol";
 import "./IStarkVerifier.sol";
@@ -185,10 +184,6 @@ abstract contract StarkVerifier is
             mstore(friStepSizesPtr, friStepSizes)
         }
         ctx[MM_FRI_LAST_LAYER_DEG_BOUND] = 2 ** logFriLastLayerDegBound;
-        console.log(
-            "Fri last layer degree bound:",
-            ctx[MM_FRI_LAST_LAYER_DEG_BOUND]
-        );
         ctx[MM_TRACE_LENGTH] = 2 ** logTraceLength;
 
         ctx[MM_BLOW_UP_FACTOR] = 2 ** logBlowupFactor;
@@ -472,18 +467,6 @@ abstract contract StarkVerifier is
             mstore(channelPtr, proofPtr)
         }
 
-        console.log("first hash:");
-        console.logBytes32(firstHash);
-
-        console.log("first item", firstItem);
-        console.log("second item", secondItem);
-
-        console.log("about to verify merkle");
-
-        // for (uint i = 0; i < 5; i++) {
-        //     console.log("Merkle queue", i, ctx[MM_MERKLE_QUEUE + i]);
-        // }
-
         verifyMerkle(channelPtr, merkleQueuePtr, merkleRoot, nUniqueQueries);
     }
 
@@ -498,9 +481,7 @@ abstract contract StarkVerifier is
       the term (f(x) - c)/(x-z).
     */
     function computeFirstFriLayer(uint256[] memory ctx) internal view {
-        console.log("inside computeFirstFriLayer");
         adjustQueryIndicesAndPrepareEvalPoints(ctx);
-        console.log("finished adjusting indices");
         readQueryResponsesAndDecommit(
             ctx,
             getNColumnsInTrace(),
@@ -508,7 +489,6 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_TRACE_QUERY_RESPONSES),
             bytes32(ctx[MM_TRACE_COMMITMENT])
         );
-        console.log("Managed to verify first query response");
         if (hasInteraction()) {
             readQueryResponsesAndDecommit(
                 ctx,
@@ -517,7 +497,6 @@ abstract contract StarkVerifier is
                 getPtr(ctx, MM_TRACE_QUERY_RESPONSES + getNColumnsInTrace0()),
                 bytes32(ctx[MM_TRACE_COMMITMENT + 1])
             );
-            console.log("Managed to verify second query response");
         }
 
         readQueryResponsesAndDecommit(
@@ -527,7 +506,6 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_COMPOSITION_QUERY_RESPONSES),
             bytes32(ctx[MM_OODS_COMMITMENT])
         );
-        console.log("Managed to verify thirs query response");
 
         address oodsAddress = oodsContractAddress;
         uint256 friQueue = getPtr(ctx, MM_FRI_QUEUE);
@@ -604,14 +582,11 @@ abstract contract StarkVerifier is
             mstore(channelPtr, lastLayerEnd)
         }
 
-        console.log("post remainder digest:", newDigest);
-
         for (uint i = 0; i < friLastLayerDegBound; i++) {
             uint256 val;
             assembly {
                 val := mload(add(lastLayerPtr, mul(i, 0x20)))
             }
-            console.log("val is:", val);
         }
 
         require(badInput == 0, "Invalid field element.");
@@ -623,42 +598,21 @@ abstract contract StarkVerifier is
         uint256[] memory proof,
         uint256[] memory publicInput
     ) internal view override {
-        console.log("Doing verifyProof");
         uint256[] memory ctx = initVerifierParams(publicInput, proofParams);
         uint256 channelPtr = getChannelPtr(ctx);
 
         bytes32 pubInputHash = getPublicInputHash2(publicInput);
 
-        // uint256 nPages = publicInput[24];
-        // // uint256 publicInputSizeForHash = getOffsetPageProd(0, nPages);
-        // console.log("num pages", nPages);
-        // console.log("pub mem offset");
-        // console.log(getOffsetPageProd(0, nPages));
-
-        console.log("pubInputHash");
-        console.logBytes32(pubInputHash);
-
         initChannel(channelPtr, getProofPtr(proof), pubInputHash);
         // Read trace commitment.
         ctx[MM_TRACE_COMMITMENT] = uint256(readHash(channelPtr, true));
-        console.log("trace commitment", ctx[MM_TRACE_COMMITMENT]);
 
         if (hasInteraction()) {
-            console.log(
-                "yo interaction before ",
-                ctx[getMmInteractionElements()]
-            );
-
             // Send interaction elements.
             VerifierChannel.sendFieldElements(
                 channelPtr,
                 getNInteractionElements(),
                 getPtr(ctx, getMmInteractionElements())
-            );
-
-            console.log(
-                "yo interaction after ",
-                ctx[getMmInteractionElements()]
             );
 
             // Read second trace commitment.
@@ -673,17 +627,12 @@ abstract contract StarkVerifier is
         );
         ctx[MM_OODS_COMMITMENT] = uint256(readHash(channelPtr, true));
 
-        // 1404206723339884257925569064645133332869953592734028041867750617941777260653
-        console.log("composition alpha", ctx[MM_COMPOSITION_ALPHA]);
-
         // Send Out of Domain Sampling point.
         VerifierChannel.sendFieldElements(
             channelPtr,
             1,
             getPtr(ctx, MM_OODS_POINT)
         );
-
-        console.log("OODS point:", ctx[MM_OODS_POINT]);
 
         // Read the answers to the Out of Domain Sampling.
         uint256 lmmOodsValues = getMmOodsValues();
@@ -700,12 +649,10 @@ abstract contract StarkVerifier is
             1,
             getPtr(ctx, MM_OODS_ALPHA)
         );
-        console.log("oods alpha: ", ctx[MM_OODS_ALPHA]);
+
         ctx[MM_FRI_COMMITMENTS] = uint256(
             VerifierChannel.readHash(channelPtr, true)
         );
-
-        console.log("first commitment: ", ctx[MM_FRI_COMMITMENTS]);
 
         uint256 nFriSteps = getFriStepSizes(ctx).length;
         uint256 fri_evalPointPtr = getPtr(ctx, MM_FRI_EVAL_POINTS);
@@ -718,10 +665,7 @@ abstract contract StarkVerifier is
             ctx[MM_FRI_COMMITMENTS + i] = uint256(
                 VerifierChannel.readHash(channelPtr, true)
             );
-            console.log("yo fri hash is:", ctx[MM_FRI_COMMITMENTS + i]);
         }
-
-        console.log("finished");
 
         // Send last random FRI evaluation point.
         VerifierChannel.sendFieldElements(
@@ -730,17 +674,11 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_FRI_EVAL_POINTS + nFriSteps - 1)
         );
 
-        console.log(
-            "Remainder alpha:",
-            ctx[MM_FRI_EVAL_POINTS + nFriSteps - 1]
-        );
-
         // Read FRI last layer commitment.
         readLastFriLayer(ctx);
 
         // Generate queries.
         // emit LogGas("Read FRI commitments", gasleft());
-        console.log("proof of work bits: {}", ctx[MM_PROOF_OF_WORK_BITS]);
         VerifierChannel.verifyProofOfWork(
             channelPtr,
             ctx[MM_PROOF_OF_WORK_BITS]
@@ -752,15 +690,9 @@ abstract contract StarkVerifier is
             getPtr(ctx, MM_FRI_QUEUE),
             FRI_QUEUE_SLOT_SIZE_IN_BYTES
         );
-        console.log("fri query:", ctx[MM_FRI_QUEUE]);
-        console.log("fri query:", ctx[MM_FRI_QUEUE + 1]);
-        console.log("fri query:", ctx[MM_FRI_QUEUE + 2]);
-        console.log("fri query:", ctx[MM_FRI_QUEUE + 3]);
-        console.log("fri query:", ctx[MM_FRI_QUEUE + 4]);
-        console.log("fri query:", ctx[MM_FRI_QUEUE + 5]);
+
         computeFirstFriLayer(ctx);
 
-        console.log("about to verify fri layers");
         friVerifyLayers(ctx);
     }
 }

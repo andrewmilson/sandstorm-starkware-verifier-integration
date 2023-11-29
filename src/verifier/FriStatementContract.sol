@@ -18,7 +18,6 @@ pragma solidity ^0.6.12;
 
 import "../FactRegistry.sol";
 import "./FriLayer.sol";
-import "forge-std/console.sol";
 
 contract FriStatementContract is FriLayer, FactRegistry {
     /*
@@ -78,14 +77,7 @@ contract FriStatementContract is FriLayer, FactRegistry {
                 add(dataToHash, 0x40),
                 keccak256(friQueuePtr, mul(0x60, nQueries))
             )
-
-            // for testing
-            // friQueuePtr := mload(add(dataToHash, 0x40))
         }
-
-        // // 89242941205408176723340213932503768558669806349213902864930852777868496999448
-        // console.log("statement input hash: ", friQueuePtr);
-        // require(1 == 0);
 
         initFriGroups(friCtx);
 
@@ -115,12 +107,6 @@ contract FriStatementContract is FriLayer, FactRegistry {
             fourthMQItem := mload(add(friQueuePtr, 0x60))
         }
 
-        console.log("first item:", firstMQItem);
-        console.log("second item:", secondMQItem);
-        console.log("third item:", thirdMQItem);
-        console.log("fourth item:", fourthMQItem);
-        console.log("expected root:", expectedRoot);
-
         verifyMerkle(
             channelPtr,
             merkleQueuePtr,
@@ -146,11 +132,6 @@ contract FriStatementContract is FriLayer, FactRegistry {
             root := mload(add(dataToHash, 0x80))
             factHash := keccak256(dataToHash, 0xa0)
         }
-        console.log("(((evalPoint: ", evalPoint);
-        console.log("(((friStepSize: ", friStepSize);
-        console.log("(((inputHash: ", inputHash);
-        console.log("(((outputHash: ", outputHash);
-        console.log("(((root: ", root);
 
         registerFact(factHash);
     }
