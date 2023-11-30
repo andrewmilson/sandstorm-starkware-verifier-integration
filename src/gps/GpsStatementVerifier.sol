@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0.
-pragma solidity ^0.6.12;
+pragma solidity >=0.6.12;
 
-import "./CairoBootloaderProgram.sol";
+import "./CairoBootloaderProgramPart1.sol";
+import "./CairoBootloaderProgramPart2.sol";
 import "../CairoVerifierContract.sol";
 import "../MemoryPageFactRegistry.sol";
 import "./Identity.sol";
@@ -14,7 +15,8 @@ contract GpsStatementVerifier is
     CairoBootloaderProgramSize,
     PrimeFieldElement0
 {
-    CairoBootloaderProgram bootloaderProgramContractAddress;
+    CairoBootloaderProgramPart1 bootloaderProgramPart1ContractAddress;
+    CairoBootloaderProgramPart2 bootloaderProgramPart2ContractAddress;
     MemoryPageFactRegistry memoryPageFactRegistry;
     CairoVerifierContract[] cairoVerifierContractAddresses;
 
@@ -32,14 +34,18 @@ contract GpsStatementVerifier is
       and cairoVerifierContracts is a list of cairoVerifiers indexed by their id.
     */
     constructor(
-        address bootloaderProgramContract,
+        address bootloaderProgramPart1Contract,
+        address bootloaderProgramPart2Contract,
         address memoryPageFactRegistry_,
         address[] memory cairoVerifierContracts,
         uint256 hashedSupportedCairoVerifiers,
         uint256 simpleBootloaderProgramHash
     ) public {
-        bootloaderProgramContractAddress = CairoBootloaderProgram(
-            bootloaderProgramContract
+        bootloaderProgramPart1ContractAddress = CairoBootloaderProgramPart1(
+            bootloaderProgramPart1Contract
+        );
+        bootloaderProgramPart2ContractAddress = CairoBootloaderProgramPart2(
+            bootloaderProgramPart2Contract
         );
         memoryPageFactRegistry = MemoryPageFactRegistry(
             memoryPageFactRegistry_
@@ -216,9 +222,19 @@ contract GpsStatementVerifier is
         // Write public memory, which is a list of pairs (address, value).
         {
             // Program segment.
-            uint256[PROGRAM_SIZE]
-                memory bootloaderProgram = bootloaderProgramContractAddress
+            uint256[1000]
+                memory bootloaderProgramPart1 = bootloaderProgramPart1ContractAddress
                     .getCompiledProgram();
+            uint256[766]
+                memory bootloaderProgramPart2 = bootloaderProgramPart2ContractAddress
+                    .getCompiledProgram();
+            uint256[1766] memory bootloaderProgram;
+            for (uint256 i = 0; i < 1000; i++) {
+                bootloaderProgram[i] = bootloaderProgramPart1[i];
+            }
+            for (uint256 i = 0; i < 766; i++) {
+                bootloaderProgram[1000 + i] = bootloaderProgramPart2[i];
+            }
             for (uint256 i = 0; i < bootloaderProgram.length; i++) {
                 // Force that memory[i + INITIAL_PC] = bootloaderProgram[i].
                 publicMemory[offset] = i + INITIAL_PC;

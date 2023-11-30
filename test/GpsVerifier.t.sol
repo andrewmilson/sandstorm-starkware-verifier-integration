@@ -15,7 +15,8 @@ import "../src/periodic_columns/EcdsaPointsXColumn.sol";
 import "../src/periodic_columns/EcdsaPointsYColumn.sol";
 import "../src/periodic_columns/PedersenHashPointsXColumn.sol";
 import "../src/periodic_columns/PedersenHashPointsYColumn.sol";
-import "../src/gps/CairoBootloaderProgram.sol";
+import "../src/gps/CairoBootloaderProgramPart1.sol";
+import "../src/gps/CairoBootloaderProgramPart2.sol";
 import "../src/verifier/FriStatementVerifier.sol";
 import "../src/verifier/CpuFrilessVerifier.sol";
 import "../src/MemoryPageFactRegistry.sol";
@@ -52,7 +53,8 @@ contract StarkNetVerifierTest is Test {
 
     // == GPS statement verifier ==
     // https://etherscan.io/address/0x6cB3EE90C50a38A0e4662bB7e7E6e40B91361BF6#code
-    CairoBootloaderProgram public bootloaderProgram;
+    CairoBootloaderProgramPart1 bootloaderProgramPart1ContractAddress;
+    CairoBootloaderProgramPart2 bootloaderProgramPart2ContractAddress;
     address[] public cairoVerifierContracts;
     uint256 hashedSupportedCairoVerifiers;
     uint256 simpleBootloaderProgramHash;
@@ -99,7 +101,10 @@ contract StarkNetVerifierTest is Test {
             minProofOfWorkBits
         );
 
-        bootloaderProgram = new CairoBootloaderProgram();
+        bootloaderProgramPart1ContractAddress = new CairoBootloaderProgramPart1();
+        bootloaderProgramPart2ContractAddress = new CairoBootloaderProgramPart2();
+
+        // console.log(bootloaderProgram.getCompiledProgram());
         // TODO: what are these? Maybe ask Starkware for the pre-images
         hashedSupportedCairoVerifiers = 3178097804922730583543126053422762895998573737925004508949311089390705597156;
         // hashedSupportedCairoVerifiers = 37341341331504021525228390428349719127283617351070997452015539964478373189;
@@ -118,7 +123,8 @@ contract StarkNetVerifierTest is Test {
             address(cpuFrilessVerifier)
         ];
         gpsStatementVerifier = new GpsStatementVerifier(
-            address(bootloaderProgram),
+            address(bootloaderProgramPart1ContractAddress),
+            address(bootloaderProgramPart2ContractAddress),
             address(memoryPageFactRegistry),
             cairoVerifierContracts,
             hashedSupportedCairoVerifiers,
@@ -126,36 +132,12 @@ contract StarkNetVerifierTest is Test {
         );
     }
 
-    // function testAddMerkleStatement() public {
-    //     AutoGenProofData proofData = new AutoGenProofData();
-    //     MerkleStatementContract myMerkleContract = new MerkleStatementContract();
-    //     myMerkleContract.verifyMerkle(
-    //         proofData.getBaseTraceMerkleView(),
-    //         proofData.getBaseTraceMerkleInitials(),
-    //         proofData.baseTraceMerkleHeight(),
-    //         proofData.baseTraceMerkleRoot()
-    //     );
-    // }
-
-    // function testFriStatement() public {
-    //     AutoGenProofData proofData = new AutoGenProofData();
-    //     FriDataLayer firstStatement = proofData.getFriDataLayers()[0];
-    //     FriStatementContract myFriContract = new FriStatementContract();
-    //     myFriContract.verifyFRI(
-    //         firstStatement.getProof(),
-    //         firstStatement.getQueue(),
-    //         firstStatement.evalPoint(),
-    //         firstStatement.stepSize(),
-    //         firstStatement.root()
-    //     );
-    // }
-
     function testVerify() public {
         // ProofData proofData = new ProofData();
         AutoGenProofData proofData = new AutoGenProofData();
         uint256 cairoVerifierId = proofData.cairoVerifierId();
         console.logUint(proofData.cairoVerifierId());
-        console.log(address(bootloaderProgram));
+        // console.log(address(bootloaderProgram));
 
         // register merkle statements
         // 1. base trace
@@ -213,107 +195,4 @@ contract StarkNetVerifierTest is Test {
             publicMemoryData
         );
     }
-
-    // uint256[] public memPairs;
-    // function testHash() public {
-    //     memPairs = [uint256(1), 2];
-    //     uint256[] memory memoryPairs = memPairs;
-    //     bytes32 memHash;
-    //     assembly {
-    //         let memPtr := add(memoryPairs, 0x20)
-    //         memHash := keccak256(
-    //             memPtr,
-    //             mul(
-    //                 // 0x20 * 2.
-    //                 0x40,
-    //                 1
-    //             )
-    //         )
-    //     }
-
-    //     console.log("testing hash pairs:");
-    //     console.logBytes32(memHash);
-
-    //     console.logBytes32(keccak256(abi.encodePacked([1, 2])));
-    // }
-
-    // function testChannel() public {
-    //     uint256[] memory ctx = new uint256[](300);
-    //     uint256 ctxPtr;
-    //     assembly {
-    //         ctxPtr := add(ctx, 0x20)
-    //     }
-    //     uint256[] memory dst = new uint256[](20);
-    //     uint256 dstPtr;
-    //     assembly {
-    //         dstPtr := add(dst, 0x20)
-    //     }
-    //     // VerifierChannel channel = new VerifierChannel();
-    //     // channel.sendFieldElements2(ctx, 4, dst);
-
-    //     uint256 channelPtr = ctxPtr;
-    //     uint256 targetPtr = dstPtr;
-    //     uint256 nElements = 8;
-
-    //     uint256 K_MONTGOMERY_R_INV = 0x40000000000001100000000000012100000000000000000000000000000000;
-    //     uint256 K_MODULUS = 0x800000000000011000000000000000000000000000000000000000000000001;
-
-    //     uint256 nummm = 5;
-    //     console.log("YOOO");
-    //     console.logBytes32(keccak256(abi.encodePacked(nummm)));
-
-    //     assembly {
-    //         // 31 * PRIME.
-    //         let
-    //             BOUND
-    //         := 0xf80000000000020f00000000000000000000000000000000000000000000001f
-    //         let digestPtr := add(channelPtr, 0x20)
-    //         let counterPtr := add(channelPtr, 0x40)
-
-    //         let endPtr := add(targetPtr, mul(nElements, 0x20))
-    //         for {
-
-    //         } lt(targetPtr, endPtr) {
-    //             targetPtr := add(targetPtr, 0x20)
-    //         } {
-    //             // *targetPtr = getRandomFieldElement(getPrngPtr(channelPtr));
-
-    //             let fieldElement := BOUND
-    //             // while (fieldElement >= 31 * K_MODULUS).
-    //             for {
-
-    //             } iszero(lt(fieldElement, BOUND)) {
-
-    //             } {
-    //                 // keccak256(abi.encodePacked(digest, counter));
-    //                 fieldElement := keccak256(digestPtr, 0x40)
-    //                 // *counterPtr += 1;
-    //                 mstore(counterPtr, add(mload(counterPtr), 1))
-    //             }
-    //             // *targetPtr = fromMontgomery(fieldElement);
-    //             mstore(targetPtr, fieldElement)
-    //             // mstore(
-    //             //     targetPtr,
-    //             //     mulmod(fieldElement, K_MONTGOMERY_R_INV, K_MODULUS)
-    //             // )
-    //         }
-    //     }
-
-    //     console.logBytes32(bytes32(dst[0]));
-    //     console.log(dst[1]);
-    //     console.log(dst[2]);
-    //     console.log(dst[3]);
-    //     console.log(dst[4]);
-    //     console.log(ctx[2]);
-    // }
-
-    // function testIncrement() public {
-    //     counter.increment();
-    //     assertEq(counter.number(), 1);
-    // }
-
-    // function testSetNumber(uint256 x) public {
-    //     counter.setNumber(x);
-    //     assertEq(counter.number(), x);
-    // }
 }
